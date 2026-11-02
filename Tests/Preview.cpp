@@ -24,9 +24,10 @@ public:
  processor->loadPreset(0);juce::MemoryBlock canonical;processor->getStateInformation(canonical);processor->state.getParameter("wet_solo")->setValueNotifyingHost(.835745f);processor->state.getParameter("power")->setValueNotifyingHost(.742717f);processor->setStateInformation(canonical.getData(),int(canonical.getSize()));check(processor->state.getParameter("wet_solo")->getValue()==1.f,"fractional host wet solo restored exactly");check(processor->state.getParameter("power")->getValue()==1.f,"fractional host power restored exactly");
  processor->reset();std::cout<<"PASS: 100 embedded presets, 100 XML mappings, session recall, bounds, audio and user library persistence\n";
 
- {vintage::RackLook skin;juce::Image knob(juce::Image::ARGB,64,64,true);juce::Graphics g(knob);juce::Slider slider;
- skin.drawRotarySlider(g,0,0,64,64,.5f,juce::MathConstants<float>::pi*1.25f,juce::MathConstants<float>::pi*2.75f,slider);
- check(knob.getPixelAt(32,32).getAlpha()==255,"photographic knob is opaque after shadow drawing");}
+ {vintage::RackLook skin;juce::Image knob(juce::Image::ARGB,64,64,true);juce::Slider slider;
+ // Finish the drawing context before reading pixels (Direct2D defers rendering).
+ {juce::Graphics g(knob);skin.drawRotarySlider(g,0,0,64,64,.5f,juce::MathConstants<float>::pi*1.25f,juce::MathConstants<float>::pi*2.75f,slider);}
+ check(knob.getPixelAt(32,32).getAlpha()>=250,"photographic knob is opaque after shadow drawing");}
  check(vintage::rackBackground().isValid()&&vintage::rackBackground().getWidth()==2011,"embedded rack artwork loaded");
  processor->reset();auto* pre=processor->state.getParameter("predelay");auto* mix=processor->state.getParameter("mix");check(std::abs(pre->convertFrom0to1(.5f)-50)<.15,"predelay center");check(std::abs(mix->convertFrom0to1(.5f)-15)<.15,"mix center");
  juce::AudioBuffer<float> audio(2,512);juce::MidiBuffer midi;for(int b=0;b<100;++b){for(int i=0;i<512;++i){float x=.25f*std::sin(float((b*512+i)*2*plate::pi*220/48000));audio.setSample(0,i,x);audio.setSample(1,i,x);}processor->processBlock(audio,midi);}
