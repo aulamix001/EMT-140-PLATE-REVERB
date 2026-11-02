@@ -17,7 +17,7 @@
   <PARAM id="mod_rate" value="0" />
   <PARAM id="mod_depth" value="0" />
   <PARAM id="predelay" value="8" />
-  <PARAM id="mix" value="7" />
+  <PARAM id="mix" value="8" />
   <PARAM id="wet_solo" value="0" />
   <PARAM id="power" value="1" />
 </PLATE140>

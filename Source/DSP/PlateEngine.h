@@ -32,18 +32,20 @@ struct Delay {
  double allpass(double x){auto d=oldest();double y=d-.65*x;push(x+.65*y);return y;}
 };
 struct Tank {
- std::array<Delay,16> lines; std::array<Delay,4> diffusion; std::array<double,16> low{},gain{}; Smooth rt; double sr=48000,damping=0;int counter=0,modelIndex=0;
+ std::array<Delay,16> lines; std::array<Delay,4> diffusion,sideDiffusion; std::array<double,16> low{},gain{}; Smooth rt; double sr=48000,damping=0;int counter=0,modelIndex=0;
  void prepare(double sampleRate,int model){sr=sampleRate;counter=0;modelIndex=model;rt.prepare(sr);rt.value=2;low.fill(0);
   const std::array<int,16> lengths{1423,1559,1747,1867,1999,2143,2287,2411,2557,2687,2797,2953,3089,3251,3391,3547};
   for(int i=0;i<16;++i){lines[i].prepare(int(lengths[i]*sr/48000*(1+model*.071)+(i%3)*model*17));gain[i]=.8;}
-  for(int i=0;i<4;++i)diffusion[i].prepare(int((113+i*137+model*31)*sr/48000));
+  for(int i=0;i<4;++i){const int length=int((113+i*137+model*31)*sr/48000);diffusion[i].prepare(length);sideDiffusion[i].prepare(length);}
   damping=std::exp(-2*pi*(model==0?6500:model==1?8500:10500)/sr);
  }
- std::array<double,2> tick(double x,double target){rt.next(target);for(auto& d:diffusion)x=d.allpass(x);
+ std::array<double,2> tick(double x,double target,double side=0){rt.next(target);for(auto& d:diffusion)x=d.allpass(x);for(auto& d:sideDiffusion)side=d.allpass(side);
   std::array<double,16> y{};double sum=0;
   for(int i=0;i<16;++i){y[i]=lines[i].oldest();sum+=y[i];}
   std::array<double,2> out{};
-  for(int i=0;i<16;++i){double v=y[i]-sum/8;low[i]=(1-damping)*v+damping*low[i];if(counter==0)gain[i]=std::pow(10.,-3.0*double(lines[i].data.size())/(sr*std::max(.3,rt.value-(modelIndex==1?.045*std::exp(-3*(rt.value-.5)):0))));lines[i].push((i%2?-.18:.18)*x+low[i]*gain[i]);out[0]+=y[i]*(i%2?-1:1)*.17;out[1]+=y[i]*((i/2)%2?-1:1)*.17;}
+  for(int i=0;i<16;++i){double v=y[i]-sum/8;low[i]=(1-damping)*v+damping*low[i];if(counter==0)gain[i]=std::pow(10.,-3.0*double(lines[i].data.size())/(sr*std::max(.3,rt.value-(modelIndex==1?.045*std::exp(-3*(rt.value-.5)):0))));
+   // Orthogonal mid/side injection retains stereo-only input energy.
+   lines[i].push((i%2?-.18:.18)*x+((i/2)%2?-.18:.18)*side+low[i]*gain[i]);out[0]+=y[i]*(i%2?-1:1)*.17;out[1]+=y[i]*((i/2)%2?-1:1)*.17;}
   counter=(counter+1)%32;return out;
  }
 };
@@ -66,12 +68,16 @@ public:
   filterHz.next(p.filterModel==2?80:p.filterModel==0?80:mh[std::clamp(p.martech,0,5)]);filterDb.next(p.filterModel==2?0:p.filterModel==0?ed[std::clamp(p.emt,0,2)]:-12);
   lowF.next(p.lowFreq);lowG.next(p.lowGain);highF.next(p.highFreq);highG.next(p.highGain);
   if((filterCounter++%32)==0){for(int c=0;c<2;++c){input[c].shelf(sr,filterHz.value,filterDb.value,false);eqLow[c].shelf(sr,lowF.value,lowG.value,false);eqHigh[c].shelf(sr,highF.value,highG.value,true);}}
-  double x=(input[0].tick(l)+input[1].tick(r))*.5;x=std::tanh(x*1.05)/1.05;
+  const double filteredL=input[0].tick(l),filteredR=input[1].tick(r);
+  double x=std::tanh((filteredL+filteredR)*.5*1.05)/1.05;
+  double sideInput=std::tanh((filteredL-filteredR)*.5*1.05)/1.05;
   phase+=2*pi*p.rate/sr;if(phase>2*pi)phase-=2*pi;
   std::array<double,2> wet{};
-  for(int i=0;i<3;++i){auto y=tanks[i].tick(x,p.rt[i]*std::pow(2.,p.depth*std::sin(phase)/1200));double a=select[i].next(i==p.plate?1:0);for(int c=0;c<2;++c)wet[c]+=a*y[c];}
+  for(int i=0;i<3;++i){auto y=tanks[i].tick(x,p.rt[i]*std::pow(2.,p.depth*std::sin(phase)/1200),sideInput);double a=select[i].next(i==p.plate?1:0);for(int c=0;c<2;++c)wet[c]+=a*y[c];}
   double d=delay.next(p.predelay*.001*sr), e=eqOn.next(p.eq?1:0);
-  for(int c=0;c<2;++c){predelay[c].push(wet[c]);wet[c]=predelay[c].read(d+1);double filtered=eqHigh[c].tick(eqLow[c].tick(wet[c]));wet[c]+=e*(filtered-wet[c]);}
+  for(int c=0;c<2;++c){predelay[c].push(wet[c]);
+   // Fixed +9.54 dB return trim; decay feedback and dry/bypass gains are unchanged.
+   wet[c]=3.0*predelay[c].read(d+1);double filtered=eqHigh[c].tick(eqLow[c].tick(wet[c]));wet[c]+=e*(filtered-wet[c]);}
   double w=width.next(p.width*.01),b=balance.next(p.balance*.01),mid=(wet[0]+wet[1])*.5,side=(wet[0]-wet[1])*.5*w;
   wet={ (mid+side)*(b>0?1-b:1), (mid-side)*(b<0?1+b:1) };
   double m=mix.next(p.mix*.01),s=solo.next(p.wetSolo?1:0);m+=(1-m)*s;

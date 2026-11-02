@@ -1,0 +1,74 @@
+[
+  {
+    "plate": "A",
+    "target_s": 0.5,
+    "measured_s": 0.5284,
+    "error_percent": 5.69,
+    "correlation": 0.9676,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "A",
+    "target_s": 2.0,
+    "measured_s": 1.9937,
+    "error_percent": -0.31,
+    "correlation": 0.8691,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "A",
+    "target_s": 5.5,
+    "measured_s": 5.2364,
+    "error_percent": -4.79,
+    "correlation": 0.7851,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "B",
+    "target_s": 0.5,
+    "measured_s": 0.5077,
+    "error_percent": 1.55,
+    "correlation": 0.97,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "B",
+    "target_s": 2.0,
+    "measured_s": 1.9918,
+    "error_percent": -0.41,
+    "correlation": 0.8525,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "B",
+    "target_s": 5.5,
+    "measured_s": 5.3876,
+    "error_percent": -2.04,
+    "correlation": 0.7625,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "C",
+    "target_s": 0.5,
+    "measured_s": 0.5069,
+    "error_percent": 1.38,
+    "correlation": 0.9635,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "C",
+    "target_s": 2.0,
+    "measured_s": 2.0148,
+    "error_percent": 0.74,
+    "correlation": 0.8387,
+    "pass_8_percent": true
+  },
+  {
+    "plate": "C",
+    "target_s": 5.5,
+    "measured_s": 5.4401,
+    "error_percent": -1.09,
+    "correlation": 0.7461,
+    "pass_8_percent": true
+  }
+]

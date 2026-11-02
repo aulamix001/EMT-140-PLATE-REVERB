@@ -7,6 +7,9 @@ IDS=['plate_select','reverb_time_a','reverb_time_b','reverb_time_c','input_filte
 DEFAULT=[0,2,2,2,0,1,2,100,0,1,120,0,8000,0,0,0,50,15,1,1]
 bank=[]
 def add(name,category,plate,rt,model,fil,width,lf,lg,hf,hg,rate,depth,pre,mix,solo,description):
+ # A minimum 8% insert mix keeps the quietest recipes measurable after the
+ # return trim. AUX remains fully wet; IDs, ranges and decay recipes stay stable.
+ if not solo: mix=max(8,mix)
  v=DEFAULT.copy();v[0]=plate;v[plate+1]=rt;v[4]=model;v[6 if model==1 else 5]=fil
  for i,x in zip([7,10,11,12,13,14,15,16,17,18],[width,lf,lg,hf,hg,rate,depth,pre,mix,int(solo)]):v[i]=x
  bank.append(dict(number=len(bank)+1,name=name,category=category,use='AUX' if solo else 'INSERT',description=description,parameters=dict(zip(IDS,v))))
@@ -40,6 +43,7 @@ tones={'warm':(0,1,140,-1.5,6000,-1,0,0),'air':(1,2,160,-2,10000,2,0,0),'clean':
 for category,rows in groups.items():
  for name,plate,rt,pre,width,tone,mix in rows:
   model,fil,lf,lg,hf,hg,rate,depth=tones[tone]
+  if mix!=100: mix=max(8,mix)
   add(name,category,plate,rt,model,fil,width,lf,lg,hf,hg,rate,depth,pre,mix,mix==100,f'{category}; carater {tone}; RT {rt:g} s; predelay {pre:g} ms; '+('retorno auxiliar 100% wet.' if mix==100 else f'insert com {mix}% wet.'))
 assert len(bank)==100,len(bank)
 assert len({tuple(x['parameters'].values()) for x in bank})==100
