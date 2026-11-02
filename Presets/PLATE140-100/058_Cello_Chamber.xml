@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PLATE140 version="1" preset_name="Cello Chamber" preset_category="Cordas" preset_number="58">
+  <PARAM id="plate_select" value="0" />
+  <PARAM id="reverb_time_a" value="1.9" />
+  <PARAM id="reverb_time_b" value="2" />
+  <PARAM id="reverb_time_c" value="2" />
+  <PARAM id="input_filter_model" value="0" />
+  <PARAM id="input_filter_emt_db" value="1" />
+  <PARAM id="input_filter_martech_hz" value="2" />
+  <PARAM id="width" value="75" />
+  <PARAM id="balance" value="0" />
+  <PARAM id="eq_enable" value="1" />
+  <PARAM id="eq_low_freq" value="150" />
+  <PARAM id="eq_low_gain" value="-1.5" />
+  <PARAM id="eq_high_freq" value="7000" />
+  <PARAM id="eq_high_gain" value="-1.5" />
+  <PARAM id="mod_rate" value="0" />
+  <PARAM id="mod_depth" value="0" />
+  <PARAM id="predelay" value="24" />
+  <PARAM id="mix" value="100" />
+  <PARAM id="wet_solo" value="1" />
+  <PARAM id="power" value="1" />
+</PLATE140>

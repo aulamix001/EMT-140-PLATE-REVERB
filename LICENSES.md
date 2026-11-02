@@ -1,0 +1,4 @@
+# Third-party licensing
+JUCE 8.0.6, copyright Raw Material Software Limited / JUCE contributors, is obtained from https://github.com/juce-framework/JUCE at commit 51a8a6d7aeae7326956d747737ccf1575e61e209. JUCE is offered under AGPLv3 or a commercial license; consult its LICENSE.md and obtain the appropriate license before distribution. The VST3 hosting/plugin wrapper uses SDK material distributed with JUCE; preserve its notices.
+
+All panel geometry and DSP in Source are independently authored for this repository. No UA logos, extracted graphics, proprietary SDK binaries or reference audio are bundled. PLATE 140 / Aulamix is independent and unaffiliated with EMT or Universal Audio. System fonts are used at runtime; no font files are bundled. No license grant for newly authored project code is selected by this file; repository owner must choose it before distribution.

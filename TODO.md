@@ -1,0 +1,14 @@
+# Remaining release work and explicit approximations
+- Obtain legitimate hardware/UAD manuals and reference recordings; verify transfer functions and model tuning against them. No proprietary equivalence is claimed.
+- 500 Hz T30-derived RT60 passed ±8% at 0.5/2/5.5 s for A/B/C at 48 kHz (see measurements.json). Full-range, per-band and multi-rate decay calibration remains; the network is an approximation.
+- EMT input cut implemented as 80 Hz low shelf with specified attenuation; Martech shelf attenuation chosen as −12 dB because no transfer function/depth was supplied.
+- Plate A/B/C differ in line lengths, input dispersion and HF damping; descriptions in supplied texts conflict. Distinct design targets must be refined by measurement.
+- Modulation implemented as smoothed decay-coefficient modulation; rate 0 means off, otherwise 0.01–1 Hz.
+- Predelay and mix use power-law taper through specified midpoint, amplitude crossfade. Alternative proprietary tapers are unverified.
+- Driver uses mild tanh coloration; characterize THD and aliasing before deciding on oversampling.
+- 100 factory presets: initial 12 supplied proposals preserved plus 88 original recipes, grouped in nine categories. All 20 values are explicit per preset; original unspecified shelves remain flat.
+- All three tanks run while powered; profile CPU target and add allocation instrumentation.
+- Linux VST3 passed pluginval level 10. Windows x64 build, Windows pluginval and Studio One load/recall remain external release gates.
+- AU configured conditionally but not validated on macOS. VST2 requires licensed SDK; CLAP not configured.
+- Floating browser, 100 factory presets, favourites, user save/rename/delete and clipboard/A-B are implemented. Undo/redo and typed numeric knob entry remain; host parameter UI supports numeric entry.
+- Harden XML migration/parameter validation; test corrupted/partial states and concurrent automation.

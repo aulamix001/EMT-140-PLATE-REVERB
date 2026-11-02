@@ -1,0 +1,3 @@
+PASS: 100 embedded presets, 100 XML mappings, session recall, bounds, audio and user library persistence
+PASS: native parameter/state/preset/taper/audio integration
+PASS: clipboard, A/B, floating nonmodal browser and search
