@@ -43,6 +43,11 @@ jobs:
           $run = Start-Process -FilePath $preview -ArgumentList $snapshot -WorkingDirectory $env:GITHUB_WORKSPACE -Wait -PassThru
           if ($run.ExitCode -ne 0) { throw 'Preset integration failed' }
           if (!(Test-Path $snapshot)) { throw 'Native editor snapshot missing' }
+      - name: Save compiled editor screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: PLATE140-Windows-UI
+          path: ${{ runner.temp }}/plate140-preview.png
       - name: pluginval level 10
         shell: pwsh
         run: |
@@ -54,7 +59,11 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Package
         shell: pwsh
-        run: Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md -DestinationPath PLATE140-Windows-x64.zip
+        run: |
+          git rev-parse HEAD | Set-Content BUILD-INFO.txt
+          Add-Content BUILD-INFO.txt 'Embedded photographic rack panel; UI screenshot included.'
+          Copy-Item (Join-Path $env:RUNNER_TEMP 'plate140-preview.png') rack-ui.png
+          Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md,BUILD-INFO.txt,rack-ui.png -DestinationPath PLATE140-Windows-x64.zip
       - uses: actions/upload-artifact@v4
         with:
           name: PLATE140-Windows-x64

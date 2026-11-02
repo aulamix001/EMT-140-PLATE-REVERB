@@ -1,15 +1,15 @@
 #pragma once
 #include "PluginProcessor.h"
-#include "GUI/VintageLookAndFeel.h"
+#include "GUI/RackLookAndFeel.h"
 #include "Presets/PresetBrowser.h"
 class PlateEditor:public juce::AudioProcessorEditor,private juce::Timer {
 public:
  explicit PlateEditor(PlateProcessor&);~PlateEditor()override;
  void mouseDown(const juce::MouseEvent&)override;void paint(juce::Graphics&)override;void resized()override;
 private:
- PlateProcessor&p;vintage::Look look;juce::Component panel;
+ PlateProcessor&p;vintage::RackLook look;juce::Component panel;
  std::array<juce::Slider,10> knobs;
- std::array<vintage::TimeMeter,3> times;
+ std::array<vintage::RackTimeMeter,3> times;
  std::array<juce::TextButton,3> letters;std::array<juce::TextButton,6> dampers;
  juce::TextButton power{"ON"},eq{"IN"},solo{"WET SOLO"},prev{"<"},next{">"},ab{"A / B"},reset{"RESET"},save{"SAVE"},load{"OPEN"};
  juce::Slider filter;juce::ComboBox presets;

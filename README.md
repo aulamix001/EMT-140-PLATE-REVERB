@@ -1,5 +1,5 @@
 # PLATE 140
-Original C++17/JUCE 8 plate-inspired reverb by Aulamix. The panel displays the historical EMT 140 / Elektromesstechnik Wilhelm Franz legends at the user’s request; the plugin remains an independent development. Native VST3 and Standalone; AU on macOS. Independently drawn scalable vintage editor, three independent plate tanks, 100 original factory presets, XML state, A/B comparison and user preset import/export.
+Original C++17/JUCE 8 plate-inspired reverb by Aulamix. The panel displays the historical EMT 140 / Elektromesstechnik Wilhelm Franz legends at the user’s request; the plugin remains an independent development. Native VST3 and Standalone; AU on macOS. Scalable photographic rack editor with embedded artwork and live controls, three independent plate tanks, 100 original factory presets, XML state, A/B comparison and user preset import/export.
 
 ## Build
 Install CMake ≥3.22, a C++17 compiler and Git. Linux also needs ALSA, X11/Xext/Xinerama/Xrandr/Xcursor/Xrender, FreeType/fontconfig development packages. JUCE 8.0.6 is fetched at a fixed commit if `JUCE_PATH` is not set.
@@ -24,3 +24,12 @@ The 100 factory presets are embedded, without per-preset disk reads or graphics.
 See `docs/VALIDATION.md` for executed checks and release gates. This is a development version, not a claim of UAD or historical hardware equivalence. Native editor and DSP are implemented together. Windows/Studio One/pluginval release validation requires those runtimes. VST2 is excluded without a legitimate SDK and license.
 
 Architecture and assumptions: `docs/DSP_ARCHITECTURE.md`, `docs/REFERENCE_ANALYSIS.md`, `docs/PARAMETER_MAP.md`, `TODO.md`. JUCE licensing must be satisfied before distributing binaries.
+
+## Photographic rack interface
+The approved rack artwork is now embedded in the plugin through the PlateArtwork
+binary resource target. Source/GUI/Assets/PanelBackground.png is the static plate;
+knobs, time pointers, toggles, input-filter cursor, lamp and VU needle are live
+controls drawn over it. The preset toolbar remains functional. No external image
+file is required when installing the VST3. IDs, ranges, DSP and presets are unchanged
+by this UI revision. Windows CI saves a compiled editor screenshot as
+PLATE140-Windows-UI and includes rack-ui.png plus BUILD-INFO.txt in the VST3 ZIP.
