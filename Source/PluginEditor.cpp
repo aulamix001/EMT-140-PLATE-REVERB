@@ -15,7 +15,16 @@ PlateEditor::PlateEditor(PlateProcessor&proc):AudioProcessorEditor(proc),p(proc)
  bButton.onClick=[this]{if(!usingB){stateA=p.state.copyState();p.restoreState(stateB);usingB=true;}updatePresetCaption();};
  copyButton.onClick=[this]{auto v=p.state.copyState();v.setProperty("version",1,nullptr);SystemClipboard::copyTextToClipboard(v.createXml()->toString());};
  pasteButton.onClick=[this]{auto xml=XmlDocument::parse(SystemClipboard::getTextFromClipboard());if(!xml||!xml->hasTagName("PLATE140"))return;auto v=ValueTree::fromXml(*xml);if(!PresetLibrary::validState(v))return;p.restoreState(v);updatePresetCaption();};
- moreButton.onClick=[this]{PopupMenu menu;menu.addItem(1,"Factory reset");menu.addItem(2,"Export current XML...");menu.addItem(3,"Import XML...");menu.showMenuAsync(PopupMenu::Options().withTargetComponent(&moreButton),[safe=Component::SafePointer<PlateEditor>(this)](int id){if(!safe)return;if(id==1)safe->p.reset();if(id==2)safe->chooseFile(true);if(id==3)safe->chooseFile(false);});};
+ const auto menuOwner = Component::SafePointer<PlateEditor>(this);
+ moreButton.onClick=[this,menuOwner]{
+  PopupMenu menu;menu.addItem(1,"Factory reset");menu.addItem(2,"Export current XML...");menu.addItem(3,"Import XML...");
+  menu.showMenuAsync(PopupMenu::Options().withTargetComponent(&moreButton),[menuOwner](int id){
+   if(!menuOwner)return;
+   if(id==1)menuOwner->p.reset();
+   if(id==2)menuOwner->chooseFile(true);
+   if(id==3)menuOwner->chooseFile(false);
+  });
+ };
  learnButton.onClick=[this]{PopupMenu menu;for(int i=0;i<20;++i)menu.addItem(i+1,String(platebank::ids[i])+" = "+String(p.get(platebank::ids[i]),2));menu.showMenuAsync(PopupMenu::Options().withTargetComponent(&learnButton),[](int id){if(id>0&&id<=20)SystemClipboard::copyTextToClipboard(platebank::ids[id-1]);});};learnButton.setTooltip("Host automation mapping: select a parameter to copy its stable ID. Not MIDI Learn.");
  setResizable(true,true);setResizeLimits(1043,398,2086,796);getConstrainer()->setFixedAspectRatio(1043.0/398);setSize(1252,478);updatePresetCaption();startTimerHz(30);
 }
