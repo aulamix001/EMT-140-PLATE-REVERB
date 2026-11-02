@@ -16,7 +16,7 @@ public:
   const float cx=x+w*.5f,cy=y+h*.5f,r=23.2f;
   juce::Path circle;circle.addEllipse(cx-r,cy-r,2*r,2*r);
   juce::DropShadow(juce::Colours::black.withAlpha(.4f),4,{1,2}).drawForPath(g,circle);
-  juce::Graphics::ScopedSaveState save(g);g.reduceClipRegion(circle);
+  juce::Graphics::ScopedSaveState save(g);g.setOpacity(1.0f);g.reduceClipRegion(circle);
   // The photographed knob's index is at the clockwise end of its travel.
   g.addTransform(juce::AffineTransform::rotation(start+pos*(end-start)-end,cx,cy));
   g.drawImage(knob,juce::Rectangle<float>(cx-r,cy-r,2*r,2*r));
@@ -47,7 +47,7 @@ public:
  bool active=false;
  RackTimeMeter(){setSliderStyle(LinearVertical);setTextBoxStyle(NoTextBox,false,0,0);setRange(.5,5.5,.1);setDoubleClickReturnValue(true,2);setPopupDisplayEnabled(true,true,nullptr);setTooltip("Reverb time | drag / wheel / arrows; double-click: 2 s");}
  void paint(juce::Graphics&g)override{
-  const float y=137.f-float((getValue()-.5)/5)*93.f;
+  const float y=122.4f-float(getValue()-.5)*15.94f;
   g.setColour(juce::Colours::black.withAlpha(.4f));g.fillRect(37.f,y+2,18.f,2.f);
   g.setColour(juce::Colour(0xffb72f23));g.fillRect(37.f,y,18.f,2.f);
  }
