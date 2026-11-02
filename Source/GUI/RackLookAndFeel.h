@@ -11,14 +11,22 @@ inline const juce::Image& rackBackground(){
 class RackLook:public Look {
  juce::Image knob;
 public:
- RackLook(){auto source=juce::ImageFileFormat::loadFrom(BinaryData::hardwareconcept_png,BinaryData::hardwareconcept_pngSize);knob=source.getClippedImage({750,337,89,89});}
+ RackLook(){
+  auto source=juce::ImageFileFormat::loadFrom(BinaryData::Knob_png,BinaryData::Knob_pngSize);
+  // Trim only transparent padding; the photographed fluted rim stays intact.
+  int left=source.getWidth(),top=source.getHeight(),right=-1,bottom=-1;
+  {juce::Image::BitmapData pixels(source,juce::Image::BitmapData::readOnly);
+   for(int y=0;y<source.getHeight();++y)for(int x=0;x<source.getWidth();++x)
+    if(pixels.getPixelColour(x,y).getAlpha()>16){left=juce::jmin(left,x);right=juce::jmax(right,x);top=juce::jmin(top,y);bottom=juce::jmax(bottom,y);}}
+  if(right>=left&&bottom>=top)knob=source.getClippedImage({left,top,right-left+1,bottom-top+1});
+ }
  void drawRotarySlider(juce::Graphics&g,int x,int y,int w,int h,float pos,float start,float end,juce::Slider&)override{
   const float cx=x+w*.5f,cy=y+h*.5f,r=23.2f;
   juce::Path circle;circle.addEllipse(cx-r,cy-r,2*r,2*r);
   juce::DropShadow(juce::Colours::black.withAlpha(.4f),4,{1,2}).drawForPath(g,circle);
-  juce::Graphics::ScopedSaveState save(g);g.setOpacity(1.0f);g.reduceClipRegion(circle);
-  // The photographed knob's index is at the clockwise end of its travel.
-  g.addTransform(juce::AffineTransform::rotation(start+pos*(end-start)-end,cx,cy));
+  juce::Graphics::ScopedSaveState save(g);g.setOpacity(1.0f);
+  // The supplied knob's index is at twelve o'clock (zero radians).
+  g.addTransform(juce::AffineTransform::rotation(start+pos*(end-start),cx,cy));
   g.drawImage(knob,juce::Rectangle<float>(cx-r,cy-r,2*r,2*r));
  }
  void drawButtonBackground(juce::Graphics&g,juce::Button&b,const juce::Colour&c,bool over,bool down)override{
