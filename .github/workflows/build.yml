@@ -34,6 +34,15 @@ jobs:
           }
       - name: Tests
         run: ctest --test-dir build -C Release --output-on-failure
+      - name: Host lifecycle regression
+        shell: pwsh
+        run: |
+          $preview = (Resolve-Path build/PlatePreview_artefacts/Release/PlatePreview.exe).Path
+          $run = Start-Process -FilePath $preview -ArgumentList '--host-lifecycle' -PassThru -RedirectStandardOutput lifecycle-stdout.log -RedirectStandardError lifecycle-stderr.log
+          if (!$run.WaitForExit(60000)) { $run.Kill(); throw 'Host lifecycle callback timed out' }
+          $run.WaitForExit()
+          Get-Content lifecycle-stdout.log,lifecycle-stderr.log
+          if ($run.ExitCode -ne 0) { throw "Host lifecycle regression failed: $($run.ExitCode)" }
       - name: Preset and floating-browser integration
         shell: pwsh
         run: |

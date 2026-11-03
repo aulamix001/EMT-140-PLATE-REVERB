@@ -1,12 +1,13 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "HostLifecycle.h"
 #include <iostream>
 #include <stdexcept>
 class PreviewApp:public juce::JUCEApplication {
  std::unique_ptr<PlateProcessor> processor;std::unique_ptr<PlateEditor> editor;
 public:
  const juce::String getApplicationName()override{return "PlatePreview";}const juce::String getApplicationVersion()override{return "0.1.0";}
- void initialise(const juce::String&args)override{processor=std::make_unique<PlateProcessor>();processor->prepareToPlay(48000,512);
+ void initialise(const juce::String&args)override{if(args=="--host-lifecycle"){runHostLifecycleRegression();quit();return;}processor=std::make_unique<PlateProcessor>();processor->prepareToPlay(48000,512);
  auto check=[](bool ok,const char*msg){if(!ok)throw std::runtime_error(msg);};
  processor->set("reverb_time_a",1.3f);processor->set("reverb_time_b",4.1f);processor->set("plate_select",1);check(std::abs(processor->get("reverb_time_a")-1.3f)<.001,"independent RT");
  processor->set("mix",27);processor->set("wet_solo",1);juce::MemoryBlock memory;processor->getStateInformation(memory);processor->reset();processor->setStateInformation(memory.getData(),int(memory.getSize()));check(std::abs(processor->get("mix")-27)<.001,"state recall mix");check(std::abs(processor->get("reverb_time_b")-4.1f)<.001,"state recall RT");check(processor->get("wet_solo")>.5,"state recall solo");

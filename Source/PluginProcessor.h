@@ -8,7 +8,7 @@ public:
  juce::AudioProcessorValueTreeState state;
  std::atomic<float> meter{0};
  void prepareToPlay(double,int) override;
- void releaseResources() override {}
+ void releaseResources() override;
  bool isBusesLayoutSupported(const BusesLayout&) const override;
  void processBlock(juce::AudioBuffer<float>&,juce::MidiBuffer&) override;
  juce::AudioProcessorEditor* createEditor() override;
@@ -25,6 +25,7 @@ public:
 private:
  std::atomic<int> currentProgram{0};
  plate::Engine engine; double sampleRate=48000, vu=0;
+ bool prepared=false;
  static juce::AudioProcessorValueTreeState::ParameterLayout layout();
  std::array<std::atomic<float>*,21> raw{};
 };
