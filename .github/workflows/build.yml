@@ -52,6 +52,44 @@ jobs:
           $run = Start-Process -FilePath $preview -ArgumentList $snapshot -WorkingDirectory $env:GITHUB_WORKSPACE -Wait -PassThru
           if ($run.ExitCode -ne 0) { throw 'Preset integration failed' }
           if (!(Test-Path $snapshot)) { throw 'Native editor snapshot missing' }
+      - name: Editor and browser teardown while playing
+        shell: pwsh
+        run: |
+          $env:PLATE140_PRESET_HOME = Join-Path $env:RUNNER_TEMP ('plate140-teardown-' + [guid]::NewGuid())
+          $preview = (Resolve-Path build/PlatePreview_artefacts/Release/PlatePreview.exe).Path
+          $run = Start-Process -FilePath $preview -ArgumentList '--editor-teardown' -PassThru -RedirectStandardOutput teardown-stdout.log -RedirectStandardError teardown-stderr.log
+          if (!$run.WaitForExit(90000)) { $run.Kill(); Get-Content teardown-stdout.log,teardown-stderr.log; throw 'Editor/browser removal blocked the UI thread' }
+          $run.WaitForExit()
+          Get-Content teardown-stdout.log,teardown-stderr.log
+          if ($run.ExitCode -ne 0) {
+            $diag = ((Get-Content teardown-stdout.log,teardown-stderr.log | Select-Object -Last 40) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+            Write-Output "::error title=Editor teardown::$diag"
+            throw "Editor teardown regression failed: $($run.ExitCode)"
+          }
+      - name: Actual VST3 playback and removal regression
+        shell: pwsh
+        run: |
+          $env:PLATE140_TEST_VST3 = (Get-ChildItem build/Plate140_artefacts/Release/VST3 -Filter *.vst3 | Select-Object -First 1).FullName
+          $env:PLATE140_PRESET_HOME = Join-Path $env:RUNNER_TEMP ('plate140-removal-' + [guid]::NewGuid())
+          $hostTest = (Resolve-Path build/PlateRemovalHost_artefacts/Release/PlateRemovalHost.exe).Path
+          $run = Start-Process -FilePath $hostTest -PassThru -RedirectStandardOutput removal-stdout.log -RedirectStandardError removal-stderr.log
+          if (!$run.WaitForExit(90000)) { $run.Kill(); Get-Content removal-stdout.log,removal-stderr.log; throw 'VST3 removal blocked the host message thread' }
+          $run.WaitForExit()
+          Get-Content removal-stdout.log,removal-stderr.log
+          if ($run.ExitCode -ne 0) {
+            $diag = ((Get-Content removal-stdout.log,removal-stderr.log | Select-Object -Last 40) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+            Write-Output "::error title=VST3 removal::$diag"
+            throw "VST3 removal regression failed: $($run.ExitCode)"
+          }
+      - name: Save removal diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PLATE140-Removal-Logs
+          path: |
+            removal-*.log
+            teardown-*.log
+          if-no-files-found: ignore
       - name: Save compiled editor screenshot
         uses: actions/upload-artifact@v4
         with:

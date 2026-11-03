@@ -1,5 +1,6 @@
 #pragma once
 #include "PresetLibrary.h"
+#include "../GUI/WindowRendering.h"
 class PresetBrowser:public juce::Component,private juce::ListBoxModel {
 public:
  PresetBrowser(PlateProcessor&processor,std::function<void()> changed):p(processor),onChange(std::move(changed)){
@@ -20,7 +21,7 @@ public:
  void resized()override{int w=getWidth();search.setBounds(10,8,w-20,35);favOnly.setBounds(w-130,51,120,24);for(int i=0;i<9;++i)tags[size_t(i)].setBounds(12+(i%3)*(w-24)/3,82+(i/3)*32,(w-30)/3,27);category.setBounds(12,183,w-24,26);name.setBounds(12,218,w-62,28);star.setBounds(w-44,218,32,28);remove.setBounds(12,254,(w-32)/3,28);rename.setBounds(16+(w-32)/3,254,(w-32)/3,28);save.setBounds(20+2*(w-32)/3,254,(w-32)/3,28);list.setBounds(10,292,w-20,getHeight()-322);}
  void refresh(){auto key=p.state.state.getProperty("preset_key").toString();filtered.clear();auto query=search.getText().trim();juce::String tag;for(auto&b:tags)if(b.getToggleState())tag=b.getButtonText();for(int i=0;i<library.entries.size();++i){auto&e=library.entries.getReference(i);if(category.getSelectedId()>1&&e.category!=category.getText())continue;if(query.isNotEmpty()&&!(e.name+" "+e.category+" "+e.tags.joinIntoString(" ")).containsIgnoreCase(query))continue;if((favOnly.getToggleState()||tag=="Best Of")&&!library.favourites.contains(e.key))continue;auto mapped=tag=="Guitar"?"Guitarras":tag=="Vocal"?"Vocais":tag=="Keys"?"Teclas":tag=="Drums"?"Bateria":tag;if(mapped.isNotEmpty()&&mapped!="Best Of"&&!e.tags.contains(mapped))continue;filtered.add(i);}list.updateContent();list.deselectAllRows();selectKey(key);updateActions();repaint();}
 private:
- PlateProcessor&p;std::function<void()>onChange;juce::LookAndFeel_V4 dark;PresetLibrary library;juce::TextEditor search,name;juce::ComboBox category;std::array<juce::TextButton,9>tags;juce::TextButton favOnly{"FAVORITES"},star{juce::String::charToString(0x2606)},save{"SAVE AS"},rename{"RENAME"},remove{"DELETE"};juce::ListBox list;juce::Array<int>filtered;
+ PlateProcessor&p;std::function<void()>onChange;vintage::SoftwareLookAndFeel dark;PresetLibrary library;juce::TextEditor search,name;juce::ComboBox category;std::array<juce::TextButton,9>tags;juce::TextButton favOnly{"FAVORITES"},star{juce::String::charToString(0x2606)},save{"SAVE AS"},rename{"RENAME"},remove{"DELETE"};juce::ListBox list;juce::Array<int>filtered;
  int getNumRows()override{return filtered.size();}
  juce::String selectedKey()const {int row=list.getSelectedRow();return juce::isPositiveAndBelow(row,filtered.size())?library.entries[filtered[row]].key:juce::String{};}
  void selectKey(const juce::String&key){for(int i=0;i<filtered.size();++i)if(library.entries[filtered[i]].key==key){list.selectRow(i);return;}}
@@ -32,7 +33,7 @@ private:
 };
 class PresetWindow:public juce::DocumentWindow {
 public:
- PresetWindow(PlateProcessor&p,std::function<void()>changed):DocumentWindow("EMT 140 PLATE PRESETS",juce::Colour(0xff363636),DocumentWindow::closeButton){setUsingNativeTitleBar(false);setTitleBarHeight(30);setContentOwned(new PresetBrowser(p,std::move(changed)),true);setResizable(true,false);setResizeLimits(350,500,650,1000);}
+ PresetWindow(PlateProcessor&p,std::function<void()>changed):DocumentWindow("EMT 140 PLATE PRESETS",juce::Colour(0xff363636),DocumentWindow::closeButton){setUsingNativeTitleBar(false);setTitleBarHeight(30);setContentOwned(new PresetBrowser(p,std::move(changed)),true);setResizable(true,false);setResizeLimits(350,500,650,1000);vintage::useSoftwareWindowRendering(*this);}
  void closeButtonPressed()override{setVisible(false);}
  void refresh(){if(auto*b=dynamic_cast<PresetBrowser*>(getContentComponent()))b->refresh();}
 };

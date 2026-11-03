@@ -5,6 +5,7 @@
 class PlateEditor:public juce::AudioProcessorEditor,private juce::Timer {
 public:
  explicit PlateEditor(PlateProcessor&);~PlateEditor()override;
+ void parentHierarchyChanged()override;void visibilityChanged()override;
  void mouseDown(const juce::MouseEvent&)override;void paint(juce::Graphics&)override;void resized()override;
 private:
  PlateProcessor&p;vintage::RackLook look;juce::Component panel;
@@ -15,8 +16,8 @@ private:
  juce::Slider filter;juce::ComboBox presets;
  std::vector<std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment>> sliders;
  std::vector<std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment>> buttons;
- juce::LookAndFeel_V4 toolbarLook;juce::TextButton browse{"Default"},inButton{"IN"},aButton{"A"},bButton{"B"},copyButton{"COPY"},pasteButton{"PASTE"},learnButton{"MAP"},moreButton{"..."};
- std::unique_ptr<PresetWindow> presetWindow;juce::ValueTree stateA,stateB;bool usingB=false;
+ vintage::SoftwareLookAndFeel toolbarLook;juce::TextButton browse{"Default"},inButton{"IN"},aButton{"A"},bButton{"B"},copyButton{"COPY"},pasteButton{"PASTE"},learnButton{"MAP"},moreButton{"..."};
+ std::unique_ptr<PresetWindow> presetWindow;juce::ValueTree stateA,stateB;bool usingB=false,closing=false;
  void openPresets();void updatePresetCaption();
  std::unique_ptr<juce::FileChooser> chooser;juce::ValueTree alternate;float vu=0;bool bState=false;int presetIndex=-1;
  void timerCallback()override;void chooseFile(bool saving);void drawPanel(juce::Graphics&);
