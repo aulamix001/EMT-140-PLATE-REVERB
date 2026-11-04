@@ -1,0 +1,22 @@
+{
+  "baseline_commit": "e3fe3b3c89178f46bd15b03ac7810a678a9be649",
+  "parameter_layout_unchanged": true,
+  "baseline_engine_blob": "7349f9f261645be29820c6472db8794b19c06a79",
+  "candidate_engine_blob": "963699f54c2c8cf70810494e94977ebfc72b00b9",
+  "candidate_bank_sha256": "e6725f6683bdf245516fbfa86425526ad53671de7ea21a038db811b0facccd0e",
+  "sample_rate": 48000,
+  "settle_seconds": 2,
+  "ir_seconds": 10,
+  "wet_only": true,
+  "before_within_failures": 2,
+  "before_cross_failures": 23,
+  "after_within_failures": 0,
+  "after_cross_failures": 0,
+  "minimum_within_distance": 1.2456249999999989,
+  "integrated_remote_commit": "6cf21fa",
+  "return_trim": 3.0,
+  "stereo_side_injection_preserved": true,
+  "production_commit": "f0c50926c39240af7b5422bbb39d866bbe2949d8",
+  "release_vst3_sha256": "a690f39702207889fb8aa39aa875af0dc174ab0873d6c76f91a3bf230700306b",
+  "editor_lifetime_blob": "521b86047495624add74a2f124f2810b714ff31d"
+}

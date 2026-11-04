@@ -133,9 +133,21 @@ jobs:
           if ([BitConverter]::ToUInt32($bytes, $offset) -ne 0x4550 -or [BitConverter]::ToUInt16($bytes, $offset+4) -ne 0x8664 -or [BitConverter]::ToUInt16($bytes, $offset+24) -ne 0x20b) { throw 'Expected PE32+ AMD64 VST3' }
           git rev-parse HEAD | Set-Content BUILD-COMMIT.txt
           Copy-Item (Join-Path $env:RUNNER_TEMP 'plate140-preview.png') rack-ui.png
-          Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md,BUILD-COMMIT.txt,rack-ui.png,build/compatible-graphics.txt -DestinationPath PLATE140-Windows-x64.zip
+          @("Commit: $env:GITHUB_SHA",'Windows Server 2022, MSVC x64. Debug build/ctest/official Steinberg validator: PASS. Release build/ctest/native preset integration/VST3 removal/pluginval level 10: PASS.','Studio One 8/8.4, Reaper, physical mixed DPI and real listening: NOT TESTED.') | Set-Content WINDOWS-VALIDATION.txt
+          Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md,BUILD-COMMIT.txt,WINDOWS-VALIDATION.txt,rack-ui.png,build/compatible-graphics.txt -DestinationPath PLATE140-Windows-x64.zip
           $symbols = Get-ChildItem build -Recurse -Filter *.pdb | Where-Object FullName -Match 'Debug'
-          Compress-Archive -Path (@('build/Plate140_artefacts/Debug/VST3','BUILD-COMMIT.txt') + @($symbols.FullName)) -DestinationPath PLATE140-Windows-x64-Debug.zip
+          $debugStage = Join-Path $env:RUNNER_TEMP 'plate140-debug-package'
+          New-Item -ItemType Directory -Force $debugStage | Out-Null
+          Copy-Item build/Plate140_artefacts/Debug/VST3 $debugStage -Recurse
+          Copy-Item BUILD-COMMIT.txt $debugStage
+          $buildRoot = (Resolve-Path build).Path
+          foreach ($symbol in $symbols) {
+            $relative = [IO.Path]::GetRelativePath($buildRoot, $symbol.FullName)
+            $destination = Join-Path $debugStage (Join-Path 'symbols' $relative)
+            New-Item -ItemType Directory -Force (Split-Path $destination) | Out-Null
+            Copy-Item $symbol.FullName $destination
+          }
+          Compress-Archive -Path "$debugStage/*" -DestinationPath PLATE140-Windows-x64-Debug.zip
           Get-FileHash PLATE140-Windows-x64*.zip -Algorithm SHA256 | ForEach-Object { "$($_.Hash.ToLower())  $([IO.Path]::GetFileName($_.Path))" } | Set-Content SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         with:
@@ -145,11 +157,12 @@ jobs:
             PLATE140-Windows-x64-Debug.zip
             SHA256SUMS.txt
             BUILD-COMMIT.txt
+            WINDOWS-VALIDATION.txt
             debug-*.log
 
   release:
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || (github.ref == 'refs/heads/fix-presets-audibility' && contains(github.event.head_commit.message, '[release-preview]'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -161,5 +174,28 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ github.ref_name }}
-        run: gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --verify-tag --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64 build, including 100 mapped presets. Build, DSP/preset integration and pluginval level 10 must pass before this package is published. Studio One validation remains pending."
+          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v0.2.0-dev.1' }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --target "$RELEASE_COMMIT" --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64 build, including 100 mapped presets. Build, DSP/preset integration and pluginval level 10 must pass before this package is published. Studio One validation remains pending."
+
+  open-pr:
+    needs: build
+    if: github.ref == 'refs/heads/fix-presets-audibility'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+      - name: Open requested review PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          existing=$(gh pr list --head fix-presets-audibility --base main --state open --json url --jq '.[0].url // empty')
+          if [ -n "$existing" ]; then
+            echo "::notice title=Pull request::$existing"
+          else
+            pr_url=$(gh pr create --base main --head fix-presets-audibility --title "Corrige presets, programas VST3 e encerramento do editor" --body-file docs/PR_DESCRIPTION.md)
+            echo "::notice title=Pull request::$pr_url"
+          fi

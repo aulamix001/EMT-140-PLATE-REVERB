@@ -1,0 +1,43 @@
+UpdateCTestConfiguration  from :/workspace/plate-debug-asan/DartConfiguration.tcl
+Parse Config file:/workspace/plate-debug-asan/DartConfiguration.tcl
+Test project /workspace/plate-debug-asan
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: PlateDSP
+
+1: Test command: /workspace/plate-debug-asan/PlateTests
+1: Working Directory: /workspace/plate-debug-asan
+1: Test timeout computed to be: 1500
+1: =================================================================
+1: ==8231==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5330000c00a0 at pc 0x56247a24ff47 bp 0x7ffe67671210 sp 0x7ffe67671208
+1: READ of size 8 at 0x5330000c00a0 thread T0
+1:     #0 0x56247a24ff46 in plate::Delay::read(double) const /workspace/EMT-140-PLATE-REVERB/Source/DSP/PlateEngine.h:32
+1:     #1 0x56247a260885 in plate::Engine::tick(double, double, plate::Parameters const&) /workspace/EMT-140-PLATE-REVERB/Source/DSP/PlateEngine.h:124
+1:     #2 0x56247a24c794 in main /workspace/EMT-140-PLATE-REVERB/Tests/TestPlateEngine.cpp:18
+1:     #3 0x7f9e0fc96ca7  (/lib/x86_64-linux-gnu/libc.so.6+0x29ca7) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
+1:     #4 0x7f9e0fc96d64 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29d64) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
+1:     #5 0x56247a2493b0 in _start (/workspace/plate-debug-asan/PlateTests+0x2e3b0) (BuildId: 452e401549907e73f787f2993b8d234e2b4f4373)
+1: 
+1: 0x5330000c00a0 is located 0 bytes after 96416-byte region [0x5330000a8800,0x5330000c00a0)
+1: allocated by thread T0 here:
+1:     #0 0x7f9e108ee778 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:95
+1:     #1 0x56247a2694ea in std::__new_allocator<double>::allocate(unsigned long, void const*) /usr/include/c++/14/bits/new_allocator.h:151
+1:     #2 0x56247a2693c7 in std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) /usr/include/c++/14/bits/alloc_traits.h:515
+1:     #3 0x56247a2693c7 in std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) /usr/include/c++/14/bits/stl_vector.h:380
+1:     #4 0x56247a268d6f in std::_Vector_base<double, std::allocator<double> >::_M_create_storage(unsigned long) /usr/include/c++/14/bits/stl_vector.h:398
+1:     #5 0x56247a2682d4 in std::_Vector_base<double, std::allocator<double> >::_Vector_base(unsigned long, std::allocator<double> const&) /usr/include/c++/14/bits/stl_vector.h:334
+1:     #6 0x56247a267534 in std::vector<double, std::allocator<double> >::vector(unsigned long, double const&, std::allocator<double> const&) /usr/include/c++/14/bits/stl_vector.h:571
+1:     #7 0x56247a266a54 in std::vector<double, std::allocator<double> >::_M_fill_assign(unsigned long, double const&) /usr/include/c++/14/bits/vector.tcc:278
+1:     #8 0x56247a26507e in std::vector<double, std::allocator<double> >::assign(unsigned long, double const&) /usr/include/c++/14/bits/stl_vector.h:809
+1:     #9 0x56247a24f775 in plate::Delay::prepare(int) /workspace/EMT-140-PLATE-REVERB/Source/DSP/PlateEngine.h:28
+1:     #10 0x56247a25b1ad in plate::Engine::prepare(double) /workspace/EMT-140-PLATE-REVERB/Source/DSP/PlateEngine.h:108
+1:     #11 0x56247a24c0f7 in main /workspace/EMT-140-PLATE-REVERB/Tests/TestPlateEngine.cpp:14
+1:     #12 0x7f9e0fc96ca7  (/lib/x86_64-linux-gnu/libc.so.6+0x29ca7) (BuildId: 5e5b51f4c39af9ac589408c1dc432ba390a273cc)
+1: 
+1: SUMMARY: AddressSanitizer: heap-buffer-overflow /workspace/EMT-140-PLATE-REVERB/Source/DSP/PlateEngine.h:32 in plate::Delay::read(double) const
+1: 

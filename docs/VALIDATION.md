@@ -1,30 +1,66 @@
-# Validation record — development version 0.1.0
+# Validação — PLATE 140 0.2.0
 
-Executed on Debian 13 x86-64 with GCC 14.2, JUCE 8.0.6 and Release builds. Windows/Studio One results are not implied.
+Registro de 04/11/2026. Código, resultados e limitações são separados abaixo. Os registros antigos em `measurements.json` e `validation/audibility` descrevem revisões anteriores; não substituem estas medições. Banco, IDs, faixas, passos e defaults: os 20 parâmetros existentes foram preservados. Não há 25 parâmetros nem MIDI Learn neste produto.
 
-- Native CMake build: VST3, Standalone, DSP test executable and native editor snapshot runner.
-- DSP suite: silence, finite/bounded impulse tails at 44.1/48/96/192 kHz, block-size loops 32/64/128/256/512/1024/2048, Wet Solo invariance to stored mix, mono width after smoothing, bypass unity, zero-gain shelf unity, exact delay sample indexing.
-- Native integration runner: independent plate RT, versioned XML state recall, all 12 factory presets, exact nonlinear midpoint mappings, real stereo audio callback, actual editor screenshot. It exits nonzero on assertion failure.
-- pluginval 1.0.4 strictness 10: Linux VST3, sample rates 44.1/48/96/192 kHz, block sizes 32/64/128/256/512/1024, seed 140, GUI tests included.
-- Offline octave-band Schroeder integration, 354–707 Hz, T30 fit from −5 to −35 dB extrapolated to RT60, 48 kHz, nine-second impulses: all nine cases within ±8%. Exact data and stereo correlations in `measurements.json`; rerun using `python Tests/measure.py` with NumPy/SciPy.
+## Executado no Linux
 
-| Plate | Target 0.5 s | Target 2 s | Target 5.5 s |
-|---|---:|---:|---:|
-| A | 0.5280 | 1.9908 | 5.2808 |
-| B | 0.5105 | 1.9727 | 5.3773 |
-| C | 0.5238 | 2.0492 | 5.4457 |
+Debian 13 x86-64, GCC 14.2, JUCE 8.0.6, C++17, Python 3.12, NumPy 2.3.5/SciPy 1.17.0; Xvfb :101, 2200×1200. Código de produção rastreado em `metrics/provenance.json`, incluindo blobs do engine/banco e SHA256 do VST3 Linux.
 
-Plate B uses a short-time decay correction derived from this measurement (45 ms × exp(−3 × (RT−0.5))). These results cover the stated sampled targets at 48 kHz; they do not establish the full frequency/rate/parameter acceptance envelope or equivalence with hardware.
+| Verificação | Resultado efetivo |
+|---|---|
+| Build Release, VST3/Standalone/runners | PASS |
+| ctest Release completo, após corrigir o wrap | PASS: 10/10, 97,06 s |
+| Integração nativa dos 100 presets | PASS: 100 respostas de áudio diferentes, 100 XML, estado, limites, biblioteca, A/B, clipboard e navegador flutuante |
+| Host VST3 externo | PASS: 100 programas; get/setCurrentProgram e restauração de estado; RTs chegam ao processor; 100 respostas diferentes |
+| Métricas dos 100 presets | PASS: 4.950 pares e 36 pares de medianas de categorias |
+| Modulação, tom estacionário 1 kHz | PASS: energia lateral/portadora 0,833127 modulada; 1,86×10⁻¹⁴ estacionária |
+| Placas A/B/C em configuração plana | PASS: brilho A 3,54 / B −0,72 / C 8,47 dB; RT500 próximo de 2,02 s |
+| Ciclo de vida nativo | PASS: 100 instâncias e 300 editores por execução, em escala 100% e 125%; áudio em thread separada; 300/300 gestos equilibrados; callback concluído antes de liberar processor |
+| Comparação RGBA Linux | PASS: 0/934.305 pixels alterados ao trocar a preferência gráfica no mesmo backend Linux; não compara GDI/Direct2D Windows |
+| Regressão de buses e reativação | PASS: mono/estéreo, 0 canais, 0 amostras, pré-prepare/pós-release e rates inválidos |
+| Navegador sob reprodução | PASS: 12 ciclos de fechamento, atualização de busca pendente, áudio finito e message thread responsiva |
+| Debug ASan + UBSan | PASS: 6/6 testes DSP/ciclo de vida, 79,30 s; detect_leaks=1, halt_on_error=1; sem relatório de memória/UB/leaks nem JUCE Assertion final |
+| pluginval 1.0.4, nível 10 | PASS no VST3 final; GUI, 44,1/48/96/192 kHz, blocos 32/64/128/256/512/1024, seed 140 |
+| Validator oficial Steinberg 3.8.1 | PASS: 47/47 no Release e 47/47 no Debug instrumentado; SDK fixado em 3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96 |
+| AudioPluginHost oficial sem alterar fontes | PARCIAL: carregou projeto/estado e abriu/fechou o editor; primeira saída 139, repetições normal e GDB saíram sem falha; causa ainda indeterminada |
 
-Remaining release gates: Windows x64 CI execution, Studio One load/session recall, authoritative manual analysis, licensed reference audio comparisons, full-band calibration, THD/aliasing and CPU budget measurements, allocation instrumentation, corrupted XML hardening, macOS AU validation. Configured GitHub Actions are source configuration, not an executed remote build. No VST2 SDK or compatibility is claimed.
+Logs efetivos em `validation/ctest-audibility-linux.txt`, `preset-integration-audibility-linux.txt`, `debug-asan-linux.txt[.gz]`, `pluginval-audibility-linux.txt` e `steinberg-*-linux.txt`. O log Debug completo preserva os diagnósticos X11 BadAtom produzidos no Xvfb sem window manager. O resumo informa sua contagem, sem ocultar assertions. O host oficial também não teve hardware ALSA/MIDI disponível. Detalhes da saída 139 e das repetições em `validation/official-host-linux.md`; não foi obtida uma stack da queda inicial.
 
-GUI revision: recompiled and relinked editor, Standalone and VST3; native parameter/state/preset/audio integration passed; pluginval strictness 10 repeated successfully with GUI tests at the same rates and block sizes. Current screenshot uses the 1043:366 panel with context-menu preset controls.
+## Defeitos comprovados e correções
 
-## 100-preset bank and floating browser
-Native integration passed for all 100 embedded presets and all 100 generated XML files: each of 20 parameter values matches the real processor, ranges are valid, session recall works and representative audio blocks remain finite. Manifest/XML agreement and 100 unique parameter states also checked.
+1. **Acesso fora do atraso circular:** ASan reproduziu heap-buffer-overflow em Delay::read quando um pequeno valor negativo, somado à capacidade, arredondava para o tamanho exato do vetor. Agora o wrap usa índices inteiros, preservando a interpolação linear. Teste com nextafter(1,2) e regressão completa passaram sob ASan; stack anterior em `validation/diagnostics/asan-delay-before-fix.txt`.
+2. **Gesto aberto ao destruir o editor:** uma cópia isolada retirando apenas finishInteractions falha com `gesture left open after editor destruction`. A versão corrigida termina a captura real e o popup enquanto slider/attachment/processor existem. Não dispara callbacks artificiais de gesto; o teste usa eventos reais via ComponentPeer. Evidência em `validation/diagnostics/gesture-without-finish.txt`.
+3. **Assertion UTF-8:** Debug reproduziu juce_String.cpp:327 no tooltip com pontos médios. String::fromUTF8 com bytes escapados removeu a assertion sem alterar o texto exibido.
+4. **Programa 0 do VST3:** o estado inicial era Default mas reportava Vocal Long/índice 0; a seleção do mesmo programa podia ser ignorada pelo wrapper. Default agora é o índice 100; as 100 fábricas mantêm 0–99. Notificação ChangeDetails inclui programChanged e nonParameterStateChanged. Estados válidos sem version explícita, com filhos reordenados e metadados extras são aceitos. O teste externo confirma programa restaurado e parâmetros efetivos.
 
-Browser is a real desktop DocumentWindow (not an embedded overlay), draggable and nonmodal. Automated checks cover toolbar opening, closing/reopening, Snare search (3 matches), clearing search (100 entries), A/B snapshots and clipboard mapping. User-library tests cover save, empty-name rejection/recovery, rename/delete, factory protections, favourites across reloads and preservation of two instances' independently saved presets. Invalid NaN/out-of-range states are rejected.
+O chooser já recebeu SafePointer/closing na revisão remota 6cf21fa; essa proteção foi mantida e estendida para conferir a identidade do chooser atual. O painel aprovado, entrada side estéreo, trim de retorno ×3 e proteção de buses remotos foram integrados, não descartados.
 
-Pluginval 1.0.4 strictness 10 passed after a state-restoration regression was fixed: JUCE bool raw values can be snapped while host-facing values remain fractional. restoreState now restores every host-facing parameter explicitly. A regression test reproduces the original Wet Solo/Power fractions and requires exact restored values. Same sample rates and block sizes as above; see validation logs in docs/validation/.
+## Presets e métricas antes/depois
 
-Windows VST3 build, Windows GUI/clipboard behaviour and Studio One remain unexecuted. CI now includes the 100-preset native integration runner, Windows builds and pluginval, but workflow source is not proof of a remote run. Bank XML is platform-neutral and uses the same parameter schema on Windows.
+[Tabela dos 12 presets](PRESET_METRICS_BEFORE_AFTER.md), JSON/CSV de todos os 100 em `metrics/before` e `metrics/after`. Baseline e banco são do commit e3fe3b3; o candidato inclui a integração remota e o conserto ASan. Render: 48 kHz, impulso estéreo 0,5, 2 s de assentamento, 10 s de cauda wet. Presets INSERT mantêm seu mix no plugin; somente a medição isola wet para não confundir o ataque seco com a cauda.
+
+O teste exige por par pelo menos um eixo: RT500 ≥15%, início ≥8 ms, brilho ≥1,5 dB, graves ≥1,5 dB ou largura S/M ≥0,08. Também exige início intrínseco ≤2 ms, densidade inicial ≥70% e ajuste de decay confiável. Antes: 2 pares internos e 23 entre categorias sem contraste mínimo; depois: zero. Início intrínseco final 0,25–0,375 ms; RT500 0,521–5,517 s. Nenhuma dessas medidas constitui prova de percepção auditiva.
+
+Routing: **73 AUX / 27 INSERT**. A integração remota manteve piso de 8% nos INSERT (máximo 25%). Browser/toolbar mostram o modo e buscas AUX/INSERT retornam as contagens corretas. Rate zero/depth zero têm render estacionário bit-idêntico quando preparados nessa configuração; ao desligar modulação em uso, offsets suavizam até zero exato. O callback não ganhou alocações/locks/I/O; a instrumentação de new passou nas quatro sample rates. ASan não é detector completo de data races.
+
+## Windows e testes não executados
+
+Execuções CI anteriores falharam no build do renderer de métricas por falta de include explícito de string no MSVC; esse erro foi corrigido em dd5c795. A execução seguinte passou 8/9 testes Debug, incluindo os 100 programas VST3; o harness de gesto não iniciou o arraste. O harness final traz sua janela à frente, aguarda pintura no Windows e testa também escala global 125%, sem reduzir os critérios. A aprovação da revisão final Windows depende do workflow associado ao commit final, que compila Debug, roda ctest e validator oficial antes de compilar/testar Release, executar integração, remoção real VST3 e pluginval 10 e empacotar. Workflow configurado não é resultado executado. O pacote só é publicado se o job build passar; inclui commit, SHA256, bundle completo e Debug/PDBs separados.
+
+**NÃO EXECUTADO neste ambiente:** Reaper; Studio One 8/Studio One ou Fender Studio Pro 8.4 no Windows 11; escuta real; teste físico de NVIDIA/Intel/AMD; monitores em DPI misto a 125%/100%; sequência SDK de escalas anexadas ao host (100/125/100/150/175/200/250/300/400/137/125/100); minidump de um congelamento da DAW. Não foi comprovada a causa do freeze relatado nem equivalência de aparência Windows usando capturas Linux.
+
+A política CPU/GDI com imagens em CPU é uma escolha de compatibilidade, não garantia para todas as GPUs. JUCE 9.0.5 foi citado no pedido para H-Delay, produto ausente deste repositório; PLATE 140 mantém JUCE 8.0.6. Não se atribui o congelamento à correção upstream de autoscaling sem evidência na DAW. O manual oficial UA permaneceu inacessível por HTTP 403; não foi apresentado como lido.
+
+## Comandos executados
+
+```sh
+. /workspace/tools/build-env.sh
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/workspace/tools/sysroot/usr
+cmake --build build --parallel 3
+DISPLAY=:101 ctest --test-dir build -V --output-on-failure
+PLATE140_PRESET_HOME=/workspace/pasta-de-teste DISPLAY=:101 build/PlatePreview_artefacts/Release/PlatePreview /workspace/plate-final.png
+```
+
+Debug usou -O0 -g1 -fsanitize=address,undefined -fno-omit-frame-pointer e flags de link equivalentes. ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 e UBSAN_OPTIONS=halt_on_error=1; ctest selecionou PlateDSP, PlateSoundBehaviour, EditorGestureLifetime, EditorGestureLifetime125, HostLifecycle e EditorBrowserTeardown. O sandbox inicial impediu o LeakSanitizer de inspecionar threads; executar fora dele resolveu a restrição, mantendo detect_leaks=1. O cache Ninja perdeu dependências entre execuções neste ambiente; a recompilação final usou os comandos de compile/link emitidos por ninja -t commands, seguida das suítes acima, sem alterar o código para evitar testes.
+
+Validator SDK foi compilado em Debug com VSTGUI/plugin/hosting examples OFF; validator permanece disponível nessa configuração. Para carregar o plugin instrumentado, o executável recebeu LD_PRELOAD do libasan do mesmo GCC. AudioPluginHost foi compilado pelo CMake oficial JUCE com JUCE_BUILD_EXTRAS=ON, target AudioPluginHost, e um projeto com estado VST3 real; o encerramento normal foi acionado por X do editor e Ctrl+Q. Esses comandos não substituem o reteste na DAW afetada.

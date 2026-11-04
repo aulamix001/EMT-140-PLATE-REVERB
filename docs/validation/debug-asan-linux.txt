@@ -1,0 +1,91 @@
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1; UBSAN_OPTIONS=halt_on_error=1
+34840 Xvfb BadAtom diagnostics omitted here; full log in .gz.
+
+UpdateCTestConfiguration  from :/workspace/plate-debug-asan/DartConfiguration.tcl
+Parse Config file:/workspace/plate-debug-asan/DartConfiguration.tcl
+Test project /workspace/plate-debug-asan
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start  1: PlateDSP
+
+1: Test command: /workspace/plate-debug-asan/PlateTests
+1: Working Directory: /workspace/plate-debug-asan
+1: Test timeout computed to be: 1500
+1: PASS: 628969 assertions; silence, impulse stability, sample rates, block sizes, wet solo, mono, bypass, flat EQ, delay
+1/6 Test  #1: PlateDSP .........................   Passed   22.04 sec
+test 2
+    Start  2: PlateSoundBehaviour
+
+2: Test command: /workspace/plate-debug-asan/PlateSoundBehaviour
+2: Working Directory: /workspace/plate-debug-asan
+2: Test timeout computed to be: 1500
+2: PASS: exact modulation OFF, early density onset, maximum-depth stability and zero callback allocations at 4 sample rates
+2/6 Test  #2: PlateSoundBehaviour ..............   Passed   23.33 sec
+test 3
+    Start  3: EditorGestureLifetime
+
+3: Test command: /workspace/plate-debug-asan/EditorGestureLifetime_artefacts/Debug/PlateLifetime
+3: Working Directory: /workspace/plate-debug-asan
+3: Test timeout computed to be: 180
+3: JUCE v8.0.6
+3: RGBA snapshot comparison: 0 changed pixels / 934305 (platform Linux)
+3: PASS: 100 instances, 300 native editor/drag/popup cycles, 4681 audio callbacks; gesture pairs 300/300
+3/6 Test  #3: EditorGestureLifetime ............   Passed   13.06 sec
+test 4
+    Start  4: EditorGestureLifetime125
+
+4: Test command: /workspace/plate-debug-asan/EditorGestureLifetime_artefacts/Debug/PlateLifetime "--scale125"
+4: Working Directory: /workspace/plate-debug-asan
+4: Test timeout computed to be: 180
+4: JUCE v8.0.6
+4: RGBA snapshot comparison: 0 changed pixels / 934305 (platform Linux)
+4: PASS: 100 instances, 300 native editor/drag/popup cycles, 4878 audio callbacks; gesture pairs 300/300
+4/6 Test  #4: EditorGestureLifetime125 .........   Passed   12.87 sec
+test 9
+    Start  9: HostLifecycle
+
+9: Test command: /workspace/plate-debug-asan/PlatePreview_artefacts/Debug/PlatePreview "--host-lifecycle"
+9: Working Directory: /workspace/plate-debug-asan
+9: Test timeout computed to be: 1500
+9: JUCE v8.0.6
+9: CHECK: zero audio channels, 64 samples
+9: PASS: empty/deactivated buses, zero samples, pre-prepare/post-release callbacks, mono/stereo and repeated activation
+5/6 Test  #9: HostLifecycle ....................   Passed    0.18 sec
+test 10
+    Start 10: EditorBrowserTeardown
+
+10: Test command: /workspace/plate-debug-asan/PlatePreview_artefacts/Debug/PlatePreview "--editor-teardown"
+10: Working Directory: /workspace/plate-debug-asan
+10: Test timeout computed to be: 1500
+10: JUCE v8.0.6
+10: CLOSE EDITOR/BROWSER 0
+10: CLOSE EDITOR/BROWSER 1
+10: CLOSE EDITOR/BROWSER 2
+10: CLOSE EDITOR/BROWSER 3
+10: CLOSE EDITOR/BROWSER 4
+10: CLOSE EDITOR/BROWSER 5
+10: CLOSE EDITOR/BROWSER 6
+10: CLOSE EDITOR/BROWSER 7
+10: CLOSE EDITOR/BROWSER 8
+10: CLOSE EDITOR/BROWSER 9
+10: CLOSE EDITOR/BROWSER 10
+10: CLOSE EDITOR/BROWSER 11
+10: PASS: 12 editor/browser removal cycles with pending search updates; live finite audio; UI responsive; CPU artwork
+6/6 Test #10: EditorBrowserTeardown ............   Passed    7.80 sec
+
+The following tests passed:
+	PlateDSP
+	PlateSoundBehaviour
+	EditorGestureLifetime
+	EditorGestureLifetime125
+	HostLifecycle
+	EditorBrowserTeardown
+
+100% tests passed out of 6
+
+Total Test time (real) =  79.30 sec

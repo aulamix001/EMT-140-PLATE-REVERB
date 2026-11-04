@@ -1,0 +1,8 @@
+{
+  "sample_rate": 48000,
+  "tone_hz": 1000,
+  "rate_hz": 0.8,
+  "depth": 10,
+  "stationary_sideband_ratio": 1.860652245075382e-14,
+  "modulated_sideband_ratio": 0.8331272255015361
+}

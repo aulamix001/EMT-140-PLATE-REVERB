@@ -2,6 +2,8 @@
 
 Independent double-precision 16-line orthogonal Householder feedback-delay networks, six serial input allpass diffusers and per-line feedback allpasses. The three tanks have distinct incommensurate lengths, diffusion coefficients, two-band decay losses and pickup shelves: A balanced, B dark/dense, C bright/metallic. This is an independent plate-inspired approximation, not a finite-element solver or a proprietary algorithm.
 
+Stereo mid/side excitation preserves opposite-polarity input energy. The integrated remote return trim is ×3 (+9.54 dB); it does not alter the feedback decay.
+
 Input → input shelf → restrained tanh driver → diffusion → three continuously running tanks and 12 dense early taps → smoothed plate selection → fractional wet predelay → two-band shelf EQ → mid/side width → balance attenuation → linear dry/wet → RMS VU. Dry latency is zero. Wet Solo overrides mix without overwriting it; power bypass is smoothed. All tanks retain their independent RT controls.
 
 Early pickup starts 0.25–0.375 ms after input at 48 kHz, before the user predelay. Shorter feedback lines and dispersive allpasses supply immediate density. Two-band stable feedback gains follow the selected RT including the allpass reference-band group delay. Model-dependent high-band loss and pickup EQ create distinct brightness without making short-loop fixed low-pass loss dominate RT. An 8 Hz DC blocker prevents DC accumulation.

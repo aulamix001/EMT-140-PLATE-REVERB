@@ -1,0 +1,53 @@
+{
+  "sample_rate": 48000,
+  "wet_only": true,
+  "metrics": [
+    {
+      "number": 1,
+      "name": "Plate A",
+      "category": "Model",
+      "rt60_s": 2.01793,
+      "rt60_broadband_s": 1.69215,
+      "onset_ms": 0.3333,
+      "intrinsic_onset_ms": 0.3333,
+      "brightness_db": 3.5428,
+      "bass_db": -12.2462,
+      "width": 0.99836,
+      "decay_fit_r2": 0.99983,
+      "density_first_10ms": 0.90208
+    },
+    {
+      "number": 2,
+      "name": "Plate B",
+      "category": "Model",
+      "rt60_s": 2.02365,
+      "rt60_broadband_s": 1.83821,
+      "onset_ms": 0.25,
+      "intrinsic_onset_ms": 0.25,
+      "brightness_db": -0.7205,
+      "bass_db": -9.838,
+      "width": 0.9678,
+      "decay_fit_r2": 0.99985,
+      "density_first_10ms": 0.92917
+    },
+    {
+      "number": 3,
+      "name": "Plate C",
+      "category": "Model",
+      "rt60_s": 2.02523,
+      "rt60_broadband_s": 1.96797,
+      "onset_ms": 0.375,
+      "intrinsic_onset_ms": 0.375,
+      "brightness_db": 8.4734,
+      "bass_db": -9.4393,
+      "width": 0.98501,
+      "decay_fit_r2": 0.99981,
+      "density_first_10ms": 0.78958
+    }
+  ],
+  "within_failures": [],
+  "cross_category_failures": [],
+  "minimum_within_distance": 2.8422,
+  "category_distances": [],
+  "failures": []
+}

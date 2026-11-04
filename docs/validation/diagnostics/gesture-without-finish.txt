@@ -1,0 +1,2 @@
+RGBA snapshot comparison: 0 changed pixels / 934305 (platform Linux)
+FAIL: gesture left open after editor destruction
