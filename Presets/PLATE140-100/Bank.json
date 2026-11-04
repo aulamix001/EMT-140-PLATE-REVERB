@@ -587,7 +587,7 @@
       "name": "Spoken Close",
       "category": "Vocais",
       "use": "INSERT",
-      "description": "Vocais; carater clean; RT 0.5 s; predelay 8 ms; insert com 7% wet.",
+      "description": "Vocais; carater clean; RT 0.5 s; predelay 8 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 1,
         "reverb_time_a": 2,
@@ -606,7 +606,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 8,
-        "mix": 7,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }
@@ -1254,7 +1254,7 @@
       "name": "Heavy Guitar Depth",
       "category": "Guitarras",
       "use": "INSERT",
-      "description": "Guitarras; carater thin; RT 0.8 s; predelay 28 ms; insert com 6% wet.",
+      "description": "Guitarras; carater thin; RT 0.8 s; predelay 28 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 1,
         "reverb_time_a": 2,
@@ -1273,7 +1273,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 28,
-        "mix": 6,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }
@@ -2501,7 +2501,7 @@
       "name": "Dialogue Depth",
       "category": "Cinema",
       "use": "INSERT",
-      "description": "Cinema; carater clean; RT 0.8 s; predelay 20 ms; insert com 6% wet.",
+      "description": "Cinema; carater clean; RT 0.8 s; predelay 20 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 1,
         "reverb_time_a": 2,
@@ -2520,7 +2520,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 20,
-        "mix": 6,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }
@@ -2675,7 +2675,7 @@
       "name": "Mix Bus Subtle",
       "category": "Mix",
       "use": "INSERT",
-      "description": "Mix; carater clean; RT 0.8 s; predelay 18 ms; insert com 4% wet.",
+      "description": "Mix; carater clean; RT 0.8 s; predelay 18 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 2,
         "reverb_time_a": 2,
@@ -2694,7 +2694,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 18,
-        "mix": 4,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }
@@ -2704,7 +2704,7 @@
       "name": "Drum Bus Glue",
       "category": "Mix",
       "use": "INSERT",
-      "description": "Mix; carater warm; RT 0.6 s; predelay 8 ms; insert com 5% wet.",
+      "description": "Mix; carater warm; RT 0.6 s; predelay 8 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 1,
         "reverb_time_a": 2,
@@ -2723,7 +2723,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 8,
-        "mix": 5,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }
@@ -2791,7 +2791,7 @@
       "name": "Vintage Cohesion",
       "category": "Mix",
       "use": "INSERT",
-      "description": "Mix; carater warm; RT 1.6 s; predelay 35 ms; insert com 7% wet.",
+      "description": "Mix; carater warm; RT 1.6 s; predelay 35 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 0,
         "reverb_time_a": 1.6,
@@ -2810,7 +2810,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 35,
-        "mix": 7,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }
@@ -2820,7 +2820,7 @@
       "name": "Master Dark Space",
       "category": "Mix",
       "use": "INSERT",
-      "description": "Mix; carater dark; RT 1.1 s; predelay 30 ms; insert com 3% wet.",
+      "description": "Mix; carater dark; RT 1.1 s; predelay 30 ms; insert com 8% wet.",
       "parameters": {
         "plate_select": 0,
         "reverb_time_a": 1.1,
@@ -2839,7 +2839,7 @@
         "mod_rate": 0,
         "mod_depth": 0,
         "predelay": 30,
-        "mix": 3,
+        "mix": 8,
         "wet_solo": 0,
         "power": 1
       }

@@ -40,8 +40,8 @@ struct Delay {
 // All tuning is an independent plate-inspired design, not a proprietary circuit model.
 struct Tank {
  std::array<Delay,16> lines,dispersion;
- std::array<Delay,6> diffusion;
- Delay early;
+ std::array<Delay,6> diffusion,sideDiffusion;
+ Delay early,earlySide;
  std::array<size_t,16> nominal{};
  std::array<double,16> low{},gainLow{},gainHigh{},roundTrip{},phaseSin{},phaseCos{};
  std::array<Smooth,16> excursion;
@@ -73,12 +73,12 @@ struct Tank {
    phaseSin[i]=std::sin(i*2.399963229728653+model*1.37);phaseCos[i]=std::cos(i*2.399963229728653+model*1.37);
    excursion[i].prepare(sr);excursion[i].value=0;gainLow[i]=gainHigh[i]=.8;
   }
-  for(int i=0;i<6;++i)diffusion[i].prepare(std::max(2,int(inputDelays[model][i]*sr/48000)));
-  early.prepare(int(sr*.025)+8);
+  for(int i=0;i<6;++i){int length=std::max(2,int(inputDelays[model][i]*sr/48000));diffusion[i].prepare(length);sideDiffusion[i].prepare(length);}
+  early.prepare(int(sr*.025)+8);earlySide.prepare(int(sr*.025)+8);
   for(int i=0;i<12;++i){double factor=model==1?.75:model==2?1.12:1.;earlyLeft[i]=size_t(std::max(1,int(earlyMs[i]*factor*sr*.001)));earlyRight[i]=size_t(std::max(1,int((earlyMs[i]*factor+.13+(i%3)*.09)*sr*.001)));}
  }
- std::array<double,2> tick(double x,double target,double modulationSamples,double sine,double cosine){
-  rt.next(target);for(auto&d:diffusion)x=d.allpass(x,inputCoefficient);early.push(x);
+ std::array<double,2> tick(double x,double target,double modulationSamples,double sine,double cosine,double side=0){
+  rt.next(target);for(auto&d:diffusion)x=d.allpass(x,inputCoefficient);early.push(x);for(auto&d:sideDiffusion)side=d.allpass(side,inputCoefficient);earlySide.push(side);
   std::array<double,16> y{};double sum=0;
   for(int i=0;i<16;++i){double amplitude=excursion[i].next(std::min(modulationSamples,std::min(sr*.006,double(nominal[i])*.35)));if(amplitude<1e-9){excursion[i].value=0;y[i]=lines[i].readInteger(nominal[i]);}else y[i]=lines[i].read(double(nominal[i])+amplitude*(sine*phaseCos[i]+cosine*phaseSin[i]));sum+=y[i];}
   std::array<double,2> out{};
@@ -88,22 +88,23 @@ struct Tank {
    double feedback=gainHigh[i]*mixed+(gainLow[i]-gainHigh[i])*low[i];
    feedback=dispersion[i].allpass(feedback,allpassCoefficient);
    int inputSign=((i+modelIndex)%2)?-1:1;
-   lines[i].push(inputSign*.14*x+feedback);
+   lines[i].push(inputSign*.14*x+(((i/2+modelIndex)%2)?-.14:.14)*side+feedback);
    out[0]+=y[i]*((i%2)?-1:1)*.14;
    out[1]+=y[i]*(((i/2+modelIndex)%2)?-1:1)*.14;
   }
   for(int i=0;i<12;++i){out[0]+=early.readInteger(earlyLeft[i]+1)*earlyGain*((i%3)==1?-.28:.28);out[1]+=early.readInteger(earlyRight[i]+1)*earlyGain*((i%3)==2?-.28:.28);}
+  for(int i=0;i<12;++i){out[0]+=earlySide.readInteger(earlyLeft[i]+1)*earlyGain*((i%3)==1?-.28:.28);out[1]-=earlySide.readInteger(earlyRight[i]+1)*earlyGain*((i%3)==2?-.28:.28);}
   for(int c=0;c<2;++c)out[c]=pickupColour[c].tick(out[c]);
   counter=(counter+1)%32;return out;
  }
 };
 class Engine {
- double sr=48000,phase=0,modulationSamples=0,lastRate=-1,lastDepth=-1,lfoSine=0,lfoCosine=1,dcPrevious=0,dcState=0,dcCoefficient=0;unsigned filterCounter=0;
+ double sr=48000,phase=0,modulationSamples=0,lastRate=-1,lastDepth=-1,lfoSine=0,lfoCosine=1,dcPrevious=0,dcState=0,dcPreviousSide=0,dcStateSide=0,dcCoefficient=0;unsigned filterCounter=0;
  std::array<Tank,3> tanks;std::array<Delay,2> predelay;
  std::array<Biquad,2> input,eqLow,eqHigh;
  std::array<Smooth,3> select;Smooth width,balance,delay,mix,power,solo,eqOn,lowF,lowG,highF,highG,filterHz,filterDb;
 public:
- void prepare(double sampleRate){sr=sampleRate;phase=0;lastRate=lastDepth=-1;modulationSamples=0;lfoSine=0;lfoCosine=1;dcPrevious=dcState=0;dcCoefficient=std::exp(-2*pi*8/sr);filterCounter=0;input={};eqLow={};eqHigh={};for(int i=0;i<3;++i){tanks[i].prepare(sr,i);select[i].prepare(sr);select[i].value=i==0?1:0;}
+ void prepare(double sampleRate){sr=sampleRate;phase=0;lastRate=lastDepth=-1;modulationSamples=0;lfoSine=0;lfoCosine=1;dcPrevious=dcState=dcPreviousSide=dcStateSide=0;dcCoefficient=std::exp(-2*pi*8/sr);filterCounter=0;input={};eqLow={};eqHigh={};for(int i=0;i<3;++i){tanks[i].prepare(sr,i);select[i].prepare(sr);select[i].value=i==0?1:0;}
   for(auto&d:predelay)d.prepare(int(sr*.251)+4);
   for(auto*s:{&width,&balance,&delay,&mix,&power,&solo,&eqOn,&lowF,&lowG,&highF,&highG,&filterHz,&filterDb})s->prepare(sr);
   width.value=1;balance.value=0;delay.value=.05*sr;mix.value=.15;power.value=1;solo.value=1;eqOn.value=1;lowF.value=120;highF.value=8000;lowG.value=highG.value=0;filterHz.value=80;filterDb.value=-10;
@@ -116,11 +117,11 @@ public:
   lowF.next(p.lowFreq);lowG.next(p.lowGain);highF.next(p.highFreq);highG.next(p.highGain);
   if((filterCounter++%32)==0){for(int c=0;c<2;++c){input[c].shelf(sr,filterHz.value,filterDb.value,false);eqLow[c].shelf(sr,lowF.value,lowG.value,false);eqHigh[c].shelf(sr,highF.value,highG.value,true);}}
   if(p.rate!=lastRate||p.depth!=lastDepth){lastRate=p.rate;lastDepth=p.depth;modulationSamples=p.rate>0&&p.depth>0?std::expm1(std::log(2.)*p.depth/1200)*sr/(2*pi*p.rate):0;}
-  double conditioned=(input[0].tick(l)+input[1].tick(r))*.5;double blocked=conditioned-dcPrevious+dcCoefficient*dcState;dcPrevious=conditioned;dcState=std::abs(blocked)<1e-30?0:blocked;double x=std::tanh(blocked*1.05)/1.05;
+  double filteredL=input[0].tick(l),filteredR=input[1].tick(r);double conditioned=(filteredL+filteredR)*.5;double conditionedSide=(filteredL-filteredR)*.5;double blockedSide=conditionedSide-dcPreviousSide+dcCoefficient*dcStateSide;dcPreviousSide=conditionedSide;dcStateSide=std::abs(blockedSide)<1e-30?0:blockedSide;double sideInput=std::tanh(blockedSide*1.05)/1.05;double blocked=conditioned-dcPrevious+dcCoefficient*dcState;dcPrevious=conditioned;dcState=std::abs(blocked)<1e-30?0:blocked;double x=std::tanh(blocked*1.05)/1.05;
   if(p.rate>0){phase+=2*pi*p.rate/sr;if(phase>2*pi)phase-=2*pi;lfoSine=std::sin(phase);lfoCosine=std::cos(phase);}
   double sine=lfoSine,cosine=lfoCosine;
-  std::array<double,2> wet{};for(int i=0;i<3;++i){auto y=tanks[i].tick(x,p.rt[i],modulationSamples,sine,cosine);double a=select[i].next(i==p.plate?1:0);for(int c=0;c<2;++c)wet[c]+=a*y[c];}
-  double d=delay.next(p.predelay*.001*sr),e=eqOn.next(p.eq?1:0);for(int c=0;c<2;++c){predelay[c].push(wet[c]);wet[c]=predelay[c].read(d+1);double filtered=eqHigh[c].tick(eqLow[c].tick(wet[c]));wet[c]+=e*(filtered-wet[c]);}
+  std::array<double,2> wet{};for(int i=0;i<3;++i){auto y=tanks[i].tick(x,p.rt[i],modulationSamples,sine,cosine,sideInput);double a=select[i].next(i==p.plate?1:0);for(int c=0;c<2;++c)wet[c]+=a*y[c];}
+  double d=delay.next(p.predelay*.001*sr),e=eqOn.next(p.eq?1:0);for(int c=0;c<2;++c){predelay[c].push(wet[c]);wet[c]=3.0*predelay[c].read(d+1);double filtered=eqHigh[c].tick(eqLow[c].tick(wet[c]));wet[c]+=e*(filtered-wet[c]);}
   double w=width.next(p.width*.01),b=balance.next(p.balance*.01),mid=(wet[0]+wet[1])*.5,side=(wet[0]-wet[1])*.5*w;wet={(mid+side)*(b>0?1-b:1),(mid-side)*(b<0?1+b:1)};
   double m=mix.next(p.mix*.01),s=solo.next(p.wetSolo?1:0);m+=(1-m)*s;return {l+on*m*(wet[0]-l),r+on*m*(wet[1]-r)};
  }

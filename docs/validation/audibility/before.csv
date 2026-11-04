@@ -1,0 +1,201 @@
+preset,mode,wet_gain_db,insert_wet_gain_db,peak,correlation
+"Vocal Long",mono,-14.9131713,-14.9131713,0.0497196222,0.0154387716
+"Vocal Long",opposite,-300,-300,0,0
+"Vocal Tight",mono,-15.3945876,-15.3945876,0.0459818133,0.00992628967
+"Vocal Tight",opposite,-300,-300,0,0
+"Vocal Legacy",mono,-16.5347347,-16.5347347,0.0406878507,0.119550667
+"Vocal Legacy",opposite,-300,-300,0,0
+"Drum Room",mono,-17.8385382,-17.8385382,0.0317683943,0.220170016
+"Drum Room",opposite,-300,-300,0,0
+"Percussion Short",mono,-19.1976488,-19.1976488,0.0269786288,0.472365577
+"Percussion Short",opposite,-300,-300,0,0
+"Strings Bright",mono,-14.0272692,-14.0272692,0.0489477487,0.000185902598
+"Strings Bright",opposite,-300,-300,0,0
+"Dark Jazz",mono,-16.9912738,-16.9912738,0.0353962579,0.00175590003
+"Dark Jazz",opposite,-300,-300,0,0
+"Ambient Wide",mono,-14.9076122,-14.9076122,0.0527096834,0.0212990611
+"Ambient Wide",opposite,-300,-300,0,0
+"Cinematic 5s",mono,-14.2662875,-14.2662875,0.0555854814,-0.00283111449
+"Cinematic 5s",opposite,-300,-300,0,0
+"Modulated Chorus",mono,-14.7547495,-14.7547495,0.0466534758,0.000283947609
+"Modulated Chorus",opposite,-300,-300,0,0
+"Insert Mono",mono,-19.54895,-31.5901499,0.0263479006,1
+"Insert Mono",opposite,-300,-300,0,0
+"Mastering Glue",mono,-15.0752899,-37.0134901,0.0436663507,0.000614543042
+"Mastering Glue",opposite,-300,-300,0,0
+"Lead Intimate",mono,-18.1698024,-36.5861774,0.0330140952,0.171344115
+"Lead Intimate",opposite,-300,-300,0,0
+"Lead Pop Air",mono,-14.5696222,-14.5696222,0.0464697528,0.000696653262
+"Lead Pop Air",opposite,-300,-300,0,0
+"Ballad Velvet",mono,-15.987288,-15.987288,0.0459465223,0.0206160972
+"Ballad Velvet",opposite,-300,-300,0,0
+"Rap Short Plate",mono,-18.3929124,-38.3929124,0.0297064091,0.281073838
+"Rap Short Plate",opposite,-300,-300,0,0
+"Soul Golden",mono,-16.6939426,-16.6939426,0.0411455055,0.0692032681
+"Soul Golden",opposite,-300,-300,0,0
+"Jazz Smoky",mono,-19.7236533,-19.7236533,0.028974083,0.237986817
+"Jazz Smoky",opposite,-300,-300,0,0
+"Backing Silk",mono,-14.0553199,-14.0553199,0.0484677674,-0.000300515891
+"Backing Silk",opposite,-300,-300,0,0
+"Choir Cathedral Plate",mono,-15.7407066,-15.7407066,0.0484353399,0.0242581843
+"Choir Cathedral Plate",opposite,-300,-300,0,0
+"Spoken Close",mono,-19.944936,-43.0429752,0.0251908087,0.66458557
+"Spoken Close",opposite,-300,-300,0,0
+"Sibilance Tamer",mono,-19.5285981,-19.5285981,0.0292701612,0.12236497
+"Sibilance Tamer",opposite,-300,-300,0,0
+"Vocal Dream",mono,-14.0655858,-14.0655858,0.0496951962,-0.00255381759
+"Vocal Dream",opposite,-300,-300,0,0
+"Vintage Slap Bloom",mono,-17.6786066,-34.7560459,0.0341726572,0.159298419
+"Vintage Slap Bloom",opposite,-300,-300,0,0
+"Snare Chrome",mono,-15.5013352,-15.5013352,0.0425909809,0.104642619
+"Snare Chrome",opposite,-300,-300,0,0
+"Snare Eighties",mono,-14.1197862,-14.1197862,0.0481207226,-0.000455763029
+"Snare Eighties",opposite,-300,-300,0,0
+"Snare Tight Dark",mono,-22.4074391,-22.4074391,0.0197680411,0.472165563
+"Snare Tight Dark",opposite,-300,-300,0,0
+"Rimshot Space",mono,-18.2088319,-18.2088319,0.030552694,0.280583854
+"Rimshot Space",opposite,-300,-300,0,0
+"Toms Thunder",mono,-17.0587322,-17.0587322,0.0386341714,0.0662676271
+"Toms Thunder",opposite,-300,-300,0,0
+"Brushes Velvet",mono,-18.6977027,-18.6977027,0.0313615058,0.291009104
+"Brushes Velvet",opposite,-300,-300,0,0
+"Kick Upper Plate",mono,-20.679033,-20.679033,0.0232299541,0.72542474
+"Kick Upper Plate",opposite,-300,-300,0,0
+"Clap Spread",mono,-14.9611378,-14.9611378,0.0445206166,0.00303319784
+"Clap Spread",opposite,-300,-300,0,0
+"Shaker Dust",mono,-21.0959004,-21.0959004,0.0238017594,0.219952193
+"Shaker Dust",opposite,-300,-300,0,0
+"Congas Copper",mono,-17.8414339,-17.8414339,0.0347675688,0.173375135
+"Congas Copper",opposite,-300,-300,0,0
+"Drum Parallel",mono,-18.2470827,-39.1622325,0.0310085201,0.342698263
+"Drum Parallel",opposite,-300,-300,0,0
+"Cymbal Mist",mono,-16.1303367,-16.1303367,0.0387885865,0.00147842005
+"Cymbal Mist",opposite,-300,-300,0,0
+"Acoustic Wood",mono,-18.0529546,-36.4693297,0.0339684342,0.231924309
+"Acoustic Wood",opposite,-300,-300,0,0
+"Acoustic Sparkle",mono,-14.5694532,-14.5694532,0.0464697528,0.00102409516
+"Acoustic Sparkle",opposite,-300,-300,0,0
+"Nylon Intimate",mono,-18.9048041,-38.9048041,0.0306183374,0.353156634
+"Nylon Intimate",opposite,-300,-300,0,0
+"Electric Surf Plate",mono,-13.5756098,-26.7271561,0.0511224565,0.000136362522
+"Electric Surf Plate",opposite,-300,-300,0,0
+"Blues Smoky",mono,-19.4115023,-36.4889416,0.0301522288,0.180798272
+"Blues Smoky",opposite,-300,-300,0,0
+"Clean Arpeggio",mono,-15.2445767,-15.2445767,0.0431935413,0.00042447921
+"Clean Arpeggio",opposite,-300,-300,0,0
+"Lead Sustain",mono,-16.4221052,-16.4221052,0.0437039162,0.0728724718
+"Lead Sustain",opposite,-300,-300,0,0
+"Heavy Guitar Depth",mono,-19.603958,-44.040933,0.0266518459,0.471631567
+"Heavy Guitar Depth",opposite,-300,-300,0,0
+"Slide Moonlight",mono,-15.261989,-15.261989,0.0492055493,0.0197563491
+"Slide Moonlight",opposite,-300,-300,0,0
+"Funk Springy Plate",mono,-16.4976229,-35.6697692,0.0378962711,0.280674124
+"Funk Springy Plate",opposite,-300,-300,0,0
+"Piano Felt",mono,-17.4828999,-35.899275,0.0368911294,0.176569455
+"Piano Felt",opposite,-300,-300,0,0
+"Piano Concert Plate",mono,-14.5418799,-14.5418799,0.0477206315,-0.00174802447
+"Piano Concert Plate",opposite,-300,-300,0,0
+"Rhodes Honey",mono,-16.630357,-32.5479574,0.0416079603,0.0693833989
+"Rhodes Honey",opposite,-300,-300,0,0
+"Wurli Amber",mono,-19.9888671,-38.4052422,0.0274720656,0.216637572
+"Wurli Amber",opposite,-300,-300,0,0
+"Organ Chapel",mono,-15.970824,-15.970824,0.0465518117,0.0230012647
+"Organ Chapel",opposite,-300,-300,0,0
+"Clav Snap",mono,-19.7977086,-41.7359089,0.0251815152,0.408116177
+"Clav Snap",opposite,-300,-300,0,0
+"Synth Pluck Halo",mono,-13.9680027,-13.9680027,0.0494637251,0.000944618066
+"Synth Pluck Halo",opposite,-300,-300,0,0
+"Analog Pad Drift",mono,-14.8833458,-14.8833458,0.0521872864,0.0224038047
+"Analog Pad Drift",opposite,-300,-300,0,0
+"FM Bell Shimmer",mono,-13.4862895,-13.4862895,0.0527795573,-0.0027751867
+"FM Bell Shimmer",opposite,-300,-300,0,0
+"Celesta Stardust",mono,-15.5407121,-15.5407121,0.0421883312,-0.000457779561
+"Celesta Stardust",opposite,-300,-300,0,0
+"Violin Solo Gold",mono,-17.1171339,-17.1171339,0.0392469589,0.178982215
+"Violin Solo Gold",opposite,-300,-300,0,0
+"Cello Chamber",mono,-18.0226454,-18.0226454,0.0348694419,0.296215156
+"Cello Chamber",opposite,-300,-300,0,0
+"String Ensemble Silk",mono,-13.7694444,-13.7694444,0.0506716964,-0.00146880006
+"String Ensemble Silk",opposite,-300,-300,0,0
+"Pizzicato Pearl",mono,-16.2876906,-16.2876906,0.0386399309,0.219811081
+"Pizzicato Pearl",opposite,-300,-300,0,0
+"Double Bass Shadow",mono,-19.3192982,-41.2574985,0.0281529013,0.535768074
+"Double Bass Shadow",opposite,-300,-300,0,0
+"Harp Silver",mono,-14.378276,-14.378276,0.0487411996,-0.00247143387
+"Harp Silver",opposite,-300,-300,0,0
+"Quartet Vintage",mono,-17.0426499,-17.0426499,0.0392620602,0.121720973
+"Quartet Vintage",opposite,-300,-300,0,0
+"Orchestral Swell",mono,-15.778078,-15.778078,0.048141219,0.0241877247
+"Orchestral Swell",opposite,-300,-300,0,0
+"Trumpet Gold",mono,-17.8634851,-17.8634851,0.0350208387,0.233473336
+"Trumpet Gold",opposite,-300,-300,0,0
+"Muted Trumpet Noir",mono,-19.0400516,-19.0400516,0.0320105677,0.183403081
+"Muted Trumpet Noir",opposite,-300,-300,0,0
+"Tenor Sax Smoke",mono,-17.5306158,-17.5306158,0.0370970638,0.178193271
+"Tenor Sax Smoke",opposite,-300,-300,0,0
+"Alto Sax Shine",mono,-15.1833658,-15.1833658,0.0434874613,0.106657287
+"Alto Sax Shine",opposite,-300,-300,0,0
+"Trombone Body",mono,-18.1528371,-18.1528371,0.0322220836,0.279347914
+"Trombone Body",opposite,-300,-300,0,0
+"Brass Section Wide",mono,-13.6954387,-13.6954387,0.0505716244,-5.24561377e-05
+"Brass Section Wide",opposite,-300,-300,0,0
+"Flute Breeze",mono,-15.5442056,-15.5442056,0.0421883312,-0.000885792433
+"Flute Breeze",opposite,-300,-300,0,0
+"Clarinet Wood",mono,-17.6916513,-35.4127842,0.0360196083,0.234863077
+"Clarinet Wood",opposite,-300,-300,0,0
+"Infinite Steel",mono,-14.6836733,-14.6836733,0.0538679118,0.0242231633
+"Infinite Steel",opposite,-300,-300,0,0
+"Frozen Amber",mono,-16.8159042,-16.8159042,0.0440848387,0.0322830322
+"Frozen Amber",opposite,-300,-300,0,0
+"Silver Cloud",mono,-13.0961737,-13.0961737,0.0556526049,-0.00468633311
+"Silver Cloud",opposite,-300,-300,0,0
+"Slow Aurora",mono,-13.6453172,-13.6453172,0.052614739,-0.00674327207
+"Slow Aurora",opposite,-300,-300,0,0
+"Dream Chamber",mono,-15.8561326,-15.8561326,0.047530018,0.023461897
+"Dream Chamber",opposite,-300,-300,0,0
+"Metallic Stars",mono,-12.8721064,-12.8721064,0.0560132319,-0.00267445889
+"Metallic Stars",opposite,-300,-300,0,0
+"Narrow Memory",mono,-20.1921672,-20.1921672,0.0264903694,0.844731464
+"Narrow Memory",opposite,-300,-300,0,0
+"Mono Ghost",mono,-18.6751846,-18.6751846,0.0300076417,1
+"Mono Ghost",opposite,-300,-300,0,0
+"Soft Horizon",mono,-15.7864874,-15.7864874,0.0486221307,0.0767066526
+"Soft Horizon",opposite,-300,-300,0,0
+"Analog Nebula",mono,-13.5723593,-13.5723593,0.0531943158,-0.00801565523
+"Analog Nebula",opposite,-300,-300,0,0
+"Trailer Steel Tail",mono,-13.1327857,-13.1327857,0.0617704608,-0.00149133827
+"Trailer Steel Tail",opposite,-300,-300,0,0
+"Noir Corridor",mono,-18.9167985,-18.9167985,0.0334747003,0.431965158
+"Noir Corridor",opposite,-300,-300,0,0
+"SciFi Reactor",mono,-13.6700778,-13.6700778,0.0524103459,-0.00640248488
+"SciFi Reactor",opposite,-300,-300,0,0
+"Distant Footsteps",mono,-18.628591,-18.628591,0.0308620142,0.535691802
+"Distant Footsteps",opposite,-300,-300,0,0
+"Dialogue Depth",mono,-19.1799832,-43.6169582,0.0278027501,0.600009688
+"Dialogue Depth",opposite,-300,-300,0,0
+"Cinematic Drum Bloom",mono,-15.9871774,-15.9871774,0.0459465223,0.0206795655
+"Cinematic Drum Bloom",opposite,-300,-300,0,0
+"Dream Transition",mono,-14.695611,-14.695611,0.0478121102,-0.00780640485
+"Dream Transition",opposite,-300,-300,0,0
+"Vintage Radio Space",mono,-21.6436693,-36.5382192,0.0234777961,0.780912406
+"Vintage Radio Space",opposite,-300,-300,0,0
+"Impact Afterglow",mono,-15.7422231,-15.7422231,0.0460175158,0.0306837793
+"Impact Afterglow",opposite,-300,-300,0,0
+"Final Frame",mono,-13.0014992,-13.0014992,0.0570355944,-0.00703047374
+"Final Frame",opposite,-300,-300,0,0
+"Mix Bus Subtle",mono,-17.4305036,-45.3893038,0.0340911089,0.110042516
+"Mix Bus Subtle",opposite,-300,-300,0,0
+"Drum Bus Glue",mono,-19.4866699,-45.5072698,0.0264004749,0.343761574
+"Drum Bus Glue",opposite,-300,-300,0,0
+"Mono Compatibility",mono,-20.3785671,-40.3785671,0.0234052655,1
+"Mono Compatibility",opposite,-300,-300,0,0
+"Parallel Brightness",mono,-15.3052394,-15.3052394,0.0431682267,0.00277503424
+"Parallel Brightness",opposite,-300,-300,0,0
+"Vintage Cohesion",mono,-17.6539993,-40.7520385,0.0358574537,0.175394069
+"Vintage Cohesion",opposite,-300,-300,0,0
+"Master Dark Space",mono,-20.0516465,-50.5092214,0.026956385,0.118158432
+"Master Dark Space",opposite,-300,-300,0,0
+"Wide Instrument Glue",mono,-15.6169441,-37.5551443,0.0415263547,0.00174144926
+"Wide Instrument Glue",opposite,-300,-300,0,0
+"Aux Neutral Plate",mono,-15.9923112,-15.9923112,0.0437207168,0.0159605414
+"Aux Neutral Plate",opposite,-300,-300,0,0

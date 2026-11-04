@@ -19,9 +19,19 @@ PlateProcessor::PlateProcessor():AudioProcessor(BusesProperties().withInput("Inp
  const char*ids[]={"plate_select","reverb_time_a","reverb_time_b","reverb_time_c","input_filter_model","input_filter_emt_db","input_filter_martech_hz","width","balance","eq_enable","eq_low_freq","eq_low_gain","eq_high_freq","eq_high_gain","mod_rate","mod_depth","predelay","mix","wet_solo","power"};
  for(int i=0;i<20;++i)raw[i]=state.getRawParameterValue(ids[i]);
 }
-void PlateProcessor::prepareToPlay(double sr,int){sampleRate=sr;engine.prepare(sr);vu=0;setLatencySamples(0);}
+void PlateProcessor::prepareToPlay(double sr,int){
+ prepared=false;vu=0;meter.store(0);
+ if(!std::isfinite(sr)||sr<=0)return;
+ sampleRate=sr;engine.prepare(sr);setLatencySamples(0);prepared=true;
+}
+void PlateProcessor::releaseResources(){prepared=false;vu=0;meter.store(0);}
 bool PlateProcessor::isBusesLayoutSupported(const BusesLayout& b)const{return b.getMainInputChannelSet()==b.getMainOutputChannelSet()&&(b.getMainOutputChannelSet()==AudioChannelSet::stereo()||b.getMainOutputChannelSet()==AudioChannelSet::mono());}
-void PlateProcessor::processBlock(AudioBuffer<float>&buffer,MidiBuffer&){ScopedNoDenormals nd;plate::Parameters p;
+void PlateProcessor::processBlock(AudioBuffer<float>&buffer,MidiBuffer&){
+ // Audio-bus flushes may have samples but no channel pointers. Do not touch channel 0.
+ if(buffer.getNumChannels()==0||buffer.getNumSamples()==0)return;
+ // Also tolerate lifecycle callbacks before preparation or after deactivation.
+ if(!prepared){buffer.clear();meter.store(0);return;}
+ ScopedNoDenormals nd;plate::Parameters p;
  p.plate=int(raw[0]->load());for(int i=0;i<3;++i)p.rt[i]=raw[i+1]->load();p.filterModel=int(raw[4]->load());p.emt=int(raw[5]->load());p.martech=int(raw[6]->load());p.width=raw[7]->load();p.balance=raw[8]->load();p.eq=raw[9]->load()>.5;p.lowFreq=raw[10]->load();p.lowGain=raw[11]->load();p.highFreq=raw[12]->load();p.highGain=raw[13]->load();p.rate=raw[14]->load();p.depth=raw[15]->load();p.predelay=raw[16]->load();p.mix=raw[17]->load();p.wetSolo=raw[18]->load()>.5;p.power=raw[19]->load()>.5;
  auto*l=buffer.getWritePointer(0);auto*r=buffer.getNumChannels()>1?buffer.getWritePointer(1):l;double k=1-std::exp(-1/(sampleRate*.3));
  for(int i=0;i<buffer.getNumSamples();++i){auto out=engine.tick(l[i],r[i],p);l[i]=float(out[0]);r[i]=buffer.getNumChannels()>1?float(out[1]):float((out[0]+out[1])*.5);double level=p.power?(out[0]*out[0]+out[1]*out[1])*.5:0;vu+=k*(level-vu);}

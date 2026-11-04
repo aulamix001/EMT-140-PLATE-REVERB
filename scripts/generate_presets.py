@@ -7,6 +7,7 @@ IDS=['plate_select','reverb_time_a','reverb_time_b','reverb_time_c','input_filte
 DEFAULT=[0,2,2,2,0,1,2,100,0,1,120,0,8000,0,0,0,50,15,1,1]
 bank=[]
 def add(name,category,plate,rt,model,fil,width,lf,lg,hf,hg,rate,depth,pre,mix,solo,description):
+ if not solo: mix=max(8,mix)
  v=DEFAULT.copy();v[0]=plate;v[plate+1]=rt;v[4]=model;v[6 if model==1 else 5]=fil
  for i,x in zip([7,10,11,12,13,14,15,16,17,18],[width,lf,lg,hf,hg,rate,depth,pre,mix,int(solo)]):v[i]=x
  bank.append(dict(number=len(bank)+1,name=name,category=category,use='AUX' if solo else 'INSERT',description=description,parameters=dict(zip(IDS,v))))
@@ -41,6 +42,7 @@ category_eq={'Vocais':(-1,0),'Bateria':(-2,1),'Guitarras':(1,-1),'Teclas':(2,1),
 
 for category,rows in groups.items():
  for name,plate,rt,pre,width,tone,mix in rows:
+  if mix!=100: mix=max(8,mix)
   model,fil,lf,lg,hf,hg,rate,depth=tones[tone]
   offset_low,offset_high=category_eq[category];lg=max(-12,min(12,lg+offset_low));hg=max(-12,min(12,hg+offset_high))
   add(name,category,plate,rt,model,fil,width,lf,lg,hf,hg,rate,depth,pre,mix,mix==100,f'{category}; carater {tone}; RT {rt:g} s; predelay {pre:g} ms; '+('retorno auxiliar 100% wet.' if mix==100 else f'insert com {mix}% wet.'))

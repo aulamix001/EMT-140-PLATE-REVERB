@@ -9,7 +9,7 @@ public:
  std::atomic<float> meter{0};
  std::atomic<bool> softwareGraphics{PLATE_COMPATIBLE_GRAPHICS != 0};
  void prepareToPlay(double,int) override;
- void releaseResources() override {}
+ void releaseResources() override;
  bool isBusesLayoutSupported(const BusesLayout&) const override;
  void processBlock(juce::AudioBuffer<float>&,juce::MidiBuffer&) override;
  juce::AudioProcessorEditor* createEditor() override;
@@ -26,6 +26,7 @@ public:
 private:
  std::atomic<int> currentProgram{platebank::count};
  plate::Engine engine; double sampleRate=48000, vu=0;
+ bool prepared=false;
  static juce::AudioProcessorValueTreeState::ParameterLayout layout();
  std::array<std::atomic<float>*,21> raw{};
 };
