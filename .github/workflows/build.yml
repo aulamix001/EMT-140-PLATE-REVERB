@@ -40,14 +40,26 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cmake --build validator-build --config Debug --target validator --parallel 2
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          function Fail-WithLog($file, $phase) {
+            $message = ((Get-Content $file | Select-Object -Last 70) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+            Write-Output "::error title=${phase}::$message"
+            exit 1
+          }
           cmake --build build --config Debug --parallel 2 2>&1 | Tee-Object debug-build.log
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ($LASTEXITCODE -ne 0) { Fail-WithLog debug-build.log 'Debug build' }
           ctest --test-dir build -C Debug --output-on-failure 2>&1 | Tee-Object debug-tests.log
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ($LASTEXITCODE -ne 0) { Fail-WithLog debug-tests.log 'Debug tests' }
           $validator = (Get-ChildItem validator-build -Recurse -Filter validator.exe | Select-Object -First 1).FullName
           & $validator (Resolve-Path 'build/Plate140_artefacts/Debug/VST3/PLATE 140.vst3').Path 2>&1 | Tee-Object debug-validator.log
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ($LASTEXITCODE -ne 0) { Fail-WithLog debug-validator.log 'Debug validator' }
           if (Select-String -Path debug-*.log -Pattern 'JUCE Assertion failure' -Quiet) { throw 'JUCE assertion in Debug logs' }
+      - name: Save Debug diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PLATE140-Debug-Logs
+          path: debug-*.log
+          if-no-files-found: ignore
       - name: Build Release
         run: cmake --build build --config Release --parallel 2
       - name: Official validator Release
@@ -69,6 +81,35 @@ jobs:
           $run = Start-Process -FilePath $preview -ArgumentList $snapshot -WorkingDirectory $env:GITHUB_WORKSPACE -Wait -PassThru
           if ($run.ExitCode -ne 0) { throw 'Preset integration failed' }
           if (!(Test-Path $snapshot)) { throw 'Native editor snapshot missing' }
+      - name: Actual VST3 playback and removal regression
+        shell: pwsh
+        run: |
+          $env:PLATE140_TEST_VST3 = (Get-ChildItem build/Plate140_artefacts/Release/VST3 -Filter *.vst3 | Select-Object -First 1).FullName
+          $env:PLATE140_PRESET_HOME = Join-Path $env:RUNNER_TEMP ('plate140-removal-' + [guid]::NewGuid())
+          $hostTest = (Resolve-Path build/PlateRemovalHost_artefacts/Release/PlateRemovalHost.exe).Path
+          $run = Start-Process -FilePath $hostTest -PassThru -RedirectStandardOutput removal-stdout.log -RedirectStandardError removal-stderr.log
+          if (!$run.WaitForExit(90000)) { $run.Kill(); Get-Content removal-stdout.log,removal-stderr.log; throw 'VST3 removal blocked the host message thread' }
+          $run.WaitForExit()
+          Get-Content removal-stdout.log,removal-stderr.log
+          if ($run.ExitCode -ne 0) {
+            $diag = ((Get-Content removal-stdout.log,removal-stderr.log | Select-Object -Last 40) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+            Write-Output "::error title=VST3 removal::$diag"
+            throw "VST3 removal regression failed: $($run.ExitCode)"
+          }
+      - name: Save removal diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PLATE140-Removal-Logs
+          path: |
+            removal-*.log
+            teardown-*.log
+          if-no-files-found: ignore
+      - name: Save compiled editor screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: PLATE140-Windows-UI
+          path: ${{ runner.temp }}/plate140-preview.png
       - name: pluginval level 10
         shell: pwsh
         run: |
@@ -86,7 +127,8 @@ jobs:
           $offset = [BitConverter]::ToInt32($bytes, 0x3c)
           if ([BitConverter]::ToUInt32($bytes, $offset) -ne 0x4550 -or [BitConverter]::ToUInt16($bytes, $offset+4) -ne 0x8664 -or [BitConverter]::ToUInt16($bytes, $offset+24) -ne 0x20b) { throw 'Expected PE32+ AMD64 VST3' }
           git rev-parse HEAD | Set-Content BUILD-COMMIT.txt
-          Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md,BUILD-COMMIT.txt,build/compatible-graphics.txt -DestinationPath PLATE140-Windows-x64.zip
+          Copy-Item (Join-Path $env:RUNNER_TEMP 'plate140-preview.png') rack-ui.png
+          Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md,BUILD-COMMIT.txt,rack-ui.png,build/compatible-graphics.txt -DestinationPath PLATE140-Windows-x64.zip
           $symbols = Get-ChildItem build -Recurse -Filter *.pdb | Where-Object FullName -Match 'Debug'
           Compress-Archive -Path (@('build/Plate140_artefacts/Debug/VST3','BUILD-COMMIT.txt') + @($symbols.FullName)) -DestinationPath PLATE140-Windows-x64-Debug.zip
           Get-FileHash PLATE140-Windows-x64*.zip -Algorithm SHA256 | ForEach-Object { "$($_.Hash.ToLower())  $([IO.Path]::GetFileName($_.Path))" } | Set-Content SHA256SUMS.txt

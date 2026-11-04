@@ -2,12 +2,12 @@
 Original C++17/JUCE 8 plate-inspired reverb by Aulamix. The panel displays the historical EMT 140 / Elektromesstechnik Wilhelm Franz legends at the user’s request; the plugin remains an independent development. Native VST3 and Standalone; AU on macOS. Scalable photographic rack editor with embedded artwork and live controls, three independent plate tanks, 100 original factory presets, XML state, A/B comparison and user preset import/export.
 
 ## Build
-Install CMake ≥3.22, a C++17 compiler and Git. Linux also needs ALSA, X11/Xext/Xinerama/Xrandr/Xcursor/Xrender, FreeType/fontconfig development packages. JUCE 8.0.6 is fetched at a fixed commit if `JUCE_PATH` is not set.
+Install CMake ≥3.22, a C++17 compiler, Git and Python 3.12. Install metric dependencies with `python -m pip install -r requirements-metrics.txt`. Linux also needs ALSA, X11/Xext/Xinerama/Xrandr/Xcursor/Xrender, FreeType/fontconfig development packages. JUCE 8.0.6 is fetched at a fixed commit if `JUCE_PATH` is not set.
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release --parallel 2
-ctest --test-dir build -C Release --output-on-failure
+ctest --test-dir build -C Release --output-on-failure # Linux GUI tests need DISPLAY / Xvfb
 ```
 Windows: Visual Studio 2022 x64 C++ desktop workload, then configure with `-G "Visual Studio 17 2022" -A x64`. Plugin output: `build/Plate140_artefacts/Release/VST3`. Copy the PLATE 140.vst3 bundle to the host's VST3 folder and rescan. Standalone lives beside it in `Standalone`.
 
@@ -18,7 +18,7 @@ Plate A/B/C buttons select a tank, each retaining its 0.5–5.5 s time. Drag the
 
 The top preset bar opens a floating, draggable, nonmodal browser with search, category and tag filters, favourites, and user preset save/rename/delete. IN controls Power; A/B compares snapshots while the editor stays open; COPY/PASTE exchanges full XML state. MAP lists stable host automation IDs (not MIDI Learn). Right-click also provides preset/import/export options. User presets/favourites are saved atomically under JUCE's per-user application data directory (`Aulamix/PLATE140/library.xml`).
 
-The 100 factory presets are embedded, without per-preset disk reads or graphics. `Presets/PLATE140-100` also contains individual XML presets, `Bank.json`, a full 20-parameter CSV map and Portuguese instructions. XML uses raw physical values and stable IDs; selecting/importing a preset maps every control automatically. Windows presets use the same XML schema. Build Windows x64 with `scripts/Build-Windows.ps1` or the existing CI workflow; these Windows operations have not been executed in this Linux environment.
+The browser and toolbar label AUX (73 presets, fully wet) versus INSERT (27 presets, stored dry/wet). Factory programs retain indices 0–99; Default is appended at index 100 so the first factory program is never confused with processor defaults. The 100 factory presets are embedded, without per-preset disk reads or graphics. `Presets/PLATE140-100` also contains individual XML presets, `Bank.json`, a full 20-parameter CSV map and Portuguese instructions. XML uses raw physical values and stable IDs; selecting/importing a preset maps every control automatically. Windows presets use the same XML schema. Build Windows x64 with `scripts/Build-Windows.ps1` or the existing CI workflow; these Windows operations have not been executed in this Linux environment.
 
 ## Status
 See `docs/VALIDATION.md` for executed checks and release gates. This is a development version, not a claim of UAD or historical hardware equivalence. Native editor and DSP are implemented together. Windows/Studio One/pluginval release validation requires those runtimes. VST2 is excluded without a legitimate SDK and license.
@@ -31,5 +31,6 @@ binary resource target. Source/GUI/Assets/PanelBackground.png is the static plat
 knobs, time pointers, toggles, input-filter cursor, lamp and VU needle are live
 controls drawn over it. The preset toolbar remains functional. No external image
 file is required when installing the VST3. IDs, ranges, DSP and presets are unchanged
-by this UI revision. Windows CI saves a compiled editor screenshot as
-PLATE140-Windows-UI and includes rack-ui.png plus BUILD-INFO.txt in the VST3 ZIP.
+by this UI revision. Windows CI saves a compiled editor screenshot and includes rack-ui.png plus BUILD-COMMIT.txt in the VST3 ZIP.
+
+Windows graphics default to CPU/GDI with CPU image storage (`CHI_WINDOWS_SOFTWARE_GRAPHICS=ON`). Options → Graphics selects Direct2D explicitly; OFF compares upstream factories. See [editor lifetime audit](docs/EDITOR_LIFETIME.md), [measured before/after](docs/PRESET_METRICS_BEFORE_AFTER.md) and [validation](docs/VALIDATION.md).
