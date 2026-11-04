@@ -27,9 +27,13 @@ struct Delay {
  std::vector<double> data; size_t pos=0;
  void prepare(int length){data.assign(std::max(2,length),0);pos=0;}
  double read(double samples)const {
-  double p=double(pos)-std::clamp(samples,1.,double(data.size()-1));if(p<0)p+=double(data.size());
-  auto index=size_t(p),next=index+1;if(next==data.size())next=0;double fraction=p-double(index);
-  return data[index]*(1-fraction)+data[next]*fraction;
+  const double delay=std::clamp(samples,1.,double(data.size()-1));
+  const auto whole=size_t(delay);const double fraction=delay-double(whole);
+  // Wrap integer indices, not a near-zero negative floating position: adding
+  // capacity to -epsilon can round up to capacity and read one past the buffer.
+  const size_t newer=pos>=whole?pos-whole:pos+data.size()-whole;
+  const size_t older=newer==0?data.size()-1:newer-1;
+  return data[newer]*(1-fraction)+data[older]*fraction;
  }
  double readInteger(size_t samples)const {return data[pos>=samples?pos-samples:pos+data.size()-samples];}
  double oldest()const{return data[pos];}

@@ -41,7 +41,9 @@ jobs:
           cmake --build validator-build --config Debug --target validator --parallel 2
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           function Fail-WithLog($file, $phase) {
-            $message = ((Get-Content $file | Select-Object -Last 70) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+            $lines = Get-Content $file
+            $details = @($lines | Select-String -Pattern 'error|fatal|FAILED|Assertion|Exception' | Select-Object -First 40) + @($lines | Select-Object -Last 20)
+            $message = (($details | ForEach-Object { "$_" }) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
             Write-Output "::error title=${phase}::$message"
             exit 1
           }

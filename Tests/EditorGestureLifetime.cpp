@@ -41,6 +41,20 @@ class LifetimeApp final : public juce::JUCEApplication, private juce::Timer,
             juce::Image image(juce::Image::ARGB,8,8,true);
             {juce::Graphics g(image);g.fillAll(juce::Colours::red);}
             check(image.getPixelAt(2,2)==juce::Colours::red,"image draw/read");
+            const auto pixelsBefore=editor->createComponentSnapshot(editor->getLocalBounds());
+            plateui::EditorGraphics pixelAdapter(*editor,processor->softwareGraphics);
+            processor->softwareGraphics=false;pixelAdapter.apply();
+            const auto pixelsAfter=editor->createComponentSnapshot(editor->getLocalBounds());
+            check(pixelsBefore.getBounds()==pixelsAfter.getBounds(),"graphics switch changed editor dimensions");
+            int changed=0;for(int y=0;y<pixelsBefore.getHeight();++y)for(int x=0;x<pixelsBefore.getWidth();++x)
+                if(pixelsBefore.getPixelAt(x,y)!=pixelsAfter.getPixelAt(x,y))++changed;
+            std::cout<<"RGBA snapshot comparison: "<<changed<<" changed pixels / "<<pixelsBefore.getWidth()*pixelsBefore.getHeight()
+                     <<" (platform "<<juce::SystemStats::getOperatingSystemName()<<")\n";
+            processor->softwareGraphics=true;pixelAdapter.apply();
+           #if ! JUCE_WINDOWS
+            check(changed==0,"Linux appearance changed when storing graphics preference");
+           #endif
+
            #if JUCE_WINDOWS && PLATE_COMPATIBLE_GRAPHICS
             juce::Component plain;plain.setSize(30,30);plain.addToDesktop(0);
             check(plain.getPeer()->getCurrentRenderingEngine()==0,"initial plain peer must be GDI");
