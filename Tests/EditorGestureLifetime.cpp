@@ -71,9 +71,11 @@ class LifetimeApp final : public juce::JUCEApplication, private juce::Timer,
        #if JUCE_WINDOWS
         // Native hit-testing must see the test window, not a runner console.
         editor->getPeer()->setAlwaysOnTop(true);
-       #endif
         editor->toFront(true);
         editor->getPeer()->performAnyPendingRepaintsNow();
+       #else
+        editor->toFront(true);
+       #endif
     }
     void timerCallback() override {
         try {
