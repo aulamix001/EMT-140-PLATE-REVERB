@@ -20,27 +20,36 @@ groups={
 'Vocais':[
 ('Lead Intimate',0,1.1,18,85,'warm',12),('Lead Pop Air',2,1.9,38,100,'air',100),('Ballad Velvet',0,3.2,65,100,'warm',100),('Rap Short Plate',1,.7,35,75,'clean',10),('Soul Golden',0,2.3,28,95,'warm',100),('Jazz Smoky',0,1.7,22,80,'dark',100),('Backing Silk',2,2.6,12,100,'air',100),('Choir Cathedral Plate',0,4.2,55,100,'smooth',100),('Spoken Close',1,.5,8,45,'clean',7),('Sibilance Tamer',0,1.5,42,90,'dark',100),('Vocal Dream',2,3.8,70,100,'mod',100),('Vintage Slap Bloom',1,1.3,115,85,'warm',14)],
 'Bateria':[
-('Snare Chrome',1,1.2,12,90,'bright',100),('Snare Eighties',2,2.5,55,100,'air',100),('Snare Tight Dark',1,.5,0,60,'dark',100),('Rimshot Space',1,.8,8,75,'clean',100),('Toms Thunder',0,1.8,14,95,'warm',100),('Brushes Velvet',0,1.2,5,75,'smooth',100),('Kick Upper Plate',1,.6,2,40,'thin',100),('Clap Spread',2,1.1,18,100,'bright',100),('Shaker Dust',1,.7,0,80,'dark',100),('Congas Copper',0,1.4,9,85,'warm',100),('Drum Parallel',1,.9,6,70,'clean',9),('Cymbal Mist',2,2.1,25,100,'smooth',100)],
+('Snare Chrome',1,1.2,12,90,'bright',100),('Snare Eighties',2,2.5,55,100,'air',100),('Snare Tight Dark',1,.5,0,60,'dark',100),('Rimshot Space',1,.8,8,75,'clean',100),('Toms Thunder',0,1.8,14,95,'warm',100),('Brushes Velvet',0,1.2,5,75,'smooth',100),('Kick Upper Plate',1,.6,2,40,'thin',100),('Clap Spread',2,1.1,18,100,'bright',100),('Shaker Dust',1,.7,0,80,'dark',100),('Congas Copper',0,1.4,9,85,'warm',100),('Drum Parallel',1,.6,6,70,'clean',9),('Cymbal Mist',2,2.1,25,100,'smooth',100)],
 'Guitarras':[
 ('Acoustic Wood',0,1.4,18,80,'warm',12),('Acoustic Sparkle',2,1.9,25,100,'air',100),('Nylon Intimate',0,1.2,15,70,'smooth',10),('Electric Surf Plate',2,2.7,6,100,'bright',22),('Blues Smoky',0,1.8,32,85,'dark',14),('Clean Arpeggio',2,2.2,42,100,'clean',100),('Lead Sustain',0,3.1,48,95,'smooth',100),('Heavy Guitar Depth',1,.8,28,60,'thin',6),('Slide Moonlight',0,3.4,60,100,'mod',100),('Funk Springy Plate',1,.9,10,75,'bright',11)],
 'Teclas':[
 ('Piano Felt',0,1.8,25,85,'warm',12),('Piano Concert Plate',2,3.2,40,100,'clean',100),('Rhodes Honey',0,2.4,22,95,'warm',16),('Wurli Amber',1,1.3,15,80,'dark',12),('Organ Chapel',0,3.6,35,100,'smooth',100),('Clav Snap',1,.6,5,65,'thin',8),('Synth Pluck Halo',2,2.1,30,100,'bright',100),('Analog Pad Drift',0,4.6,70,100,'mod',100),('FM Bell Shimmer',2,3.7,48,100,'air',100),('Celesta Stardust',2,2.8,22,100,'smooth',100)],
 'Cordas':[
-('Violin Solo Gold',0,2.3,28,85,'warm',100),('Cello Chamber',0,1.9,24,75,'smooth',100),('String Ensemble Silk',2,3.1,35,100,'air',100),('Pizzicato Pearl',1,.9,12,80,'bright',100),('Double Bass Shadow',1,1.1,18,55,'thin',8),('Harp Silver',2,3.5,45,100,'clean',100),('Quartet Vintage',0,2.1,20,90,'warm',100),('Orchestral Swell',0,4.1,60,100,'smooth',100)],
+('Violin Solo Gold',0,2.3,28,85,'warm',100),('Cello Chamber',0,1.9,24,75,'smooth',100),('String Ensemble Silk',2,3.1,35,100,'air',100),('Pizzicato Pearl',1,.9,12,80,'bright',100),('Double Bass Shadow',1,1.1,18,55,'thin',8),('Harp Silver',2,3.5,65,100,'clean',100),('Quartet Vintage',0,2.1,18,90,'warm',100),('Orchestral Swell',0,4.1,45,100,'smooth',100)],
 'Sopros':[
-('Trumpet Gold',0,1.6,28,80,'warm',100),('Muted Trumpet Noir',0,2.2,42,85,'dark',100),('Tenor Sax Smoke',0,2,32,85,'smooth',100),('Alto Sax Shine',2,1.7,25,90,'air',100),('Trombone Body',1,1.4,22,75,'thin',100),('Brass Section Wide',2,2.5,38,100,'bright',100),('Flute Breeze',2,2.8,35,100,'smooth',100),('Clarinet Wood',0,1.8,24,80,'warm',13)],
+('Trumpet Gold',0,1.6,28,80,'warm',100),('Muted Trumpet Noir',0,2.2,42,85,'dark',100),('Tenor Sax Smoke',0,2,32,85,'smooth',100),('Alto Sax Shine',2,1.7,25,90,'air',100),('Trombone Body',1,1.4,22,75,'thin',100),('Brass Section Wide',2,2.5,38,100,'bright',100),('Flute Breeze',2,2.8,35,100,'smooth',100),('Clarinet Wood',0,1.8,24,60,'warm',13)],
 'Atmosferas':[
 ('Infinite Steel',0,5.5,110,100,'mod',100),('Frozen Amber',0,5.2,85,100,'dark',100),('Silver Cloud',2,4.8,95,100,'air',100),('Slow Aurora',2,5,150,100,'mod',100),('Dream Chamber',0,3.9,65,100,'smooth',100),('Metallic Stars',2,4.3,45,100,'bright',100),('Narrow Memory',0,3.3,90,30,'dark',100),('Mono Ghost',1,2.9,125,0,'warm',100),('Soft Horizon',0,4.7,75,95,'smooth',100),('Analog Nebula',2,5.3,180,100,'mod',100)],
 'Cinema':[
-('Trailer Steel Tail',1,5.4,120,100,'bright',100),('Noir Corridor',0,3.6,75,65,'dark',100),('SciFi Reactor',2,4.9,135,100,'mod',100),('Distant Footsteps',1,1.7,85,55,'thin',100),('Dialogue Depth',1,.8,20,50,'clean',6),('Cinematic Drum Bloom',0,3.2,55,100,'warm',100),('Dream Transition',2,4.4,160,100,'smooth',100),('Vintage Radio Space',1,1.3,15,35,'dark',18),('Impact Afterglow',0,5.1,200,100,'thin',100),('Final Frame',2,5.5,250,100,'air',100)],
+('Trailer Steel Tail',1,5.4,120,100,'bright',100),('Noir Corridor',0,3.6,75,65,'dark',100),('SciFi Reactor',2,4.9,135,100,'mod',100),('Distant Footsteps',1,1.7,85,55,'thin',100),('Dialogue Depth',1,.8,20,50,'clean',6),('Cinematic Drum Bloom',0,3.2,70,100,'warm',100),('Dream Transition',2,4.4,160,100,'smooth',100),('Vintage Radio Space',1,1.3,15,35,'dark',18),('Impact Afterglow',0,5.1,200,100,'thin',100),('Final Frame',2,5.5,250,100,'air',100)],
 'Mix':[
-('Mix Bus Subtle',2,.8,18,90,'clean',4),('Drum Bus Glue',1,.6,8,70,'warm',5),('Mono Compatibility',0,1.4,20,0,'smooth',10),('Parallel Brightness',2,1.2,12,100,'air',100),('Vintage Cohesion',0,1.6,25,85,'warm',7),('Master Dark Space',0,1.1,30,90,'dark',3),('Wide Instrument Glue',2,1.8,35,100,'clean',8),('Aux Neutral Plate',0,2.2,25,100,'clean',100)]}
+('Mix Bus Subtle',2,.8,18,90,'clean',4),('Drum Bus Glue',1,.6,8,70,'warm',5),('Mono Compatibility',0,1.4,20,0,'smooth',10),('Parallel Brightness',2,1.2,12,100,'air',100),('Vintage Cohesion',0,1.6,35,65,'warm',7),('Master Dark Space',0,1.1,30,90,'dark',3),('Wide Instrument Glue',2,1.8,35,100,'clean',8),('Aux Neutral Plate',0,2.2,25,100,'clean',100)]}
 # Tonal recipes attenuate low-end on wet return, with no constant hiss or saturation control.
-tones={'warm':(0,1,140,-1.5,6000,-1,0,0),'air':(1,2,160,-2,10000,2,0,0),'clean':(0,1,120,-1,8000,0,0,0),'dark':(1,1,180,-1,4000,-4,0,0),'smooth':(0,1,150,-1.5,7000,-1.5,0,0),'mod':(1,2,180,-2,8000,.5,.18,4),'bright':(1,3,200,-2.5,8000,2.5,0,0),'thin':(1,5,250,-4,6000,-1,0,0)}
+tones={'warm':(0,1,140,3,4200,-4,0,0),'air':(1,2,160,-5,9500,8,0,0),'clean':(0,1,120,-2,7500,2,0,0),'dark':(1,1,180,4,3200,-9,0,0),'smooth':(0,1,180,1,5500,-5,0,0),'mod':(1,2,220,-4,7000,6,.28,8),'bright':(1,3,240,-7,8000,7,0,0),'thin':(1,5,350,-10,6000,3,0,0)}
+category_eq={'Vocais':(-1,0),'Bateria':(-2,1),'Guitarras':(1,-1),'Teclas':(2,1),'Cordas':(-1,2),'Sopros':(3,-2),'Atmosferas':(-2,2),'Cinema':(2,-2),'Mix':(0,0)}
+
 for category,rows in groups.items():
  for name,plate,rt,pre,width,tone,mix in rows:
   model,fil,lf,lg,hf,hg,rate,depth=tones[tone]
+  offset_low,offset_high=category_eq[category];lg=max(-12,min(12,lg+offset_low));hg=max(-12,min(12,hg+offset_high))
   add(name,category,plate,rt,model,fil,width,lf,lg,hf,hg,rate,depth,pre,mix,mix==100,f'{category}; carater {tone}; RT {rt:g} s; predelay {pre:g} ms; '+('retorno auxiliar 100% wet.' if mix==100 else f'insert com {mix}% wet.'))
+# Version-2 return voicings: clear contrast while preserving all IDs/ranges and AUX/INSERT routing.
+reference_eq=[(150,-3,6500,3),(230,-6,10500,7),(120,2,4500,-6),(180,-6,7000,3),(350,-10,8500,8),(220,-4,8500,6),(180,5,2800,-9),(200,-4,6000,5),(100,6,3500,-6),(250,-6,8000,5),(200,-5,4500,-4),(100,-4,12000,3)]
+for preset,(lf,lg,hf,hg) in zip(bank,reference_eq):
+ preset['parameters'].update(eq_low_freq=lf,eq_low_gain=lg,eq_high_freq=hf,eq_high_gain=hg)
+ preset['description']='Voicing recalibrado v2; '+preset['description'].replace('valores originais preservados.','nome e roteamento preservados; EQ recalibrado.')
+bank[7]['parameters'].update(mod_rate=.25,mod_depth=8)
 assert len(bank)==100,len(bank)
 assert len({tuple(x['parameters'].values()) for x in bank})==100
 out=ROOT/'Presets/PLATE140-100';out.mkdir(parents=True,exist_ok=True)
