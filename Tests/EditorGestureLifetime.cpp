@@ -35,7 +35,7 @@ class LifetimeApp final : public juce::JUCEApplication, private juce::Timer,
     }
     void open() {
         editor=std::make_unique<PlateEditor>(*processor);
-        editor->addToDesktop(0);editor->setVisible(true);
+        editor->setTopLeftPosition(20,20);editor->addToDesktop(0);editor->setVisible(true);editor->toFront(true);
         check(editor->getPeer()!=nullptr,"native peer missing");
         if(instances==0&&cycles==0) {
             juce::Image image(juce::Image::ARGB,8,8,true);
@@ -68,6 +68,12 @@ class LifetimeApp final : public juce::JUCEApplication, private juce::Timer,
             check(before.isEquivalentTo(processor->state.copyState()),"graphics changed audio parameters");
            #endif
         }
+       #if JUCE_WINDOWS
+        // Native hit-testing must see the test window, not a runner console.
+        editor->getPeer()->setAlwaysOnTop(true);
+       #endif
+        editor->toFront(true);
+        editor->getPeer()->performAnyPendingRepaintsNow();
     }
     void timerCallback() override {
         try {
@@ -96,11 +102,22 @@ class LifetimeApp final : public juce::JUCEApplication, private juce::Timer,
             auto* slider=dynamic_cast<juce::Slider*>(find(*editor,"width"));
             check(slider!=nullptr,"width slider");
             auto* peer=editor->getPeer();
-            auto position=editor->getLocalPoint(slider,slider->getLocalBounds().getCentre()).toFloat();
+            editor->toFront(true);
+            const auto logicalPosition=editor->getLocalPoint(slider,slider->getLocalBounds().getCentre()).toFloat();
+            auto position=logicalPosition*editor->getDesktopScaleFactor();
+            juce::Desktop::getInstance().getMainMouseSource().setScreenPosition(slider->getScreenBounds().getCentre().toFloat());
+            if(!peer->contains(position.roundToInt(),true)) {
+                std::cerr<<"Native hit-test miss: instance="<<instances<<" cycle="<<cycles
+                         <<" peer position="<<position.toString()<<" editor bounds="<<editor->getScreenBounds().toString()
+                         <<" scale="<<editor->getDesktopScaleFactor()<<"\n";
+            }
             const auto now=juce::Time::currentTimeMillis();
             peer->handleMouseEvent(juce::MouseInputSource::mouse,position,{},0,0,now);
             peer->handleMouseEvent(juce::MouseInputSource::mouse,position,juce::ModifierKeys::leftButtonModifier,0,0,now+1);
             peer->handleMouseEvent(juce::MouseInputSource::mouse,position.translated(0,-18),juce::ModifierKeys::leftButtonModifier,0,0,now+2);
+            if(begins<=ends){auto* hit=juce::Desktop::getInstance().getMainMouseSource().getComponentUnderMouse();
+                std::cerr<<"Gesture diagnostic: instance="<<instances<<" cycle="<<cycles<<" begins="<<begins<<" ends="<<ends
+                         <<" target="<<(hit?hit->getName():juce::String("null"))<<"\n";}
             check(begins>ends,"real attachment gesture did not start");
             check(slider->getCurrentPopupDisplay()!=nullptr,"real drag popup did not open");
             editor.reset();
@@ -121,7 +138,8 @@ class LifetimeApp final : public juce::JUCEApplication, private juce::Timer,
 public:
     const juce::String getApplicationName() override{return "PlateLifetime";}
     const juce::String getApplicationVersion() override{return "0.2";}
-    void initialise(const juce::String&) override {
+    void initialise(const juce::String& args) override {
+        if(args=="--scale125")juce::Desktop::getInstance().setGlobalScaleFactor(1.25f);
         checkpoint=juce::Time::currentTimeMillis();
         watchdog=std::thread([this]{while(!finished.load()){
             if(juce::Time::currentTimeMillis()-checkpoint.load()>30000){

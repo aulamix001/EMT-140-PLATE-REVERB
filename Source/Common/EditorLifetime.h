@@ -21,7 +21,7 @@ inline void finishInteractions(juce::Component& root) {
         if (!safeRoot) return;
         if (source.isDragging() && target && (target == safeRoot.getComponent() || safeRoot->isParentOf(target))) {
             if (auto* peer = target->getPeer()) {
-                auto position = peer->globalToLocal(source.getScreenPosition());
+                auto position = peer->globalToLocal(source.getRawScreenPosition());
                 peer->handleMouseEvent(source.getType(), position,
                     source.getCurrentModifiers().withoutMouseButtons(), source.getCurrentPressure(),
                     source.getCurrentOrientation(), juce::Time::currentTimeMillis(), {}, source.getIndex());
