@@ -12,6 +12,11 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Metric dependencies
+        run: python -m pip install -r requirements-metrics.txt
       - name: Configure
         shell: pwsh
         run: |
@@ -22,16 +27,37 @@ jobs:
             Write-Output "::error title=CMake configure::$message"
             exit $result
           }
-      - name: Build
+      - uses: actions/checkout@v5
+        with:
+          repository: steinbergmedia/vst3sdk
+          ref: 3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96
+          submodules: recursive
+          path: _validator-sdk
+      - name: Build and validate Debug before Release
         shell: pwsh
         run: |
-          cmake --build build --config Release --parallel 2 2>&1 | Tee-Object -Variable buildLog
-          $result = $LASTEXITCODE
-          if ($result -ne 0) {
-            $message = (($buildLog | Select-Object -Last 60) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
-            Write-Output "::error title=Windows build::$message"
-            exit $result
-          }
+          cmake -S _validator-sdk -B validator-build -G "Visual Studio 17 2022" -A x64 -DSMTG_ENABLE_VSTGUI_SUPPORT=OFF -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=OFF
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build validator-build --config Debug --target validator --parallel 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build build --config Debug --parallel 2 2>&1 | Tee-Object debug-build.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          ctest --test-dir build -C Debug --output-on-failure 2>&1 | Tee-Object debug-tests.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $validator = (Get-ChildItem validator-build -Recurse -Filter validator.exe | Select-Object -First 1).FullName
+          & $validator (Resolve-Path 'build/Plate140_artefacts/Debug/VST3/PLATE 140.vst3').Path 2>&1 | Tee-Object debug-validator.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (Select-String -Path debug-*.log -Pattern 'JUCE Assertion failure' -Quiet) { throw 'JUCE assertion in Debug logs' }
+      - name: Build Release
+        run: cmake --build build --config Release --parallel 2
+      - name: Official validator Release
+        shell: pwsh
+        run: |
+          cmake --build validator-build --config Release --target validator --parallel 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $validator = (Get-ChildItem validator-build -Recurse -Filter validator.exe | Where-Object FullName -Match 'Release' | Select-Object -First 1).FullName
+          & $validator (Resolve-Path 'build/Plate140_artefacts/Release/VST3/PLATE 140.vst3').Path
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Tests
         run: ctest --test-dir build -C Release --output-on-failure
       - name: Preset and floating-browser integration
@@ -52,13 +78,27 @@ jobs:
           $bundle = (Get-ChildItem build/Plate140_artefacts/Release/VST3 -Filter *.vst3 | Select-Object -First 1).FullName
           & $validator --strictness-level 10 --sample-rates 44100,48000,96000,192000 --block-sizes 32,64,128,256,512,1024 --validate $bundle
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Package
+      - name: Package and verify Windows AMD64 binaries
         shell: pwsh
-        run: Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md -DestinationPath PLATE140-Windows-x64.zip
+        run: |
+          $binary = (Get-ChildItem build/Plate140_artefacts/Release/VST3 -Recurse -File -Filter *.vst3 | Select-Object -First 1).FullName
+          $bytes = [IO.File]::ReadAllBytes($binary)
+          $offset = [BitConverter]::ToInt32($bytes, 0x3c)
+          if ([BitConverter]::ToUInt32($bytes, $offset) -ne 0x4550 -or [BitConverter]::ToUInt16($bytes, $offset+4) -ne 0x8664 -or [BitConverter]::ToUInt16($bytes, $offset+24) -ne 0x20b) { throw 'Expected PE32+ AMD64 VST3' }
+          git rev-parse HEAD | Set-Content BUILD-COMMIT.txt
+          Compress-Archive -Path build/Plate140_artefacts/Release/VST3,build/Plate140_artefacts/Release/Standalone,Presets/PLATE140-100,README.md,LICENSES.md,BUILD-COMMIT.txt,build/compatible-graphics.txt -DestinationPath PLATE140-Windows-x64.zip
+          $symbols = Get-ChildItem build -Recurse -Filter *.pdb | Where-Object FullName -Match 'Debug'
+          Compress-Archive -Path (@('build/Plate140_artefacts/Debug/VST3','BUILD-COMMIT.txt') + @($symbols.FullName)) -DestinationPath PLATE140-Windows-x64-Debug.zip
+          Get-FileHash PLATE140-Windows-x64*.zip -Algorithm SHA256 | ForEach-Object { "$($_.Hash.ToLower())  $([IO.Path]::GetFileName($_.Path))" } | Set-Content SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         with:
           name: PLATE140-Windows-x64
-          path: PLATE140-Windows-x64.zip
+          path: |
+            PLATE140-Windows-x64.zip
+            PLATE140-Windows-x64-Debug.zip
+            SHA256SUMS.txt
+            BUILD-COMMIT.txt
+            debug-*.log
 
   release:
     needs: build
@@ -75,4 +115,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ github.ref_name }}
-        run: gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip --verify-tag --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64 build, including 100 mapped presets. Build, DSP/preset integration and pluginval level 10 must pass before this package is published. Studio One validation remains pending."
+        run: gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --verify-tag --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64 build, including 100 mapped presets. Build, DSP/preset integration and pluginval level 10 must pass before this package is published. Studio One validation remains pending."

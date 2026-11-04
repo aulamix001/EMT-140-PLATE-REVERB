@@ -27,17 +27,17 @@ void PlateProcessor::processBlock(AudioBuffer<float>&buffer,MidiBuffer&){ScopedN
  for(int i=0;i<buffer.getNumSamples();++i){auto out=engine.tick(l[i],r[i],p);l[i]=float(out[0]);r[i]=buffer.getNumChannels()>1?float(out[1]):float((out[0]+out[1])*.5);double level=p.power?(out[0]*out[0]+out[1]*out[1])*.5:0;vu+=k*(level-vu);}
  meter.store(float(std::sqrt(std::max(0.,vu))));
 }
-void PlateProcessor::getStateInformation(MemoryBlock&b){auto v=state.copyState();v.setProperty("version",1,nullptr);auto xml=v.createXml();copyXmlToBinary(*xml,b);}
-void PlateProcessor::restoreState(const ValueTree&v){if(!PresetLibrary::validState(v))return;state.replaceState(v.createCopy());
+void PlateProcessor::getStateInformation(MemoryBlock&b){auto v=state.copyState();v.setProperty("version",1,nullptr);v.setProperty("graphicsMode",softwareGraphics.load()?0:1,nullptr);auto xml=v.createXml();copyXmlToBinary(*xml,b);}
+void PlateProcessor::restoreState(const ValueTree&v){if(!PresetLibrary::validState(v))return;softwareGraphics.store(int(v.getProperty("graphicsMode",PLATE_COMPATIBLE_GRAPHICS ? 0 : 1))==0);state.replaceState(v.createCopy());
  // Explicitly restore each host-facing value: APVTS raw bool values may already be
  // snapped to 0/1 while AudioParameterBool still holds a fractional host value.
  for(auto child:v){auto*parameter=state.getParameter(child.getProperty("id").toString());if(parameter)parameter->setValueNotifyingHost(parameter->convertTo0to1(float(child.getProperty("value"))));}
- auto key=v.getProperty("preset_key").toString();if(key.startsWith("factory:"))currentProgram.store(jlimit(0,platebank::count-1,key.fromFirstOccurrenceOf(":",false,false).getIntValue()-1));}
+ auto key=v.getProperty("preset_key").toString();currentProgram.store(platebank::count);if(key.startsWith("factory:"))currentProgram.store(jlimit(0,platebank::count-1,key.fromFirstOccurrenceOf(":",false,false).getIntValue()-1));updateHostDisplay(ChangeDetails().withProgramChanged(true).withNonParameterStateChanged(true));}
 void PlateProcessor::setStateInformation(const void*d,int size){auto xml=getXmlFromBinary(d,size);if(xml)restoreState(ValueTree::fromXml(*xml));}
 void PlateProcessor::set(const String&id,float value){if(auto*p=state.getParameter(id)){p->beginChangeGesture();p->setValueNotifyingHost(p->convertTo0to1(value));p->endChangeGesture();}}
 float PlateProcessor::get(const String&id)const{return state.getRawParameterValue(id)->load();}
-void PlateProcessor::reset(){for(auto*p:getParameters())p->setValueNotifyingHost(p->getDefaultValue());state.state.removeProperty("preset_name",nullptr);state.state.removeProperty("preset_key",nullptr);}
+void PlateProcessor::reset(){currentProgram.store(platebank::count);for(auto*p:getParameters())p->setValueNotifyingHost(p->getDefaultValue());state.state.removeProperty("preset_name",nullptr);state.state.removeProperty("preset_key",nullptr);updateHostDisplay(ChangeDetails().withProgramChanged(true).withNonParameterStateChanged(true));}
 StringArray PlateProcessor::presetNames(){StringArray names;for(const auto& preset:platebank::presets)names.add(preset.name);return names;}
-void PlateProcessor::loadPreset(int n){if(n<0||n>=platebank::count)return;const auto& preset=platebank::presets[n];for(int i=0;i<20;++i)set(platebank::ids[i],preset.values[size_t(i)]);currentProgram.store(n);state.state.setProperty("preset_name",preset.name,nullptr);state.state.setProperty("preset_key","factory:"+String(n+1),nullptr);}
+void PlateProcessor::loadPreset(int n){if(n<0||n>=platebank::count)return;const auto& preset=platebank::presets[n];for(int i=0;i<20;++i)set(platebank::ids[i],preset.values[size_t(i)]);currentProgram.store(n);state.state.setProperty("preset_name",preset.name,nullptr);state.state.setProperty("preset_key","factory:"+String(n+1),nullptr);updateHostDisplay(ChangeDetails().withProgramChanged(true).withNonParameterStateChanged(true));}
 AudioProcessorEditor*PlateProcessor::createEditor(){return new PlateEditor(*this);}
 AudioProcessor* JUCE_CALLTYPE createPluginFilter(){return new PlateProcessor();}

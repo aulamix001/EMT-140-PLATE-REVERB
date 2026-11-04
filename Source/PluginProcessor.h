@@ -7,6 +7,7 @@ public:
  PlateProcessor();
  juce::AudioProcessorValueTreeState state;
  std::atomic<float> meter{0};
+ std::atomic<bool> softwareGraphics{PLATE_COMPATIBLE_GRAPHICS != 0};
  void prepareToPlay(double,int) override;
  void releaseResources() override {}
  bool isBusesLayoutSupported(const BusesLayout&) const override;
@@ -15,15 +16,15 @@ public:
  bool hasEditor()const override{return true;}
  const juce::String getName()const override{return "PLATE 140";}
  bool acceptsMidi()const override{return false;} bool producesMidi()const override{return false;}
- double getTailLengthSeconds()const override{return 6;}
- int getNumPrograms()override{return platebank::count;}int getCurrentProgram()override{return currentProgram.load();}void setCurrentProgram(int n)override{loadPreset(n);}
- const juce::String getProgramName(int n)override{return n>=0&&n<platebank::count?platebank::presets[n].name:juce::String{}; }void changeProgramName(int,const juce::String&)override{}
+ double getTailLengthSeconds()const override{return 7;}
+ int getNumPrograms()override{return platebank::count+1;}int getCurrentProgram()override{return currentProgram.load();}void setCurrentProgram(int n)override{if(n==platebank::count)reset();else if(n>=0&&n<platebank::count)loadPreset(n);}
+ const juce::String getProgramName(int n)override{return n==platebank::count?juce::String("Default"):(n>=0&&n<platebank::count?juce::String(platebank::presets[n].name):juce::String{}); }void changeProgramName(int,const juce::String&)override{}
  void getStateInformation(juce::MemoryBlock&)override;void setStateInformation(const void*,int)override;
  void set(const juce::String&,float); float get(const juce::String&)const;
  void loadPreset(int);void reset();void restoreState(const juce::ValueTree&);
  static juce::StringArray presetNames();
 private:
- std::atomic<int> currentProgram{0};
+ std::atomic<int> currentProgram{platebank::count};
  plate::Engine engine; double sampleRate=48000, vu=0;
  static juce::AudioProcessorValueTreeState::ParameterLayout layout();
  std::array<std::atomic<float>*,21> raw{};

@@ -1,0 +1,12 @@
+#include <JuceHeader.h>
+#include "Presets/FactoryPresets.h"
+#include <iostream>
+#include <set>
+#include <stdexcept>
+int main(int argc,char**argv){try{juce::ScopedJuceInitialiser_GUI init;if(argc<2)throw std::runtime_error("VST3 bundle path required");juce::AudioPluginFormatManager formats;auto*format=new juce::VST3PluginFormat();formats.addFormat(format);juce::OwnedArray<juce::PluginDescription> descriptions;format->findAllTypesForFile(descriptions,juce::String::fromUTF8(argv[1]));if(descriptions.size()!=1)throw std::runtime_error("VST3 scan failed");std::set<uint64_t> fingerprints;
+ for(int n=0;n<platebank::count;++n){juce::String error;auto plugin=formats.createPluginInstance(*descriptions[0],48000,512,error);if(!plugin)throw std::runtime_error(error.toStdString());if(plugin->getNumPrograms()!=platebank::count+1)throw std::runtime_error("host program count");plugin->prepareToPlay(48000,512);plugin->setCurrentProgram(n);juce::AudioBuffer<float> audio(2,512);juce::MidiBuffer midi;for(int b=0;b<94;++b){audio.clear();plugin->processBlock(audio,midi);}
+  for(int i=0;i<3;++i){auto name="Reverb "+juce::String::charToString(char('A'+i));bool found=false;for(auto*param:plugin->getParameters())if(param->getName(128)==name){found=true;float actual=param->getText(param->getValue(),64).getFloatValue(),expected=platebank::presets[n].values[size_t(i+1)];if(std::abs(actual-expected)>.011f){std::cerr<<"program="<<n<<" "<<name<<" expected="<<expected<<" actual="<<actual<<'\n';throw std::runtime_error("VST3 host program did not reach processor");}}if(!found)throw std::runtime_error("host RT parameter missing");}
+  uint64_t hash=1469598103934665603ULL;for(int b=0;b<563;++b){audio.clear();if(b==0){audio.setSample(0,0,.7f);audio.setSample(1,0,.7f);}plugin->processBlock(audio,midi);for(int c=0;c<2;++c)for(int i=0;i<512;++i){double value=audio.getSample(c,i);if(!std::isfinite(value))throw std::runtime_error("nonfinite VST3 output");hash^=uint64_t(int64_t(std::llround(value*1e9)));hash*=1099511628211ULL;}}
+  fingerprints.insert(hash);plugin->releaseResources();std::cout<<"host program "<<n<<" "<<plugin->getProgramName(n)<<" OK\n";
+ }if(fingerprints.size()!=100)throw std::runtime_error("VST3 host audio responses are not unique");std::cout<<"PASS: 100 real VST3 host program changes and distinct audio responses\n";
+ }catch(const std::exception&e){std::cerr<<"FAIL: "<<e.what()<<'\n';return 1;}return 0;}
