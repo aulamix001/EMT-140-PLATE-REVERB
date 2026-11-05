@@ -24,7 +24,7 @@ Numeros medidos, nao estimados: impulso estereo identico de 0,5, 48 kHz, 2 s de 
 - Brilho: 10 log10(energia 3–12 kHz / energia 300–2000 Hz). Graves: 10 log10(energia 20–180 Hz / energia 300–2000 Hz). As larguras das bandas nao sao normalizadas; sao razoes espectrais, nao os ganhos do EQ.
 - Largura: RMS Side / RMS Mid, com M=(L+R)/2 e S=(L-R)/2. Zero indica mono.
 - Densidade: fracao dos primeiros 10 ms apos o inicio com energia >= -40 dB do pico. Exige-se >= 70% para todos os presets.
-- Cada um dos 4.950 pares precisa diferir por **pelo menos um** eixo: RT60 de referencia >=15%, inicio >=8 ms, brilho >=1,5 dB, graves >=1,5 dB ou largura >=0,08. O mesmo teste vale para os 36 pares de medianas das nove categorias.
-- A distancia normalizada e o maximo dessas cinco diferencas divididas pelos respectivos limites. Exige-se >=1, sem ajustar o limite para fazer o banco passar. Valores completos e falhas anteriores: `metrics/before` e `metrics/after`.
+- Cada um dos 4.950 pares precisa diferir por **pelo menos um** eixo: RT60 de referencia >=20%, brilho >=2,5 dB ou graves >=2,5 dB. Diferencas apenas de largura/pre-delay nao sao suficientes. O mesmo teste vale para os 36 pares de medianas das nove categorias.
+- A distancia normalizada e o maximo dessas tres diferencas divididas pelos respectivos limites. Exige-se >=1, sem ajustar o limite para fazer o banco passar. Valores completos e falhas anteriores: `metrics/before` e `metrics/after`.
 
 Esses criterios demonstram contraste objetivo; nao constituem teste psicoacustico, escuta real ou validacao no Reaper/Studio One 8. Os presets INSERT preservam seu mix e Wet Solo OFF no plugin; o isolamento wet e exclusivo da medicao para evitar que o ataque dry esconda a cauda.

@@ -1,6 +1,13 @@
 {
   "sample_rate": 48000,
   "wet_only": true,
+  "contrast_criteria": {
+    "rt60_ratio": 1.2,
+    "brightness_db": 2.5,
+    "bass_db": 2.5,
+    "minimum_axes": 1,
+    "spatial_only_not_sufficient": true
+  },
   "metrics": [
     {
       "number": 1,
@@ -47,7 +54,7 @@
   ],
   "within_failures": [],
   "cross_category_failures": [],
-  "minimum_within_distance": 2.8422,
+  "minimum_within_distance": 1.70532,
   "category_distances": [],
   "failures": []
 }

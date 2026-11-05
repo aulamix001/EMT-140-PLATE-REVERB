@@ -1,0 +1,58 @@
+UpdateCTestConfiguration  from :/workspace/EMT-140-PLATE-REVERB/build/DartConfiguration.tcl
+Parse Config file:/workspace/EMT-140-PLATE-REVERB/build/DartConfiguration.tcl
+Test project /workspace/EMT-140-PLATE-REVERB/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 10
+    Start 10: PanelControlAudit
+
+10: Test command: /workspace/EMT-140-PLATE-REVERB/build/PlatePreview_artefacts/Release/PlatePreview "--control-audit"
+10: Working Directory: /workspace/EMT-140-PLATE-REVERB/build
+10: Test timeout computed to be: 1500
+10: PASS dial width: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial balance: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial mod_rate: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial mod_depth: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial eq_low_freq: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial eq_low_gain: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial eq_high_freq: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial eq_high_gain: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial predelay: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: PASS dial mix: UI -> APVTS, host -> UI, isolation, endpoints, default
+10: Low GAIN -12 dB -> measured -11.9742 dB
+10: Low GAIN 12 dB -> measured 11.9742 dB
+10: High GAIN -12 dB -> measured -11.9951 dB
+10: High GAIN 12 dB -> measured 11.9951 dB
+10: PASS audio plate_select relative IR difference 1.00386
+10: PASS audio reverb_time_a relative IR difference 0.658323
+10: PASS audio reverb_time_b relative IR difference 0.542706
+10: PASS audio reverb_time_c relative IR difference 0.650224
+10: PASS audio input_filter_model relative IR difference 0.0590407
+10: PASS audio input_filter_emt_db relative IR difference 0.0623976
+10: PASS audio input_filter_martech_hz relative IR difference 0.128129
+10: PASS audio width relative IR difference 0.52493
+10: PASS audio balance relative IR difference 1
+10: PASS audio eq_enable relative IR difference 0.562792
+10: PASS audio eq_low_freq relative IR difference 0.593891
+10: PASS audio eq_low_gain relative IR difference 0.325497
+10: PASS audio eq_high_freq relative IR difference 0.68621
+10: PASS audio eq_high_gain relative IR difference 0.94206
+10: PASS audio mod_rate relative IR difference 0.802565
+10: PASS audio mod_depth relative IR difference 0.802459
+10: PASS audio predelay relative IR difference 1.00036
+10: PASS audio mix relative IR difference 1
+10: PASS audio wet_solo relative IR difference 0.950559
+10: PASS audio power relative IR difference 1
+10: PASS: all 20 parameters, 10 dial attachments, 3 RTs, A/B/C, all filter positions, toggles and real processor low/high gain audio
+1/1 Test #10: PanelControlAudit ................   Passed    6.61 sec
+
+The following tests passed:
+	PanelControlAudit
+
+100% tests passed out of 1
+
+Total Test time (real) =   6.61 sec

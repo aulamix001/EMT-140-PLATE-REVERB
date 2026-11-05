@@ -32,7 +32,7 @@ for preset in bank:
  row=dict(number=preset['number'],name=preset['name'],category=preset['category'],rt60_s=round(float(rt),5),rt60_broadband_s=round(float(broad_rt),5),onset_ms=round(onset,4),intrinsic_onset_ms=round(onset-preset['parameters']['predelay'],4),brightness_db=round(float(bright),4),bass_db=round(float(bass),4),width=round(float(width),5),decay_fit_r2=round(float(r2),5),density_first_10ms=round(density,5))
  rows.append(row)
 def distance(a,b):
- return max(abs(np.log(a['rt60_s']/b['rt60_s']))/np.log(1.15),abs(a['onset_ms']-b['onset_ms'])/8,abs(a['brightness_db']-b['brightness_db'])/1.5,abs(a['bass_db']-b['bass_db'])/1.5,abs(a['width']-b['width'])/.08)
+ return max(abs(np.log(a['rt60_s']/b['rt60_s']))/np.log(1.20),abs(a['brightness_db']-b['brightness_db'])/2.5,abs(a['bass_db']-b['bass_db'])/2.5)
 within=[];cross=[];all_within=[]
 for a,b in itertools.combinations(rows,2):
  if a['category']==b['category']:
@@ -53,7 +53,7 @@ for r in rows:
  if not .25<r['rt60_s']<9 or r['decay_fit_r2']<.9:failures.append(f"Unreliable decay: {r['name']}")
  if r['intrinsic_onset_ms']>2 or r['intrinsic_onset_ms']<-.1:failures.append(f"Late/invalid intrinsic onset: {r['name']}")
 args.out.mkdir(parents=True,exist_ok=True)
-(args.out/'metrics.json').write_text(json.dumps(dict(sample_rate=sr,wet_only=True,metrics=rows,within_failures=within,cross_category_failures=cross,minimum_within_distance=min(all_within),category_distances=between,failures=failures),indent=2)+'\n')
+(args.out/'metrics.json').write_text(json.dumps(dict(sample_rate=sr,wet_only=True,contrast_criteria=dict(rt60_ratio=1.20,brightness_db=2.5,bass_db=2.5,minimum_axes=1,spatial_only_not_sufficient=True),metrics=rows,within_failures=within,cross_category_failures=cross,minimum_within_distance=min(all_within),category_distances=between,failures=failures),indent=2)+'\n')
 with (args.out/'metrics.csv').open('w',newline='') as f:
  w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
 print(json.dumps(dict(presets=len(rows),within_failures=within,cross_category_failures=cross,weak_categories=weak,onset_range=[min(r['intrinsic_onset_ms'] for r in rows),max(r['intrinsic_onset_ms'] for r in rows)],rt60_range=[min(r['rt60_s'] for r in rows),max(r['rt60_s'] for r in rows)],other_failures=[s for s in failures if not s.startswith(('Late/invalid','100 '))][:12]),indent=2))

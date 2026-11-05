@@ -4,6 +4,7 @@
 #include "Presets/PresetBrowser.h"
 #include "Common/EditorGraphics.h"
 #include "Common/EditorLifetime.h"
+#include "GUI/ControlMapping.h"
 class PlateEditor:public juce::AudioProcessorEditor,private juce::Timer {
 public:
  explicit PlateEditor(PlateProcessor&);~PlateEditor()override;
@@ -11,7 +12,7 @@ public:
  void mouseDown(const juce::MouseEvent&)override;void paint(juce::Graphics&)override;void resized()override;
 private:
  PlateProcessor&p;plateui::EditorGraphics graphics;vintage::RackLook look;juce::Component panel;
- std::array<juce::Slider,10> knobs;
+ std::array<plateui::PanelKnob,10> knobs;
  std::array<vintage::RackTimeMeter,3> times;
  std::array<juce::TextButton,3> letters;std::array<juce::TextButton,6> dampers;
  juce::TextButton power{"ON"},eq{"IN"},solo{"WET SOLO"},prev{"<"},next{">"},ab{"A / B"},reset{"RESET"},save{"SAVE"},load{"OPEN"};

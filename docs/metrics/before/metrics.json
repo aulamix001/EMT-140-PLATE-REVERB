@@ -1,6 +1,13 @@
 {
   "sample_rate": 48000,
   "wet_only": true,
+  "contrast_criteria": {
+    "rt60_ratio": 1.2,
+    "brightness_db": 2.5,
+    "bass_db": 2.5,
+    "minimum_axes": 1,
+    "spatial_only_not_sufficient": true
+  },
   "metrics": [
     {
       "number": 1,
@@ -1405,419 +1412,1684 @@
   ],
   "within_failures": [
     {
+      "a": "Vocal Long",
+      "b": "Ballad Velvet",
+      "distance": 0.6819
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Soul Golden",
+      "distance": 0.7523
+    },
+    {
+      "a": "Drum Room",
+      "b": "Rimshot Space",
+      "distance": 0.5656
+    },
+    {
+      "a": "Drum Room",
+      "b": "Drum Parallel",
+      "distance": 0.5177
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Cello Chamber",
+      "distance": 0.3713
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Quartet Vintage",
+      "distance": 0.7264
+    },
+    {
+      "a": "Ambient Wide",
+      "b": "Dream Chamber",
+      "distance": 0.9326
+    },
+    {
+      "a": "Ambient Wide",
+      "b": "Soft Horizon",
+      "distance": 0.8685
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Mono Compatibility",
+      "distance": 0.6937
+    },
+    {
+      "a": "Lead Intimate",
+      "b": "Vintage Slap Bloom",
+      "distance": 0.9872
+    },
+    {
+      "a": "Jazz Smoky",
+      "b": "Sibilance Tamer",
+      "distance": 0.7009
+    },
+    {
+      "a": "Snare Chrome",
+      "b": "Clap Spread",
+      "distance": 0.4597
+    },
+    {
       "a": "Rimshot Space",
       "b": "Drum Parallel",
-      "distance": 0.7314
+      "distance": 0.5607
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Cymbal Mist",
+      "distance": 0.8882
+    },
+    {
+      "a": "Brushes Velvet",
+      "b": "Congas Copper",
+      "distance": 0.8075
+    },
+    {
+      "a": "Acoustic Wood",
+      "b": "Nylon Intimate",
+      "distance": 0.8058
+    },
+    {
+      "a": "Piano Concert Plate",
+      "b": "Celesta Stardust",
+      "distance": 0.6968
+    },
+    {
+      "a": "Rhodes Honey",
+      "b": "Celesta Stardust",
+      "distance": 0.869
+    },
+    {
+      "a": "Violin Solo Gold",
+      "b": "Quartet Vintage",
+      "distance": 0.4907
+    },
+    {
+      "a": "Cello Chamber",
+      "b": "Quartet Vintage",
+      "distance": 0.5245
     },
     {
       "a": "Trumpet Gold",
       "b": "Clarinet Wood",
-      "distance": 0.8573
+      "distance": 0.6572
+    },
+    {
+      "a": "Tenor Sax Smoke",
+      "b": "Clarinet Wood",
+      "distance": 0.5533
+    },
+    {
+      "a": "Infinite Steel",
+      "b": "Slow Aurora",
+      "distance": 0.9116
+    },
+    {
+      "a": "Infinite Steel",
+      "b": "Analog Nebula",
+      "distance": 0.8537
+    },
+    {
+      "a": "Silver Cloud",
+      "b": "Slow Aurora",
+      "distance": 0.216
+    },
+    {
+      "a": "Silver Cloud",
+      "b": "Analog Nebula",
+      "distance": 0.5283
+    },
+    {
+      "a": "Slow Aurora",
+      "b": "Analog Nebula",
+      "distance": 0.3124
+    },
+    {
+      "a": "Dream Chamber",
+      "b": "Soft Horizon",
+      "distance": 0.9895
+    },
+    {
+      "a": "Trailer Steel Tail",
+      "b": "Impact Afterglow",
+      "distance": 0.7256
+    },
+    {
+      "a": "SciFi Reactor",
+      "b": "Final Frame",
+      "distance": 0.6265
+    },
+    {
+      "a": "Mono Compatibility",
+      "b": "Vintage Cohesion",
+      "distance": 0.7396
+    },
+    {
+      "a": "Vintage Cohesion",
+      "b": "Wide Instrument Glue",
+      "distance": 0.7482
+    },
+    {
+      "a": "Wide Instrument Glue",
+      "b": "Aux Neutral Plate",
+      "distance": 0.9784
     }
   ],
   "cross_category_failures": [
     {
       "a": "Vocal Long",
+      "b": "Lead Sustain",
+      "distance": 0.5866
+    },
+    {
+      "a": "Vocal Long",
+      "b": "Piano Concert Plate",
+      "distance": 0.7518
+    },
+    {
+      "a": "Vocal Long",
+      "b": "Rhodes Honey",
+      "distance": 0.814
+    },
+    {
+      "a": "Vocal Long",
       "b": "Celesta Stardust",
-      "distance": 0.776
+      "distance": 0.3346
+    },
+    {
+      "a": "Vocal Long",
+      "b": "Flute Breeze",
+      "distance": 0.3346
+    },
+    {
+      "a": "Vocal Long",
+      "b": "Mono Ghost",
+      "distance": 0.2913
+    },
+    {
+      "a": "Vocal Long",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.6819
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Dark Jazz",
+      "distance": 0.7533
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Toms Thunder",
+      "distance": 0.7887
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Congas Copper",
+      "distance": 0.8941
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Acoustic Wood",
+      "distance": 0.8996
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Piano Felt",
+      "distance": 0.7998
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Cello Chamber",
+      "distance": 0.9552
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Trumpet Gold",
+      "distance": 0.8488
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Clarinet Wood",
+      "distance": 0.8058
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Vintage Cohesion",
+      "distance": 0.843
+    },
+    {
+      "a": "Vocal Tight",
+      "b": "Wide Instrument Glue",
+      "distance": 0.8294
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Dark Jazz",
+      "distance": 0.464
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Toms Thunder",
+      "distance": 0.5561
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Cymbal Mist",
+      "distance": 0.5089
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Clean Arpeggio",
+      "distance": 0.5772
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Piano Felt",
+      "distance": 0.5542
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Rhodes Honey",
+      "distance": 0.9791
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Violin Solo Gold",
+      "distance": 0.7531
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Cello Chamber",
+      "distance": 0.3646
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Quartet Vintage",
+      "distance": 0.278
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.3341
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Clarinet Wood",
+      "distance": 0.5531
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Wide Instrument Glue",
+      "distance": 0.6678
+    },
+    {
+      "a": "Vocal Legacy",
+      "b": "Aux Neutral Plate",
+      "distance": 0.5146
+    },
+    {
+      "a": "Drum Room",
+      "b": "Dialogue Depth",
+      "distance": 0.5276
+    },
+    {
+      "a": "Drum Room",
+      "b": "Mix Bus Subtle",
+      "distance": 0.5317
+    },
+    {
+      "a": "Percussion Short",
+      "b": "Rap Short Plate",
+      "distance": 0.8626
+    },
+    {
+      "a": "Percussion Short",
+      "b": "Drum Bus Glue",
+      "distance": 0.2394
+    },
+    {
+      "a": "Strings Bright",
+      "b": "Backing Silk",
+      "distance": 0.4767
+    },
+    {
+      "a": "Strings Bright",
+      "b": "Snare Eighties",
+      "distance": 0.4868
     },
     {
       "a": "Dark Jazz",
       "b": "Toms Thunder",
-      "distance": 0.7258
+      "distance": 0.3343
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Cymbal Mist",
+      "distance": 0.7961
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Piano Felt",
+      "distance": 0.3454
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Trumpet Gold",
+      "distance": 0.7463
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.4642
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Clarinet Wood",
+      "distance": 0.3514
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Vintage Cohesion",
+      "distance": 0.7481
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Wide Instrument Glue",
+      "distance": 0.6322
+    },
+    {
+      "a": "Dark Jazz",
+      "b": "Aux Neutral Plate",
+      "distance": 0.9786
+    },
+    {
+      "a": "Ambient Wide",
+      "b": "Choir Cathedral Plate",
+      "distance": 0.9053
+    },
+    {
+      "a": "Ambient Wide",
+      "b": "Orchestral Swell",
+      "distance": 0.9142
     },
     {
       "a": "Modulated Chorus",
       "b": "Backing Silk",
-      "distance": 0.9669
+      "distance": 0.7412
+    },
+    {
+      "a": "Modulated Chorus",
+      "b": "Snare Eighties",
+      "distance": 0.9475
+    },
+    {
+      "a": "Modulated Chorus",
+      "b": "Electric Surf Plate",
+      "distance": 0.8386
+    },
+    {
+      "a": "Modulated Chorus",
+      "b": "Slide Moonlight",
+      "distance": 0.8352
+    },
+    {
+      "a": "Modulated Chorus",
+      "b": "String Ensemble Silk",
+      "distance": 0.438
+    },
+    {
+      "a": "Modulated Chorus",
+      "b": "Brass Section Wide",
+      "distance": 0.952
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Lead Intimate",
+      "distance": 0.5721
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Vintage Slap Bloom",
+      "distance": 0.4151
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Brushes Velvet",
+      "distance": 0.5574
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Congas Copper",
+      "distance": 0.6851
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Acoustic Wood",
+      "distance": 0.6853
+    },
+    {
+      "a": "Insert Mono",
+      "b": "Nylon Intimate",
+      "distance": 0.5578
+    },
+    {
+      "a": "Lead Intimate",
+      "b": "Brushes Velvet",
+      "distance": 0.4497
+    },
+    {
+      "a": "Lead Intimate",
+      "b": "Nylon Intimate",
+      "distance": 0.4516
+    },
+    {
+      "a": "Lead Pop Air",
+      "b": "Acoustic Sparkle",
+      "distance": 0.0
+    },
+    {
+      "a": "Lead Pop Air",
+      "b": "Alto Sax Shine",
+      "distance": 0.5711
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Lead Sustain",
+      "distance": 0.165
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Piano Concert Plate",
+      "distance": 0.9264
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Organ Chapel",
+      "distance": 0.6191
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Celesta Stardust",
+      "distance": 0.7779
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Harp Silver",
+      "distance": 0.8482
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Flute Breeze",
+      "distance": 0.7779
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Mono Ghost",
+      "distance": 0.4944
+    },
+    {
+      "a": "Ballad Velvet",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.0
+    },
+    {
+      "a": "Rap Short Plate",
+      "b": "Rimshot Space",
+      "distance": 0.7141
+    },
+    {
+      "a": "Rap Short Plate",
+      "b": "Dialogue Depth",
+      "distance": 0.7521
+    },
+    {
+      "a": "Rap Short Plate",
+      "b": "Mix Bus Subtle",
+      "distance": 0.7651
+    },
+    {
+      "a": "Rap Short Plate",
+      "b": "Drum Bus Glue",
+      "distance": 0.914
+    },
+    {
+      "a": "Soul Golden",
+      "b": "Cymbal Mist",
+      "distance": 0.6458
+    },
+    {
+      "a": "Soul Golden",
+      "b": "Clean Arpeggio",
+      "distance": 0.881
     },
     {
       "a": "Soul Golden",
       "b": "Rhodes Honey",
-      "distance": 0.75
+      "distance": 0.2268
+    },
+    {
+      "a": "Soul Golden",
+      "b": "Violin Solo Gold",
+      "distance": 0.0116
+    },
+    {
+      "a": "Soul Golden",
+      "b": "Quartet Vintage",
+      "distance": 0.49
+    },
+    {
+      "a": "Soul Golden",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.7521
     },
     {
       "a": "Soul Golden",
       "b": "Aux Neutral Plate",
-      "distance": 0.6309
+      "distance": 0.2612
+    },
+    {
+      "a": "Jazz Smoky",
+      "b": "Blues Smoky",
+      "distance": 0.3198
+    },
+    {
+      "a": "Backing Silk",
+      "b": "Snare Eighties",
+      "distance": 0.2063
+    },
+    {
+      "a": "Backing Silk",
+      "b": "String Ensemble Silk",
+      "distance": 0.9161
+    },
+    {
+      "a": "Choir Cathedral Plate",
+      "b": "Organ Chapel",
+      "distance": 0.8145
     },
     {
       "a": "Choir Cathedral Plate",
       "b": "Orchestral Swell",
-      "distance": 0.625
+      "distance": 0.1313
+    },
+    {
+      "a": "Choir Cathedral Plate",
+      "b": "Dream Chamber",
+      "distance": 0.3933
+    },
+    {
+      "a": "Choir Cathedral Plate",
+      "b": "Soft Horizon",
+      "distance": 0.5962
+    },
+    {
+      "a": "Choir Cathedral Plate",
+      "b": "Dream Transition",
+      "distance": 0.7306
+    },
+    {
+      "a": "Sibilance Tamer",
+      "b": "Wurli Amber",
+      "distance": 0.6505
+    },
+    {
+      "a": "Sibilance Tamer",
+      "b": "Vintage Radio Space",
+      "distance": 0.6605
+    },
+    {
+      "a": "Vocal Dream",
+      "b": "Slide Moonlight",
+      "distance": 0.6792
+    },
+    {
+      "a": "Vocal Dream",
+      "b": "Analog Pad Drift",
+      "distance": 0.9684
+    },
+    {
+      "a": "Vocal Dream",
+      "b": "FM Bell Shimmer",
+      "distance": 0.1379
+    },
+    {
+      "a": "Vintage Slap Bloom",
+      "b": "Brushes Velvet",
+      "distance": 0.5375
+    },
+    {
+      "a": "Vintage Slap Bloom",
+      "b": "Congas Copper",
+      "distance": 0.3379
+    },
+    {
+      "a": "Vintage Slap Bloom",
+      "b": "Acoustic Wood",
+      "distance": 0.3385
+    },
+    {
+      "a": "Vintage Slap Bloom",
+      "b": "Nylon Intimate",
+      "distance": 0.5356
+    },
+    {
+      "a": "Vintage Slap Bloom",
+      "b": "Mono Compatibility",
+      "distance": 0.3946
+    },
+    {
+      "a": "Snare Chrome",
+      "b": "Trombone Body",
+      "distance": 0.9836
+    },
+    {
+      "a": "Rimshot Space",
+      "b": "Dialogue Depth",
+      "distance": 0.038
+    },
+    {
+      "a": "Rimshot Space",
+      "b": "Mix Bus Subtle",
+      "distance": 0.1188
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Piano Felt",
+      "distance": 0.0112
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Cello Chamber",
+      "distance": 0.294
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Quartet Vintage",
+      "distance": 0.8185
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Trumpet Gold",
+      "distance": 0.6543
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.5563
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Clarinet Wood",
+      "distance": 0.0171
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Vintage Cohesion",
+      "distance": 0.656
+    },
+    {
+      "a": "Toms Thunder",
+      "b": "Wide Instrument Glue",
+      "distance": 0.7819
+    },
+    {
+      "a": "Brushes Velvet",
+      "b": "Acoustic Wood",
+      "distance": 0.8077
+    },
+    {
+      "a": "Brushes Velvet",
+      "b": "Nylon Intimate",
+      "distance": 0.0054
+    },
+    {
+      "a": "Brushes Velvet",
+      "b": "Mono Compatibility",
+      "distance": 0.8101
+    },
+    {
+      "a": "Kick Upper Plate",
+      "b": "Clav Snap",
+      "distance": 0.1097
+    },
+    {
+      "a": "Congas Copper",
+      "b": "Acoustic Wood",
+      "distance": 0.0055
+    },
+    {
+      "a": "Congas Copper",
+      "b": "Nylon Intimate",
+      "distance": 0.8056
+    },
+    {
+      "a": "Congas Copper",
+      "b": "Trumpet Gold",
+      "distance": 0.7439
+    },
+    {
+      "a": "Congas Copper",
+      "b": "Mono Compatibility",
+      "distance": 0.1131
+    },
+    {
+      "a": "Congas Copper",
+      "b": "Vintage Cohesion",
+      "distance": 0.7421
+    },
+    {
+      "a": "Drum Parallel",
+      "b": "Dialogue Depth",
+      "distance": 0.5227
+    },
+    {
+      "a": "Drum Parallel",
+      "b": "Mix Bus Subtle",
+      "distance": 0.5097
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Clean Arpeggio",
+      "distance": 0.2451
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Piano Felt",
+      "distance": 0.8863
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Rhodes Honey",
+      "distance": 0.6891
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Violin Solo Gold",
+      "distance": 0.648
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Cello Chamber",
+      "distance": 0.5942
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Quartet Vintage",
+      "distance": 0.5558
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.5541
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Clarinet Wood",
+      "distance": 0.8853
+    },
+    {
+      "a": "Cymbal Mist",
+      "b": "Wide Instrument Glue",
+      "distance": 0.7959
     },
     {
       "a": "Cymbal Mist",
       "b": "Aux Neutral Plate",
-      "distance": 0.6687
+      "distance": 0.4012
+    },
+    {
+      "a": "Acoustic Wood",
+      "b": "Trumpet Gold",
+      "distance": 0.7437
+    },
+    {
+      "a": "Acoustic Wood",
+      "b": "Mono Compatibility",
+      "distance": 0.1076
     },
     {
       "a": "Acoustic Wood",
       "b": "Vintage Cohesion",
-      "distance": 0.9679
+      "distance": 0.742
+    },
+    {
+      "a": "Acoustic Sparkle",
+      "b": "Alto Sax Shine",
+      "distance": 0.5711
+    },
+    {
+      "a": "Nylon Intimate",
+      "b": "Mono Compatibility",
+      "distance": 0.8082
+    },
+    {
+      "a": "Electric Surf Plate",
+      "b": "Brass Section Wide",
+      "distance": 0.402
+    },
+    {
+      "a": "Clean Arpeggio",
+      "b": "Rhodes Honey",
+      "distance": 0.9242
+    },
+    {
+      "a": "Clean Arpeggio",
+      "b": "Violin Solo Gold",
+      "distance": 0.8832
+    },
+    {
+      "a": "Clean Arpeggio",
+      "b": "Cello Chamber",
+      "distance": 0.8393
+    },
+    {
+      "a": "Clean Arpeggio",
+      "b": "Quartet Vintage",
+      "distance": 0.7909
+    },
+    {
+      "a": "Clean Arpeggio",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.7892
+    },
+    {
+      "a": "Clean Arpeggio",
+      "b": "Aux Neutral Plate",
+      "distance": 0.6198
+    },
+    {
+      "a": "Lead Sustain",
+      "b": "Piano Concert Plate",
+      "distance": 0.9356
+    },
+    {
+      "a": "Lead Sustain",
+      "b": "Organ Chapel",
+      "distance": 0.7841
+    },
+    {
+      "a": "Lead Sustain",
+      "b": "Celesta Stardust",
+      "distance": 0.7871
+    },
+    {
+      "a": "Lead Sustain",
+      "b": "Harp Silver",
+      "distance": 0.8574
+    },
+    {
+      "a": "Lead Sustain",
+      "b": "Flute Breeze",
+      "distance": 0.7871
+    },
+    {
+      "a": "Lead Sustain",
+      "b": "Mono Ghost",
+      "distance": 0.4859
     },
     {
       "a": "Lead Sustain",
       "b": "Cinematic Drum Bloom",
-      "distance": 0.875
+      "distance": 0.165
+    },
+    {
+      "a": "Slide Moonlight",
+      "b": "FM Bell Shimmer",
+      "distance": 0.7536
+    },
+    {
+      "a": "Slide Moonlight",
+      "b": "String Ensemble Silk",
+      "distance": 0.9128
     },
     {
       "a": "Funk Springy Plate",
       "b": "Pizzicato Pearl",
-      "distance": 0.6248
+      "distance": 0.0068
+    },
+    {
+      "a": "Piano Felt",
+      "b": "Cello Chamber",
+      "distance": 0.2921
+    },
+    {
+      "a": "Piano Felt",
+      "b": "Quartet Vintage",
+      "distance": 0.8165
     },
     {
       "a": "Piano Felt",
       "b": "Trumpet Gold",
-      "distance": 0.856
+      "distance": 0.6562
     },
     {
       "a": "Piano Felt",
       "b": "Tenor Sax Smoke",
-      "distance": 0.875
+      "distance": 0.5544
     },
     {
       "a": "Piano Felt",
       "b": "Clarinet Wood",
-      "distance": 0.6185
+      "distance": 0.006
     },
     {
       "a": "Piano Felt",
       "b": "Vintage Cohesion",
-      "distance": 0.8582
+      "distance": 0.6579
+    },
+    {
+      "a": "Piano Felt",
+      "b": "Wide Instrument Glue",
+      "distance": 0.7836
     },
     {
       "a": "Piano Concert Plate",
       "b": "Harp Silver",
-      "distance": 0.625
+      "distance": 0.4712
     },
     {
       "a": "Piano Concert Plate",
       "b": "Flute Breeze",
-      "distance": 0.909
+      "distance": 0.6968
+    },
+    {
+      "a": "Piano Concert Plate",
+      "b": "Mono Ghost",
+      "distance": 0.5643
+    },
+    {
+      "a": "Piano Concert Plate",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.9264
+    },
+    {
+      "a": "Rhodes Honey",
+      "b": "Violin Solo Gold",
+      "distance": 0.226
     },
     {
       "a": "Rhodes Honey",
       "b": "Quartet Vintage",
-      "distance": 0.935
+      "distance": 0.7167
+    },
+    {
+      "a": "Rhodes Honey",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.9789
+    },
+    {
+      "a": "Rhodes Honey",
+      "b": "Flute Breeze",
+      "distance": 0.869
     },
     {
       "a": "Rhodes Honey",
       "b": "Aux Neutral Plate",
-      "distance": 0.6327
+      "distance": 0.4645
+    },
+    {
+      "a": "Wurli Amber",
+      "b": "Vintage Radio Space",
+      "distance": 0.029
+    },
+    {
+      "a": "Wurli Amber",
+      "b": "Master Dark Space",
+      "distance": 0.9882
+    },
+    {
+      "a": "Organ Chapel",
+      "b": "Orchestral Swell",
+      "distance": 0.6833
+    },
+    {
+      "a": "Organ Chapel",
+      "b": "Dream Chamber",
+      "distance": 0.4213
+    },
+    {
+      "a": "Organ Chapel",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.6191
+    },
+    {
+      "a": "Synth Pluck Halo",
+      "b": "Brass Section Wide",
+      "distance": 0.924
+    },
+    {
+      "a": "Analog Pad Drift",
+      "b": "Infinite Steel",
+      "distance": 0.9154
+    },
+    {
+      "a": "Analog Pad Drift",
+      "b": "Silver Cloud",
+      "distance": 0.8436
+    },
+    {
+      "a": "Analog Pad Drift",
+      "b": "Slow Aurora",
+      "distance": 0.7068
+    },
+    {
+      "a": "Analog Pad Drift",
+      "b": "Analog Nebula",
+      "distance": 0.9174
+    },
+    {
+      "a": "Analog Pad Drift",
+      "b": "SciFi Reactor",
+      "distance": 0.7267
+    },
+    {
+      "a": "FM Bell Shimmer",
+      "b": "String Ensemble Silk",
+      "distance": 0.9427
+    },
+    {
+      "a": "Celesta Stardust",
+      "b": "Flute Breeze",
+      "distance": 0.0
+    },
+    {
+      "a": "Celesta Stardust",
+      "b": "Mono Ghost",
+      "distance": 0.3012
+    },
+    {
+      "a": "Celesta Stardust",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.7779
     },
     {
       "a": "Violin Solo Gold",
       "b": "Tenor Sax Smoke",
-      "distance": 0.9822
+      "distance": 0.7529
+    },
+    {
+      "a": "Violin Solo Gold",
+      "b": "Aux Neutral Plate",
+      "distance": 0.2634
+    },
+    {
+      "a": "Cello Chamber",
+      "b": "Trumpet Gold",
+      "distance": 0.9482
+    },
+    {
+      "a": "Cello Chamber",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.2623
     },
     {
       "a": "Cello Chamber",
       "b": "Clarinet Wood",
-      "distance": 0.6245
+      "distance": 0.291
+    },
+    {
+      "a": "Cello Chamber",
+      "b": "Vintage Cohesion",
+      "distance": 0.9499
+    },
+    {
+      "a": "Cello Chamber",
+      "b": "Wide Instrument Glue",
+      "distance": 0.883
+    },
+    {
+      "a": "Cello Chamber",
+      "b": "Aux Neutral Plate",
+      "distance": 0.7767
+    },
+    {
+      "a": "Harp Silver",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.8482
+    },
+    {
+      "a": "Quartet Vintage",
+      "b": "Tenor Sax Smoke",
+      "distance": 0.2622
+    },
+    {
+      "a": "Quartet Vintage",
+      "b": "Clarinet Wood",
+      "distance": 0.8155
+    },
+    {
+      "a": "Quartet Vintage",
+      "b": "Wide Instrument Glue",
+      "distance": 0.9322
+    },
+    {
+      "a": "Quartet Vintage",
+      "b": "Aux Neutral Plate",
+      "distance": 0.2522
     },
     {
       "a": "Orchestral Swell",
       "b": "Dream Chamber",
-      "distance": 0.625
+      "distance": 0.262
+    },
+    {
+      "a": "Orchestral Swell",
+      "b": "Soft Horizon",
+      "distance": 0.7275
+    },
+    {
+      "a": "Orchestral Swell",
+      "b": "Dream Transition",
+      "distance": 0.7039
+    },
+    {
+      "a": "Trumpet Gold",
+      "b": "Mono Compatibility",
+      "distance": 0.7413
     },
     {
       "a": "Trumpet Gold",
       "b": "Vintage Cohesion",
-      "distance": 0.6189
+      "distance": 0.0058
+    },
+    {
+      "a": "Trumpet Gold",
+      "b": "Wide Instrument Glue",
+      "distance": 0.7465
+    },
+    {
+      "a": "Tenor Sax Smoke",
+      "b": "Wide Instrument Glue",
+      "distance": 0.9305
+    },
+    {
+      "a": "Tenor Sax Smoke",
+      "b": "Aux Neutral Plate",
+      "distance": 0.5144
+    },
+    {
+      "a": "Trombone Body",
+      "b": "Distant Footsteps",
+      "distance": 0.9791
+    },
+    {
+      "a": "Flute Breeze",
+      "b": "Mono Ghost",
+      "distance": 0.3012
+    },
+    {
+      "a": "Flute Breeze",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.7779
     },
     {
       "a": "Clarinet Wood",
       "b": "Vintage Cohesion",
-      "distance": 0.8596
+      "distance": 0.6589
+    },
+    {
+      "a": "Clarinet Wood",
+      "b": "Wide Instrument Glue",
+      "distance": 0.7846
+    },
+    {
+      "a": "Infinite Steel",
+      "b": "SciFi Reactor",
+      "distance": 0.9316
+    },
+    {
+      "a": "Infinite Steel",
+      "b": "Final Frame",
+      "distance": 0.9108
+    },
+    {
+      "a": "Silver Cloud",
+      "b": "SciFi Reactor",
+      "distance": 0.1169
+    },
+    {
+      "a": "Silver Cloud",
+      "b": "Final Frame",
+      "distance": 0.732
+    },
+    {
+      "a": "Slow Aurora",
+      "b": "SciFi Reactor",
+      "distance": 0.1105
+    },
+    {
+      "a": "Slow Aurora",
+      "b": "Final Frame",
+      "distance": 0.516
+    },
+    {
+      "a": "Dream Chamber",
+      "b": "Dream Transition",
+      "distance": 0.7603
+    },
+    {
+      "a": "Narrow Memory",
+      "b": "Noir Corridor",
+      "distance": 0.4558
+    },
+    {
+      "a": "Mono Ghost",
+      "b": "Cinematic Drum Bloom",
+      "distance": 0.4944
+    },
+    {
+      "a": "Soft Horizon",
+      "b": "Dream Transition",
+      "distance": 0.8577
+    },
+    {
+      "a": "Analog Nebula",
+      "b": "SciFi Reactor",
+      "distance": 0.4228
+    },
+    {
+      "a": "Analog Nebula",
+      "b": "Final Frame",
+      "distance": 0.2036
+    },
+    {
+      "a": "Dialogue Depth",
+      "b": "Mix Bus Subtle",
+      "distance": 0.1252
+    },
+    {
+      "a": "Vintage Radio Space",
+      "b": "Master Dark Space",
+      "distance": 0.9781
     }
   ],
-  "minimum_within_distance": 0.731402484953378,
+  "minimum_within_distance": 0.21596046413612183,
   "category_distances": [
     {
       "a": "Atmosferas",
       "b": "Bateria",
-      "distance": 10.5263
+      "distance": 8.0691
     },
     {
       "a": "Atmosferas",
       "b": "Cinema",
-      "distance": 0.4
+      "distance": 0.24
     },
     {
       "a": "Atmosferas",
       "b": "Cordas",
-      "distance": 7.6875
+      "distance": 3.8723
     },
     {
       "a": "Atmosferas",
       "b": "Guitarras",
-      "distance": 7.2305
+      "distance": 4.7483
     },
     {
       "a": "Atmosferas",
       "b": "Mix",
-      "distance": 8.6707
+      "distance": 6.6467
     },
     {
       "a": "Atmosferas",
       "b": "Sopros",
-      "distance": 7.112
+      "distance": 4.6551
     },
     {
       "a": "Atmosferas",
       "b": "Teclas",
-      "distance": 7.1614
+      "distance": 2.9548
     },
     {
       "a": "Atmosferas",
       "b": "Vocais",
-      "distance": 7.4375
+      "distance": 4.5633
     },
     {
       "a": "Bateria",
       "b": "Cinema",
-      "distance": 10.3829
+      "distance": 7.9592
     },
     {
       "a": "Bateria",
       "b": "Cordas",
-      "distance": 5.4748
+      "distance": 4.1968
     },
     {
       "a": "Bateria",
       "b": "Guitarras",
-      "distance": 4.3321
+      "distance": 3.3209
     },
     {
       "a": "Bateria",
       "b": "Mix",
-      "distance": 1.8815
+      "distance": 1.4225
     },
     {
       "a": "Bateria",
       "b": "Sopros",
-      "distance": 4.4537
+      "distance": 3.4141
     },
     {
       "a": "Bateria",
       "b": "Teclas",
-      "distance": 6.6718
+      "distance": 5.1144
     },
     {
       "a": "Bateria",
       "b": "Vocais",
-      "distance": 4.5734
+      "distance": 3.5058
     },
     {
       "a": "Cinema",
       "b": "Cordas",
-      "distance": 7.638
+      "distance": 3.7624
     },
     {
       "a": "Cinema",
       "b": "Guitarras",
-      "distance": 7.181
+      "distance": 4.6383
     },
     {
       "a": "Cinema",
       "b": "Mix",
-      "distance": 8.5273
+      "distance": 6.5367
     },
     {
       "a": "Cinema",
       "b": "Sopros",
-      "distance": 7.0625
+      "distance": 4.5451
     },
     {
       "a": "Cinema",
       "b": "Teclas",
-      "distance": 7.112
+      "distance": 2.8448
     },
     {
       "a": "Cinema",
       "b": "Vocais",
-      "distance": 7.388
+      "distance": 4.4534
     },
     {
       "a": "Cordas",
       "b": "Guitarras",
-      "distance": 3.3559
+      "distance": 2.0135
     },
     {
       "a": "Cordas",
       "b": "Mix",
-      "distance": 3.6192
+      "distance": 2.7743
     },
     {
       "a": "Cordas",
       "b": "Sopros",
-      "distance": 1.2371
+      "distance": 0.7827
     },
     {
       "a": "Cordas",
       "b": "Teclas",
-      "distance": 1.5144
+      "distance": 0.9176
     },
     {
       "a": "Cordas",
       "b": "Vocais",
-      "distance": 0.9014
+      "distance": 0.691
     },
     {
       "a": "Guitarras",
       "b": "Mix",
-      "distance": 2.829
+      "distance": 1.8984
     },
     {
       "a": "Guitarras",
       "b": "Sopros",
-      "distance": 2.2414
+      "distance": 1.3448
     },
     {
       "a": "Guitarras",
       "b": "Teclas",
-      "distance": 2.3397
+      "distance": 1.7935
     },
     {
       "a": "Guitarras",
       "b": "Vocais",
-      "distance": 2.7861
+      "distance": 1.6716
     },
     {
       "a": "Mix",
       "b": "Sopros",
-      "distance": 2.5981
+      "distance": 1.9916
     },
     {
       "a": "Mix",
       "b": "Teclas",
-      "distance": 4.8162
+      "distance": 3.6919
     },
     {
       "a": "Mix",
       "b": "Vocais",
-      "distance": 2.7178
+      "distance": 2.0833
     },
     {
       "a": "Sopros",
       "b": "Teclas",
-      "distance": 2.2181
+      "distance": 1.7003
     },
     {
       "a": "Sopros",
       "b": "Vocais",
-      "distance": 1.2489
+      "distance": 0.3268
     },
     {
       "a": "Teclas",
       "b": "Vocais",
-      "distance": 2.0984
+      "distance": 1.6086
     }
   ],
   "failures": [
-    "23 cross-category pairs lack minimum contrast",
-    "2 within-category pairs lack minimum contrast",
-    "2 category centroids lack minimum contrast",
+    "225 cross-category pairs lack minimum contrast",
+    "33 within-category pairs lack minimum contrast",
+    "5 category centroids lack minimum contrast",
+    "Sparse first 10 ms: Vocal Long",
     "Late/invalid intrinsic onset: Vocal Long",
+    "Sparse first 10 ms: Vocal Tight",
     "Late/invalid intrinsic onset: Vocal Tight",
+    "Sparse first 10 ms: Vocal Legacy",
     "Late/invalid intrinsic onset: Vocal Legacy",
+    "Sparse first 10 ms: Drum Room",
     "Late/invalid intrinsic onset: Drum Room",
+    "Sparse first 10 ms: Percussion Short",
     "Late/invalid intrinsic onset: Percussion Short",
+    "Sparse first 10 ms: Strings Bright",
     "Late/invalid intrinsic onset: Strings Bright",
+    "Sparse first 10 ms: Dark Jazz",
     "Late/invalid intrinsic onset: Dark Jazz",
+    "Sparse first 10 ms: Ambient Wide",
     "Late/invalid intrinsic onset: Ambient Wide",
+    "Sparse first 10 ms: Cinematic 5s",
     "Late/invalid intrinsic onset: Cinematic 5s",
+    "Sparse first 10 ms: Modulated Chorus",
     "Late/invalid intrinsic onset: Modulated Chorus",
+    "Sparse first 10 ms: Insert Mono",
     "Late/invalid intrinsic onset: Insert Mono",
+    "Sparse first 10 ms: Mastering Glue",
     "Late/invalid intrinsic onset: Mastering Glue",
+    "Sparse first 10 ms: Lead Intimate",
     "Late/invalid intrinsic onset: Lead Intimate",
+    "Sparse first 10 ms: Lead Pop Air",
     "Late/invalid intrinsic onset: Lead Pop Air",
+    "Sparse first 10 ms: Ballad Velvet",
     "Late/invalid intrinsic onset: Ballad Velvet",
+    "Sparse first 10 ms: Rap Short Plate",
     "Late/invalid intrinsic onset: Rap Short Plate",
+    "Sparse first 10 ms: Soul Golden",
     "Late/invalid intrinsic onset: Soul Golden",
+    "Sparse first 10 ms: Jazz Smoky",
     "Late/invalid intrinsic onset: Jazz Smoky",
+    "Sparse first 10 ms: Backing Silk",
     "Late/invalid intrinsic onset: Backing Silk",
+    "Sparse first 10 ms: Choir Cathedral Plate",
     "Late/invalid intrinsic onset: Choir Cathedral Plate",
+    "Sparse first 10 ms: Spoken Close",
     "Late/invalid intrinsic onset: Spoken Close",
+    "Sparse first 10 ms: Sibilance Tamer",
     "Late/invalid intrinsic onset: Sibilance Tamer",
+    "Sparse first 10 ms: Vocal Dream",
     "Late/invalid intrinsic onset: Vocal Dream",
+    "Sparse first 10 ms: Vintage Slap Bloom",
     "Late/invalid intrinsic onset: Vintage Slap Bloom",
+    "Sparse first 10 ms: Snare Chrome",
     "Late/invalid intrinsic onset: Snare Chrome",
+    "Sparse first 10 ms: Snare Eighties",
     "Late/invalid intrinsic onset: Snare Eighties",
+    "Sparse first 10 ms: Snare Tight Dark",
     "Late/invalid intrinsic onset: Snare Tight Dark",
+    "Sparse first 10 ms: Rimshot Space",
     "Late/invalid intrinsic onset: Rimshot Space",
+    "Sparse first 10 ms: Toms Thunder",
     "Late/invalid intrinsic onset: Toms Thunder",
+    "Sparse first 10 ms: Brushes Velvet",
     "Late/invalid intrinsic onset: Brushes Velvet",
+    "Sparse first 10 ms: Kick Upper Plate",
     "Late/invalid intrinsic onset: Kick Upper Plate",
+    "Sparse first 10 ms: Clap Spread",
     "Late/invalid intrinsic onset: Clap Spread",
+    "Sparse first 10 ms: Shaker Dust",
     "Late/invalid intrinsic onset: Shaker Dust",
+    "Sparse first 10 ms: Congas Copper",
     "Late/invalid intrinsic onset: Congas Copper",
+    "Sparse first 10 ms: Drum Parallel",
     "Late/invalid intrinsic onset: Drum Parallel",
+    "Sparse first 10 ms: Cymbal Mist",
     "Late/invalid intrinsic onset: Cymbal Mist",
+    "Sparse first 10 ms: Acoustic Wood",
     "Late/invalid intrinsic onset: Acoustic Wood",
+    "Sparse first 10 ms: Acoustic Sparkle",
     "Late/invalid intrinsic onset: Acoustic Sparkle",
+    "Sparse first 10 ms: Nylon Intimate",
     "Late/invalid intrinsic onset: Nylon Intimate",
+    "Sparse first 10 ms: Electric Surf Plate",
     "Late/invalid intrinsic onset: Electric Surf Plate",
+    "Sparse first 10 ms: Blues Smoky",
     "Late/invalid intrinsic onset: Blues Smoky",
+    "Sparse first 10 ms: Clean Arpeggio",
     "Late/invalid intrinsic onset: Clean Arpeggio",
+    "Sparse first 10 ms: Lead Sustain",
     "Late/invalid intrinsic onset: Lead Sustain",
+    "Sparse first 10 ms: Heavy Guitar Depth",
     "Late/invalid intrinsic onset: Heavy Guitar Depth",
+    "Sparse first 10 ms: Slide Moonlight",
     "Late/invalid intrinsic onset: Slide Moonlight",
+    "Sparse first 10 ms: Funk Springy Plate",
     "Late/invalid intrinsic onset: Funk Springy Plate",
+    "Sparse first 10 ms: Piano Felt",
     "Late/invalid intrinsic onset: Piano Felt",
+    "Sparse first 10 ms: Piano Concert Plate",
     "Late/invalid intrinsic onset: Piano Concert Plate",
+    "Sparse first 10 ms: Rhodes Honey",
     "Late/invalid intrinsic onset: Rhodes Honey",
+    "Sparse first 10 ms: Wurli Amber",
     "Late/invalid intrinsic onset: Wurli Amber",
+    "Sparse first 10 ms: Organ Chapel",
     "Late/invalid intrinsic onset: Organ Chapel",
+    "Sparse first 10 ms: Clav Snap",
     "Late/invalid intrinsic onset: Clav Snap",
+    "Sparse first 10 ms: Synth Pluck Halo",
     "Late/invalid intrinsic onset: Synth Pluck Halo",
+    "Sparse first 10 ms: Analog Pad Drift",
     "Late/invalid intrinsic onset: Analog Pad Drift",
+    "Sparse first 10 ms: FM Bell Shimmer",
     "Late/invalid intrinsic onset: FM Bell Shimmer",
+    "Sparse first 10 ms: Celesta Stardust",
     "Late/invalid intrinsic onset: Celesta Stardust",
+    "Sparse first 10 ms: Violin Solo Gold",
     "Late/invalid intrinsic onset: Violin Solo Gold",
+    "Sparse first 10 ms: Cello Chamber",
     "Late/invalid intrinsic onset: Cello Chamber",
+    "Sparse first 10 ms: String Ensemble Silk",
     "Late/invalid intrinsic onset: String Ensemble Silk",
+    "Sparse first 10 ms: Pizzicato Pearl",
     "Late/invalid intrinsic onset: Pizzicato Pearl",
+    "Sparse first 10 ms: Double Bass Shadow",
     "Late/invalid intrinsic onset: Double Bass Shadow",
+    "Sparse first 10 ms: Harp Silver",
     "Late/invalid intrinsic onset: Harp Silver",
+    "Sparse first 10 ms: Quartet Vintage",
     "Late/invalid intrinsic onset: Quartet Vintage",
+    "Sparse first 10 ms: Orchestral Swell",
     "Late/invalid intrinsic onset: Orchestral Swell",
+    "Sparse first 10 ms: Trumpet Gold",
     "Late/invalid intrinsic onset: Trumpet Gold",
+    "Sparse first 10 ms: Muted Trumpet Noir",
     "Late/invalid intrinsic onset: Muted Trumpet Noir",
+    "Sparse first 10 ms: Tenor Sax Smoke",
     "Late/invalid intrinsic onset: Tenor Sax Smoke",
+    "Sparse first 10 ms: Alto Sax Shine",
     "Late/invalid intrinsic onset: Alto Sax Shine",
+    "Sparse first 10 ms: Trombone Body",
     "Late/invalid intrinsic onset: Trombone Body",
+    "Sparse first 10 ms: Brass Section Wide",
     "Late/invalid intrinsic onset: Brass Section Wide",
+    "Sparse first 10 ms: Flute Breeze",
     "Late/invalid intrinsic onset: Flute Breeze",
+    "Sparse first 10 ms: Clarinet Wood",
     "Late/invalid intrinsic onset: Clarinet Wood",
+    "Sparse first 10 ms: Infinite Steel",
     "Late/invalid intrinsic onset: Infinite Steel",
+    "Sparse first 10 ms: Frozen Amber",
     "Late/invalid intrinsic onset: Frozen Amber",
+    "Sparse first 10 ms: Silver Cloud",
     "Late/invalid intrinsic onset: Silver Cloud",
+    "Sparse first 10 ms: Slow Aurora",
     "Late/invalid intrinsic onset: Slow Aurora",
+    "Sparse first 10 ms: Dream Chamber",
     "Late/invalid intrinsic onset: Dream Chamber",
+    "Sparse first 10 ms: Metallic Stars",
     "Late/invalid intrinsic onset: Metallic Stars",
+    "Sparse first 10 ms: Narrow Memory",
     "Late/invalid intrinsic onset: Narrow Memory",
+    "Sparse first 10 ms: Mono Ghost",
     "Late/invalid intrinsic onset: Mono Ghost",
+    "Sparse first 10 ms: Soft Horizon",
     "Late/invalid intrinsic onset: Soft Horizon",
+    "Sparse first 10 ms: Analog Nebula",
     "Late/invalid intrinsic onset: Analog Nebula",
+    "Sparse first 10 ms: Trailer Steel Tail",
     "Late/invalid intrinsic onset: Trailer Steel Tail",
+    "Sparse first 10 ms: Noir Corridor",
     "Late/invalid intrinsic onset: Noir Corridor",
+    "Sparse first 10 ms: SciFi Reactor",
     "Late/invalid intrinsic onset: SciFi Reactor",
+    "Sparse first 10 ms: Distant Footsteps",
     "Late/invalid intrinsic onset: Distant Footsteps",
+    "Sparse first 10 ms: Dialogue Depth",
     "Late/invalid intrinsic onset: Dialogue Depth",
+    "Sparse first 10 ms: Cinematic Drum Bloom",
     "Late/invalid intrinsic onset: Cinematic Drum Bloom",
+    "Sparse first 10 ms: Dream Transition",
     "Late/invalid intrinsic onset: Dream Transition",
+    "Sparse first 10 ms: Vintage Radio Space",
     "Late/invalid intrinsic onset: Vintage Radio Space",
+    "Sparse first 10 ms: Impact Afterglow",
     "Late/invalid intrinsic onset: Impact Afterglow",
+    "Sparse first 10 ms: Final Frame",
     "Late/invalid intrinsic onset: Final Frame",
+    "Sparse first 10 ms: Mix Bus Subtle",
     "Late/invalid intrinsic onset: Mix Bus Subtle",
+    "Sparse first 10 ms: Drum Bus Glue",
     "Late/invalid intrinsic onset: Drum Bus Glue",
+    "Sparse first 10 ms: Mono Compatibility",
     "Late/invalid intrinsic onset: Mono Compatibility",
+    "Sparse first 10 ms: Parallel Brightness",
     "Late/invalid intrinsic onset: Parallel Brightness",
+    "Sparse first 10 ms: Vintage Cohesion",
     "Late/invalid intrinsic onset: Vintage Cohesion",
+    "Sparse first 10 ms: Master Dark Space",
     "Late/invalid intrinsic onset: Master Dark Space",
+    "Sparse first 10 ms: Wide Instrument Glue",
     "Late/invalid intrinsic onset: Wide Instrument Glue",
+    "Sparse first 10 ms: Aux Neutral Plate",
     "Late/invalid intrinsic onset: Aux Neutral Plate"
   ]
 }

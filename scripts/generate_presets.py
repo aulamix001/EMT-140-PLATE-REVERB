@@ -52,6 +52,14 @@ for preset,(lf,lg,hf,hg) in zip(bank,reference_eq):
  preset['parameters'].update(eq_low_freq=lf,eq_low_gain=lg,eq_high_freq=hf,eq_high_gain=hg)
  preset['description']='Voicing recalibrado v2; '+preset['description'].replace('valores originais preservados.','nome e roteamento preservados; EQ recalibrado.')
 bank[7]['parameters'].update(mod_rate=.25,mod_depth=8)
+# Named final voicings are reviewed sound-design data, not randomized at runtime.
+# Distinction is checked from newly rendered audio (RT500 >=20%, brightness/bass >=2.5 dB).
+voicings=json.loads((ROOT/'scripts/preset_voicings.json').read_text())
+assert set(voicings)=={preset['name'] for preset in bank}
+for preset in bank:
+ voice=voicings[preset['name']];assert set(voice)=={'eq_low_freq','eq_low_gain','eq_high_freq','eq_high_gain'}
+ preset['parameters'].update(voice)
+ preset['description']+=f" Perfil individual: graves {voice['eq_low_gain']:+g} dB / {voice['eq_low_freq']:g} Hz; agudos {voice['eq_high_gain']:+g} dB / {voice['eq_high_freq']:g} Hz."
 assert len(bank)==100,len(bank)
 assert len({tuple(x['parameters'].values()) for x in bank})==100
 out=ROOT/'Presets/PLATE140-100';out.mkdir(parents=True,exist_ok=True)

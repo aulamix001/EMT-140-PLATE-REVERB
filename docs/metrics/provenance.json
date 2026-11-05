@@ -3,20 +3,36 @@
   "parameter_layout_unchanged": true,
   "baseline_engine_blob": "7349f9f261645be29820c6472db8794b19c06a79",
   "candidate_engine_blob": "963699f54c2c8cf70810494e94977ebfc72b00b9",
-  "candidate_bank_sha256": "e6725f6683bdf245516fbfa86425526ad53671de7ea21a038db811b0facccd0e",
+  "candidate_bank_sha256": "ee2a0b800cbb761e22a91cb355ff5a18492ef10f623e658e25e2ae05307c8656",
   "sample_rate": 48000,
   "settle_seconds": 2,
   "ir_seconds": 10,
   "wet_only": true,
-  "before_within_failures": 2,
-  "before_cross_failures": 23,
+  "before_within_failures": 33,
+  "before_cross_failures": 225,
   "after_within_failures": 0,
   "after_cross_failures": 0,
-  "minimum_within_distance": 1.2456249999999989,
+  "minimum_within_distance": 1.1593199999999997,
   "integrated_remote_commit": "6cf21fa",
   "return_trim": 3.0,
   "stereo_side_injection_preserved": true,
-  "production_commit": "f0c50926c39240af7b5422bbb39d866bbe2949d8",
-  "release_vst3_sha256": "a690f39702207889fb8aa39aa875af0dc174ab0873d6c76f91a3bf230700306b",
-  "editor_lifetime_blob": "521b86047495624add74a2f124f2810b714ff31d"
+  "release_vst3_sha256": "62d9cccec7df5843bfed7f14f426ccef2123b7dd9d4e71d83eba32db56834cd5",
+  "editor_lifetime_blob": "521b86047495624add74a2f124f2810b714ff31d",
+  "contrast_criteria": {
+    "rt60_ratio": 1.2,
+    "brightness_db": 2.5,
+    "bass_db": 2.5,
+    "minimum_axes": 1,
+    "spatial_only_not_sufficient": true
+  },
+  "source_blobs": {
+    "Source/PluginProcessor.cpp": "dbfa9952889eecc187fb58926fc0f1c03399e443",
+    "Source/PluginEditor.cpp": "ff0a055e37a37da779a4181c17e567268a8b4378",
+    "Source/PluginEditor.h": "ea13d40989863f80882fc1c10cdc9edff5f9ac9b",
+    "Source/GUI/ControlMapping.h": "75f52a9345c0e652a67d14ea1f97fd52624b897d",
+    "Source/GUI/RackLookAndFeel.h": "d6f80bdcd97d0c8e8d0b83a4a697f5347076b55c",
+    "Source/Presets/FactoryPresets.h": "42207d1cf6b1ea132c2ed5920ecbbfaced247ff3",
+    "Source/GUI/Assets/PanelBackground.png": "c89756de0e3d581e3adb6489a75afc36e010fc38",
+    "Source/GUI/Assets/MeterFace.png": "6252340e3cdd228590cb7de9d9b2a9f65cdf8c50"
+  }
 }

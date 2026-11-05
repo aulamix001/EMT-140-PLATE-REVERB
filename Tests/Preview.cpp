@@ -2,6 +2,7 @@
 #include "PluginEditor.h"
 #include "HostLifecycle.h"
 #include "EditorTeardown.h"
+#include "ControlAudit.h"
 #include <iostream>
 #include <stdexcept>
 #include <set>
@@ -10,7 +11,7 @@ class PreviewApp:public juce::JUCEApplication {
  std::unique_ptr<PlateProcessor> processor;std::unique_ptr<PlateEditor> editor;
 public:
  const juce::String getApplicationName()override{return "PlatePreview";}const juce::String getApplicationVersion()override{return "0.1.0";}
- void initialise(const juce::String&args)override{if(args=="--editor-teardown"){teardownTest=std::make_unique<EditorTeardownRegression>([this](bool ok){setApplicationReturnValue(ok?0:1);quit();});return;}if(args=="--host-lifecycle"){runHostLifecycleRegression();quit();return;}processor=std::make_unique<PlateProcessor>();processor->prepareToPlay(48000,512);
+ void initialise(const juce::String&args)override{if(args=="--control-audit"){try{runControlAudit();}catch(const std::exception&e){std::cerr<<e.what()<<std::endl;setApplicationReturnValue(1);}quit();return;}if(args=="--editor-teardown"){teardownTest=std::make_unique<EditorTeardownRegression>([this](bool ok){setApplicationReturnValue(ok?0:1);quit();});return;}if(args=="--host-lifecycle"){runHostLifecycleRegression();quit();return;}processor=std::make_unique<PlateProcessor>();processor->prepareToPlay(48000,512);
  auto check=[](bool ok,const char*msg){if(!ok)throw std::runtime_error(msg);};
  processor->set("reverb_time_a",1.3f);processor->set("reverb_time_b",4.1f);processor->set("plate_select",1);check(std::abs(processor->get("reverb_time_a")-1.3f)<.001,"independent RT");
  processor->set("mix",27);processor->set("wet_solo",1);juce::MemoryBlock memory;processor->getStateInformation(memory);processor->reset();processor->setStateInformation(memory.getData(),int(memory.getSize()));check(std::abs(processor->get("mix")-27)<.001,"state recall mix");check(std::abs(processor->get("reverb_time_b")-4.1f)<.001,"state recall RT");check(processor->get("wet_solo")>.5,"state recall solo");
@@ -31,11 +32,7 @@ public:
  processor->softwareGraphics=false;processor->getStateInformation(canonical);processor->softwareGraphics=true;processor->setStateInformation(canonical.getData(),int(canonical.getSize()));check(!processor->softwareGraphics.load(),"graphics preference recalled");processor->loadPreset(1);check(!processor->softwareGraphics.load(),"factory preset preserves graphics preference");auto legacy=processor->state.copyState();legacy.removeProperty("graphicsMode",nullptr);processor->restoreState(legacy);check(processor->softwareGraphics.load()==bool(PLATE_COMPATIBLE_GRAPHICS),"legacy graphics default");
  processor->reset();std::cout<<"PASS: 100 embedded presets, 100 XML mappings, session recall, bounds, audio and user library persistence\n";
 
- {vintage::RackLook skin;juce::Image knob(juce::Image::ARGB,64,64,true);juce::Slider slider;
- // Finish the drawing context before reading pixels (Direct2D defers rendering).
- {juce::Graphics g(knob);skin.drawRotarySlider(g,0,0,64,64,.5f,juce::MathConstants<float>::pi*1.25f,juce::MathConstants<float>::pi*2.75f,slider);}
- check(knob.getPixelAt(32,32).getAlpha()>=250,"photographic knob is opaque after shadow drawing");}
- check(vintage::rackBackground().isValid()&&vintage::rackBackground().getWidth()==2011,"embedded rack artwork loaded");
+ check(vintage::rackBackground().isValid()&&vintage::rackBackground().getWidth()==2086,"embedded reference artwork loaded");
  processor->reset();auto* pre=processor->state.getParameter("predelay");auto* mix=processor->state.getParameter("mix");check(std::abs(pre->convertFrom0to1(.5f)-50)<.15,"predelay center");check(std::abs(mix->convertFrom0to1(.5f)-15)<.15,"mix center");
  juce::AudioBuffer<float> audio(2,512);juce::MidiBuffer midi;for(int b=0;b<100;++b){for(int i=0;i<512;++i){float x=.25f*std::sin(float((b*512+i)*2*plate::pi*220/48000));audio.setSample(0,i,x);audio.setSample(1,i,x);}processor->processBlock(audio,midi);}
  std::cout<<"PASS: native parameter/state/preset/taper/audio integration\n";

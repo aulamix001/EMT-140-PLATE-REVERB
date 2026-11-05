@@ -10,10 +10,10 @@
   <PARAM id="width" value="100" />
   <PARAM id="balance" value="0" />
   <PARAM id="eq_enable" value="1" />
-  <PARAM id="eq_low_freq" value="160" />
-  <PARAM id="eq_low_gain" value="-6" />
-  <PARAM id="eq_high_freq" value="9500" />
-  <PARAM id="eq_high_gain" value="8" />
+  <PARAM id="eq_low_freq" value="224" />
+  <PARAM id="eq_low_gain" value="-8.5" />
+  <PARAM id="eq_high_freq" value="6175" />
+  <PARAM id="eq_high_gain" value="11.5" />
   <PARAM id="mod_rate" value="0" />
   <PARAM id="mod_depth" value="0" />
   <PARAM id="predelay" value="12" />

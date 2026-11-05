@@ -34,8 +34,7 @@ private:
    #if JUCE_WINDOWS
    if(!editor->getPeer()||editor->getPeer()->getCurrentRenderingEngine()!=0){finish(false,"editor is not using software rendering");return;}
    #endif
-   if(vintage::rackBackground().getPixelData()->createType()->getTypeID()!=juce::SoftwareImageType{}.getTypeID()
-      ||vintage::rackKnob().getPixelData()->createType()->getTypeID()!=juce::SoftwareImageType{}.getTypeID()){
+   if(vintage::rackBackground().getPixelData()->createType()->getTypeID()!=juce::SoftwareImageType{}.getTypeID()){
     finish(false,"cached artwork retains native GPU image resources");return;}
    phase=1;return;
   }

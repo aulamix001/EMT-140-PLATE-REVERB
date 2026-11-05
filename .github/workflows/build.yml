@@ -184,9 +184,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v0.2.0-dev.1' }}
+          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v0.2.0-dev.2' }}
           RELEASE_COMMIT: ${{ github.sha }}
-        run: gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --target "$RELEASE_COMMIT" --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64 build, including 100 mapped presets. Build, DSP/preset integration and pluginval level 10 must pass before this package is published. Studio One validation remains pending."
+        run: |
+          gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --target "$RELEASE_COMMIT" --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64: reference-panel UI, corrected physical knob scales, all 20 controls audited through audio, 100 individually voiced presets (minimum tonal/decay contrast across all 4,950 pairs). Debug/Release tests, native lifecycle, official validator and pluginval level 10 passed. Studio One 8, Reaper and listening validation remain pending."
 
   open-pr:
     needs: build
@@ -206,6 +207,14 @@ jobs:
           if [ -n "$existing" ]; then
             echo "::notice title=Pull request::$existing"
           else
-            pr_url=$(gh pr create --base main --head fix-presets-audibility --title "Corrige presets, programas VST3 e encerramento do editor" --body-file docs/PR_DESCRIPTION.md)
-            echo "::notice title=Pull request::$pr_url"
+            set +e
+            gh pr create --base main --head fix-presets-audibility --title "Corrige painel EMT, mapeamento dos controles e contraste dos 100 presets" --body-file docs/PR_DESCRIPTION.md > pr-result.txt 2>&1
+            result=$?
+            set -e
+            if [ "$result" -ne 0 ]; then
+              message=$(cat pr-result.txt | sed 's/%/%25/g' | tr '\n' ' ')
+              echo "::error title=Pull request creation::$message"
+              exit "$result"
+            fi
+            echo "::notice title=Pull request::$(cat pr-result.txt)"
           fi

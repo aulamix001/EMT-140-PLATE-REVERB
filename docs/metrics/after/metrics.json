@@ -1,6 +1,13 @@
 {
   "sample_rate": 48000,
   "wet_only": true,
+  "contrast_criteria": {
+    "rt60_ratio": 1.2,
+    "brightness_db": 2.5,
+    "bass_db": 2.5,
+    "minimum_axes": 1,
+    "spatial_only_not_sufficient": true
+  },
   "metrics": [
     {
       "number": 1,
@@ -35,14 +42,14 @@
       "name": "Vocal Legacy",
       "category": "Vocais",
       "rt60_s": 2.01525,
-      "rt60_broadband_s": 1.83247,
+      "rt60_broadband_s": 1.85844,
       "onset_ms": 0.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -0.5369,
-      "bass_db": -13.8871,
-      "width": 0.8851,
+      "brightness_db": -1.7737,
+      "bass_db": -13.8243,
+      "width": 0.88045,
       "decay_fit_r2": 0.99983,
-      "density_first_10ms": 0.95833
+      "density_first_10ms": 0.97917
     },
     {
       "number": 4,
@@ -146,15 +153,15 @@
       "number": 11,
       "name": "Insert Mono",
       "category": "Mix",
-      "rt60_s": 1.22819,
-      "rt60_broadband_s": 1.07128,
+      "rt60_s": 1.22812,
+      "rt60_broadband_s": 1.09972,
       "onset_ms": 0.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": -4.099,
-      "bass_db": -15.0339,
+      "brightness_db": -7.3489,
+      "bass_db": -15.2532,
       "width": 0.0,
       "decay_fit_r2": 0.99873,
-      "density_first_10ms": 0.89167
+      "density_first_10ms": 0.89792
     },
     {
       "number": 12,
@@ -174,113 +181,113 @@
       "number": 13,
       "name": "Lead Intimate",
       "category": "Vocais",
-      "rt60_s": 1.10528,
-      "rt60_broadband_s": 0.99578,
+      "rt60_s": 1.10532,
+      "rt60_broadband_s": 1.01927,
       "onset_ms": 18.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.7617,
-      "bass_db": -14.0647,
-      "width": 0.83124,
+      "brightness_db": -0.3157,
+      "bass_db": -12.8572,
+      "width": 0.82519,
       "decay_fit_r2": 0.99939,
-      "density_first_10ms": 0.95625
+      "density_first_10ms": 0.96875
     },
     {
       "number": 14,
       "name": "Lead Pop Air",
       "category": "Vocais",
-      "rt60_s": 1.92366,
-      "rt60_broadband_s": 1.84508,
+      "rt60_s": 1.92368,
+      "rt60_broadband_s": 1.84292,
       "onset_ms": 38.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 11.8067,
-      "bass_db": -20.9769,
-      "width": 0.98687,
+      "brightness_db": 10.5826,
+      "bass_db": -21.711,
+      "width": 0.98549,
       "decay_fit_r2": 0.9998,
-      "density_first_10ms": 0.84583
+      "density_first_10ms": 0.89375
     },
     {
       "number": 15,
       "name": "Ballad Velvet",
       "category": "Vocais",
-      "rt60_s": 3.2199,
-      "rt60_broadband_s": 2.87423,
+      "rt60_s": 3.21965,
+      "rt60_broadband_s": 2.80877,
       "onset_ms": 65.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.4707,
-      "bass_db": -13.3138,
-      "width": 0.99353,
+      "brightness_db": 1.4868,
+      "bass_db": -16.0654,
+      "width": 0.99663,
       "decay_fit_r2": 0.99992,
-      "density_first_10ms": 0.95417
+      "density_first_10ms": 0.95208
     },
     {
       "number": 16,
       "name": "Rap Short Plate",
       "category": "Vocais",
-      "rt60_s": 0.71433,
-      "rt60_broadband_s": 0.59863,
+      "rt60_s": 0.71434,
+      "rt60_broadband_s": 0.5361,
       "onset_ms": 35.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": 0.6681,
-      "bass_db": -13.7889,
-      "width": 0.74046,
+      "brightness_db": 4.2323,
+      "bass_db": -13.668,
+      "width": 0.75249,
       "decay_fit_r2": 0.99921,
-      "density_first_10ms": 0.90625
+      "density_first_10ms": 0.86667
     },
     {
       "number": 17,
       "name": "Soul Golden",
       "category": "Vocais",
-      "rt60_s": 2.31806,
-      "rt60_broadband_s": 2.06763,
+      "rt60_s": 2.31801,
+      "rt60_broadband_s": 2.02261,
       "onset_ms": 28.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.5567,
-      "bass_db": -13.5282,
-      "width": 0.94072,
+      "brightness_db": 1.4458,
+      "bass_db": -14.6389,
+      "width": 0.94414,
       "decay_fit_r2": 0.99987,
-      "density_first_10ms": 0.95625
+      "density_first_10ms": 0.95
     },
     {
       "number": 18,
       "name": "Jazz Smoky",
       "category": "Vocais",
-      "rt60_s": 1.70961,
-      "rt60_broadband_s": 1.60949,
+      "rt60_s": 1.70941,
+      "rt60_broadband_s": 1.5876,
       "onset_ms": 22.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -3.84,
-      "bass_db": -16.2736,
-      "width": 0.772,
+      "brightness_db": -3.113,
+      "bass_db": -19.283,
+      "width": 0.7756,
       "decay_fit_r2": 0.99976,
-      "density_first_10ms": 0.99375
+      "density_first_10ms": 0.98542
     },
     {
       "number": 19,
       "name": "Backing Silk",
       "category": "Vocais",
-      "rt60_s": 2.61928,
-      "rt60_broadband_s": 2.51477,
+      "rt60_s": 2.61994,
+      "rt60_broadband_s": 2.51603,
       "onset_ms": 12.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 11.7801,
-      "bass_db": -20.6515,
-      "width": 0.98874,
-      "decay_fit_r2": 0.99984,
-      "density_first_10ms": 0.84583
+      "brightness_db": 17.0755,
+      "bass_db": -24.0892,
+      "width": 0.98913,
+      "decay_fit_r2": 0.99985,
+      "density_first_10ms": 0.90417
     },
     {
       "number": 20,
       "name": "Choir Cathedral Plate",
       "category": "Vocais",
-      "rt60_s": 4.2357,
-      "rt60_broadband_s": 3.78022,
+      "rt60_s": 4.23553,
+      "rt60_broadband_s": 3.79145,
       "onset_ms": 55.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.5406,
-      "bass_db": -14.3244,
-      "width": 0.99445,
+      "brightness_db": 0.0479,
+      "bass_db": -15.0462,
+      "width": 0.99419,
       "decay_fit_r2": 0.99995,
-      "density_first_10ms": 0.95833
+      "density_first_10ms": 0.9625
     },
     {
       "number": 21,
@@ -329,12 +336,12 @@
       "name": "Vintage Slap Bloom",
       "category": "Vocais",
       "rt60_s": 1.32999,
-      "rt60_broadband_s": 1.20673,
+      "rt60_broadband_s": 1.21031,
       "onset_ms": 115.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": -3.4487,
-      "bass_db": -11.0879,
-      "width": 0.80445,
+      "brightness_db": -3.7932,
+      "bass_db": -11.082,
+      "width": 0.80169,
       "decay_fit_r2": 0.99973,
       "density_first_10ms": 0.96875
     },
@@ -356,15 +363,15 @@
       "number": 26,
       "name": "Snare Eighties",
       "category": "Bateria",
-      "rt60_s": 2.52536,
-      "rt60_broadband_s": 2.41627,
+      "rt60_s": 2.52534,
+      "rt60_broadband_s": 2.41521,
       "onset_ms": 55.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 12.2534,
-      "bass_db": -21.1754,
-      "width": 0.98845,
+      "brightness_db": 14.748,
+      "bass_db": -20.6934,
+      "width": 0.98903,
       "decay_fit_r2": 0.99986,
-      "density_first_10ms": 0.86458
+      "density_first_10ms": 0.84583
     },
     {
       "number": 27,
@@ -384,13 +391,13 @@
       "number": 28,
       "name": "Rimshot Space",
       "category": "Bateria",
-      "rt60_s": 0.81493,
-      "rt60_broadband_s": 0.67412,
+      "rt60_s": 0.81499,
+      "rt60_broadband_s": 0.67719,
       "onset_ms": 8.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": 1.0956,
-      "bass_db": -13.9014,
-      "width": 0.74244,
+      "brightness_db": 1.0917,
+      "bass_db": -13.0972,
+      "width": 0.74224,
       "decay_fit_r2": 0.99937,
       "density_first_10ms": 0.90208
     },
@@ -398,15 +405,15 @@
       "number": 29,
       "name": "Toms Thunder",
       "category": "Bateria",
-      "rt60_s": 1.81398,
-      "rt60_broadband_s": 1.59311,
+      "rt60_s": 1.81456,
+      "rt60_broadband_s": 1.55006,
       "onset_ms": 14.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.3485,
-      "bass_db": -14.239,
-      "width": 0.94041,
+      "brightness_db": 3.9019,
+      "bass_db": -8.8953,
+      "width": 0.94681,
       "decay_fit_r2": 0.99979,
-      "density_first_10ms": 0.94792
+      "density_first_10ms": 0.9
     },
     {
       "number": 30,
@@ -468,29 +475,29 @@
       "number": 34,
       "name": "Congas Copper",
       "category": "Bateria",
-      "rt60_s": 1.40667,
-      "rt60_broadband_s": 1.24628,
+      "rt60_s": 1.40712,
+      "rt60_broadband_s": 1.22465,
       "onset_ms": 9.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.3923,
-      "bass_db": -14.4838,
-      "width": 0.83817,
+      "brightness_db": 3.1548,
+      "bass_db": -10.2941,
+      "width": 0.8429,
       "decay_fit_r2": 0.99965,
-      "density_first_10ms": 0.94375
+      "density_first_10ms": 0.92292
     },
     {
       "number": 35,
       "name": "Drum Parallel",
       "category": "Bateria",
-      "rt60_s": 0.62044,
-      "rt60_broadband_s": 0.50132,
+      "rt60_s": 0.61975,
+      "rt60_broadband_s": 0.48657,
       "onset_ms": 6.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": 1.203,
-      "bass_db": -14.3003,
-      "width": 0.69462,
-      "decay_fit_r2": 0.99905,
-      "density_first_10ms": 0.90208
+      "brightness_db": 1.4902,
+      "bass_db": -17.1351,
+      "width": 0.69611,
+      "decay_fit_r2": 0.99903,
+      "density_first_10ms": 0.89375
     },
     {
       "number": 36,
@@ -510,42 +517,42 @@
       "number": 37,
       "name": "Acoustic Wood",
       "category": "Guitarras",
-      "rt60_s": 1.40589,
-      "rt60_broadband_s": 1.28753,
+      "rt60_s": 1.40649,
+      "rt60_broadband_s": 1.37661,
       "onset_ms": 18.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -0.0531,
-      "bass_db": -12.7883,
-      "width": 0.78265,
+      "brightness_db": -3.1491,
+      "bass_db": -7.8028,
+      "width": 0.7645,
       "decay_fit_r2": 0.99964,
-      "density_first_10ms": 0.9625
+      "density_first_10ms": 0.98958
     },
     {
       "number": 38,
       "name": "Acoustic Sparkle",
       "category": "Guitarras",
-      "rt60_s": 1.92363,
-      "rt60_broadband_s": 1.84708,
+      "rt60_s": 1.92362,
+      "rt60_broadband_s": 1.84955,
       "onset_ms": 25.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 11.3441,
-      "bass_db": -19.9804,
-      "width": 0.98695,
+      "brightness_db": 14.6929,
+      "bass_db": -19.4923,
+      "width": 0.98708,
       "decay_fit_r2": 0.9998,
-      "density_first_10ms": 0.8625
+      "density_first_10ms": 0.9
     },
     {
       "number": 39,
       "name": "Nylon Intimate",
       "category": "Guitarras",
-      "rt60_s": 1.20287,
-      "rt60_broadband_s": 1.10406,
+      "rt60_s": 1.20397,
+      "rt60_broadband_s": 1.14169,
       "onset_ms": 15.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.2052,
-      "bass_db": -13.8178,
-      "width": 0.683,
-      "decay_fit_r2": 0.99945,
+      "brightness_db": 0.0562,
+      "bass_db": -9.5556,
+      "width": 0.67875,
+      "decay_fit_r2": 0.99944,
       "density_first_10ms": 0.95625
     },
     {
@@ -566,15 +573,15 @@
       "number": 41,
       "name": "Blues Smoky",
       "category": "Guitarras",
-      "rt60_s": 1.8116,
-      "rt60_broadband_s": 1.72225,
+      "rt60_s": 1.812,
+      "rt60_broadband_s": 1.74796,
       "onset_ms": 32.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -4.6078,
-      "bass_db": -14.7008,
-      "width": 0.8181,
+      "brightness_db": -6.6804,
+      "bass_db": -16.1138,
+      "width": 0.81329,
       "decay_fit_r2": 0.99979,
-      "density_first_10ms": 0.99167
+      "density_first_10ms": 0.99583
     },
     {
       "number": 42,
@@ -594,71 +601,71 @@
       "number": 43,
       "name": "Lead Sustain",
       "category": "Guitarras",
-      "rt60_s": 3.11803,
-      "rt60_broadband_s": 2.81943,
+      "rt60_s": 3.11781,
+      "rt60_broadband_s": 2.87313,
       "onset_ms": 48.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.1003,
-      "bass_db": -13.0196,
-      "width": 0.94092,
+      "brightness_db": -1.8906,
+      "bass_db": -14.4681,
+      "width": 0.93601,
       "decay_fit_r2": 0.99992,
-      "density_first_10ms": 0.9625
+      "density_first_10ms": 0.97917
     },
     {
       "number": 44,
       "name": "Heavy Guitar Depth",
       "category": "Guitarras",
-      "rt60_s": 0.80003,
-      "rt60_broadband_s": 0.60411,
+      "rt60_s": 0.79863,
+      "rt60_broadband_s": 0.48961,
       "onset_ms": 28.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": 1.5216,
-      "bass_db": -31.579,
-      "width": 0.58646,
-      "decay_fit_r2": 0.99887,
-      "density_first_10ms": 0.88958
+      "brightness_db": 6.3417,
+      "bass_db": -32.0313,
+      "width": 0.60264,
+      "decay_fit_r2": 0.99872,
+      "density_first_10ms": 0.87917
     },
     {
       "number": 45,
       "name": "Slide Moonlight",
       "category": "Guitarras",
-      "rt60_s": 3.44116,
-      "rt60_broadband_s": 2.88769,
+      "rt60_s": 3.44197,
+      "rt60_broadband_s": 2.75157,
       "onset_ms": 60.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 3.6818,
-      "bass_db": -21.8406,
-      "width": 0.98211,
-      "decay_fit_r2": 0.9992,
-      "density_first_10ms": 0.90208
+      "brightness_db": 6.4798,
+      "bass_db": -21.0987,
+      "width": 0.98536,
+      "decay_fit_r2": 0.99919,
+      "density_first_10ms": 0.91042
     },
     {
       "number": 46,
       "name": "Funk Springy Plate",
       "category": "Guitarras",
-      "rt60_s": 0.91076,
-      "rt60_broadband_s": 0.66285,
+      "rt60_s": 0.91097,
+      "rt60_broadband_s": 0.57447,
       "onset_ms": 10.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": 2.654,
-      "bass_db": -26.8107,
-      "width": 0.74896,
-      "decay_fit_r2": 0.99946,
-      "density_first_10ms": 0.90208
+      "brightness_db": 6.2301,
+      "bass_db": -25.5999,
+      "width": 0.75406,
+      "decay_fit_r2": 0.99947,
+      "density_first_10ms": 0.9
     },
     {
       "number": 47,
       "name": "Piano Felt",
       "category": "Teclas",
-      "rt60_s": 1.81158,
-      "rt60_broadband_s": 1.60894,
+      "rt60_s": 1.81224,
+      "rt60_broadband_s": 1.74858,
       "onset_ms": 25.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.2962,
-      "bass_db": -12.0143,
-      "width": 0.84085,
-      "decay_fit_r2": 0.9998,
-      "density_first_10ms": 0.95208
+      "brightness_db": -2.8188,
+      "bass_db": -8.0089,
+      "width": 0.8209,
+      "decay_fit_r2": 0.99979,
+      "density_first_10ms": 0.98542
     },
     {
       "number": 48,
@@ -762,57 +769,57 @@
       "number": 55,
       "name": "FM Bell Shimmer",
       "category": "Teclas",
-      "rt60_s": 3.71455,
-      "rt60_broadband_s": 3.57476,
+      "rt60_s": 3.71443,
+      "rt60_broadband_s": 3.57484,
       "onset_ms": 48.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 12.2093,
-      "bass_db": -18.9023,
-      "width": 0.99029,
+      "brightness_db": 12.1998,
+      "bass_db": -17.6315,
+      "width": 0.99027,
       "decay_fit_r2": 0.99988,
-      "density_first_10ms": 0.85417
+      "density_first_10ms": 0.84583
     },
     {
       "number": 56,
       "name": "Celesta Stardust",
       "category": "Teclas",
-      "rt60_s": 2.81367,
-      "rt60_broadband_s": 2.77641,
+      "rt60_s": 2.81304,
+      "rt60_broadband_s": 2.7441,
       "onset_ms": 22.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 5.7078,
-      "bass_db": -8.9793,
-      "width": 0.98364,
-      "decay_fit_r2": 0.99984,
-      "density_first_10ms": 0.81042
+      "brightness_db": 8.8767,
+      "bass_db": -7.592,
+      "width": 0.98559,
+      "decay_fit_r2": 0.99983,
+      "density_first_10ms": 0.8
     },
     {
       "number": 57,
       "name": "Violin Solo Gold",
       "category": "Cordas",
-      "rt60_s": 2.31564,
-      "rt60_broadband_s": 2.00974,
+      "rt60_s": 2.31533,
+      "rt60_broadband_s": 2.1127,
       "onset_ms": 28.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.9497,
-      "bass_db": -13.6355,
-      "width": 0.84601,
+      "brightness_db": -1.6492,
+      "bass_db": -17.0129,
+      "width": 0.83595,
       "decay_fit_r2": 0.99987,
-      "density_first_10ms": 0.93542
+      "density_first_10ms": 0.98333
     },
     {
       "number": 58,
       "name": "Cello Chamber",
       "category": "Cordas",
-      "rt60_s": 1.9074,
-      "rt60_broadband_s": 1.67053,
+      "rt60_s": 1.90617,
+      "rt60_broadband_s": 1.62051,
       "onset_ms": 24.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.7098,
-      "bass_db": -14.9891,
-      "width": 0.74392,
+      "brightness_db": 2.2382,
+      "bass_db": -21.1696,
+      "width": 0.7472,
       "decay_fit_r2": 0.99981,
-      "density_first_10ms": 0.93542
+      "density_first_10ms": 0.93958
     },
     {
       "number": 59,
@@ -860,43 +867,43 @@
       "number": 62,
       "name": "Harp Silver",
       "category": "Cordas",
-      "rt60_s": 3.50726,
-      "rt60_broadband_s": 3.40762,
+      "rt60_s": 3.50724,
+      "rt60_broadband_s": 3.39855,
       "onset_ms": 65.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 10.7003,
-      "bass_db": -11.787,
-      "width": 0.98923,
+      "brightness_db": 13.2979,
+      "bass_db": -11.3335,
+      "width": 0.98955,
       "decay_fit_r2": 0.99988,
-      "density_first_10ms": 0.85208
+      "density_first_10ms": 0.8875
     },
     {
       "number": 63,
       "name": "Quartet Vintage",
       "category": "Cordas",
-      "rt60_s": 2.11599,
-      "rt60_broadband_s": 1.83656,
+      "rt60_s": 2.11556,
+      "rt60_broadband_s": 1.84069,
       "onset_ms": 18.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.9954,
-      "bass_db": -13.6427,
-      "width": 0.89496,
+      "brightness_db": 1.3216,
+      "bass_db": -18.2713,
+      "width": 0.89412,
       "decay_fit_r2": 0.99985,
-      "density_first_10ms": 0.93542
+      "density_first_10ms": 0.95417
     },
     {
       "number": 64,
       "name": "Orchestral Swell",
       "category": "Cordas",
-      "rt60_s": 4.13282,
-      "rt60_broadband_s": 3.61625,
+      "rt60_s": 4.13199,
+      "rt60_broadband_s": 3.677,
       "onset_ms": 45.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.5736,
-      "bass_db": -14.3424,
-      "width": 0.99742,
+      "brightness_db": 0.3386,
+      "bass_db": -17.9624,
+      "width": 0.99502,
       "decay_fit_r2": 0.99995,
-      "density_first_10ms": 0.93958
+      "density_first_10ms": 0.97292
     },
     {
       "number": 65,
@@ -930,15 +937,15 @@
       "number": 67,
       "name": "Tenor Sax Smoke",
       "category": "Sopros",
-      "rt60_s": 2.014,
-      "rt60_broadband_s": 1.84795,
+      "rt60_s": 2.01483,
+      "rt60_broadband_s": 1.95508,
       "onset_ms": 32.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -0.3154,
-      "bass_db": -11.8407,
-      "width": 0.83479,
+      "brightness_db": -5.671,
+      "bass_db": -9.7154,
+      "width": 0.81214,
       "decay_fit_r2": 0.99983,
-      "density_first_10ms": 0.96042
+      "density_first_10ms": 0.99583
     },
     {
       "number": 68,
@@ -958,29 +965,29 @@
       "number": 69,
       "name": "Trombone Body",
       "category": "Sopros",
-      "rt60_s": 1.41809,
-      "rt60_broadband_s": 1.11587,
+      "rt60_s": 1.41521,
+      "rt60_broadband_s": 1.12036,
       "onset_ms": 22.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": 0.7746,
-      "bass_db": -29.1241,
-      "width": 0.728,
-      "decay_fit_r2": 0.99965,
-      "density_first_10ms": 0.9125
+      "brightness_db": 0.3158,
+      "bass_db": -32.7943,
+      "width": 0.72289,
+      "decay_fit_r2": 0.99963,
+      "density_first_10ms": 0.92292
     },
     {
       "number": 70,
       "name": "Brass Section Wide",
       "category": "Sopros",
-      "rt60_s": 2.52593,
-      "rt60_broadband_s": 2.42924,
+      "rt60_s": 2.52588,
+      "rt60_broadband_s": 2.45437,
       "onset_ms": 38.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 11.3844,
-      "bass_db": -23.7882,
-      "width": 0.98861,
+      "brightness_db": 8.497,
+      "bass_db": -22.9614,
+      "width": 0.98742,
       "decay_fit_r2": 0.99987,
-      "density_first_10ms": 0.925
+      "density_first_10ms": 0.96458
     },
     {
       "number": 71,
@@ -1000,15 +1007,15 @@
       "number": 72,
       "name": "Clarinet Wood",
       "category": "Sopros",
-      "rt60_s": 1.80428,
-      "rt60_broadband_s": 1.67152,
+      "rt60_s": 1.80566,
+      "rt60_broadband_s": 1.73569,
       "onset_ms": 24.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -0.9,
-      "bass_db": -11.5856,
-      "width": 0.58774,
-      "decay_fit_r2": 0.99975,
-      "density_first_10ms": 0.96458
+      "brightness_db": 0.0435,
+      "bass_db": -5.5694,
+      "width": 0.58656,
+      "decay_fit_r2": 0.99974,
+      "density_first_10ms": 0.97083
     },
     {
       "number": 73,
@@ -1043,14 +1050,14 @@
       "name": "Silver Cloud",
       "category": "Atmosferas",
       "rt60_s": 4.81669,
-      "rt60_broadband_s": 4.63069,
+      "rt60_broadband_s": 4.63861,
       "onset_ms": 95.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 12.6897,
-      "bass_db": -20.7136,
-      "width": 0.99107,
+      "brightness_db": 13.7858,
+      "bass_db": -20.7172,
+      "width": 0.99142,
       "decay_fit_r2": 0.99993,
-      "density_first_10ms": 0.875
+      "density_first_10ms": 0.8875
     },
     {
       "number": 76,
@@ -1070,15 +1077,15 @@
       "number": 77,
       "name": "Dream Chamber",
       "category": "Atmosferas",
-      "rt60_s": 3.93163,
-      "rt60_broadband_s": 3.42997,
+      "rt60_s": 3.93222,
+      "rt60_broadband_s": 3.21923,
       "onset_ms": 65.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.5925,
-      "bass_db": -15.1037,
-      "width": 0.99753,
+      "brightness_db": 4.2214,
+      "bass_db": -12.1434,
+      "width": 1.00364,
       "decay_fit_r2": 0.99995,
-      "density_first_10ms": 0.94375
+      "density_first_10ms": 0.79583
     },
     {
       "number": 78,
@@ -1126,29 +1133,29 @@
       "number": 81,
       "name": "Soft Horizon",
       "category": "Atmosferas",
-      "rt60_s": 4.74459,
-      "rt60_broadband_s": 4.13769,
+      "rt60_s": 4.74554,
+      "rt60_broadband_s": 4.20836,
       "onset_ms": 75.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 1.5477,
-      "bass_db": -15.061,
-      "width": 0.948,
+      "brightness_db": 1.2501,
+      "bass_db": -11.7001,
+      "width": 0.94623,
       "decay_fit_r2": 0.99996,
-      "density_first_10ms": 0.94167
+      "density_first_10ms": 0.93958
     },
     {
       "number": 82,
       "name": "Analog Nebula",
       "category": "Atmosferas",
-      "rt60_s": 5.2788,
-      "rt60_broadband_s": 4.13026,
+      "rt60_s": 5.27993,
+      "rt60_broadband_s": 4.11295,
       "onset_ms": 180.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 8.8192,
-      "bass_db": -24.6961,
-      "width": 1.00657,
+      "brightness_db": 8.8927,
+      "bass_db": -27.8456,
+      "width": 1.00659,
       "decay_fit_r2": 0.99984,
-      "density_first_10ms": 0.93125
+      "density_first_10ms": 0.95
     },
     {
       "number": 83,
@@ -1182,15 +1189,15 @@
       "number": 85,
       "name": "SciFi Reactor",
       "category": "Cinema",
-      "rt60_s": 4.88842,
-      "rt60_broadband_s": 4.07969,
+      "rt60_s": 4.88829,
+      "rt60_broadband_s": 4.01869,
       "onset_ms": 135.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 6.5687,
-      "bass_db": -21.4361,
-      "width": 1.00641,
+      "brightness_db": 7.3032,
+      "bass_db": -20.6091,
+      "width": 1.00544,
       "decay_fit_r2": 0.99979,
-      "density_first_10ms": 0.90208
+      "density_first_10ms": 0.89167
     },
     {
       "number": 86,
@@ -1210,29 +1217,29 @@
       "number": 87,
       "name": "Dialogue Depth",
       "category": "Cinema",
-      "rt60_s": 0.80318,
-      "rt60_broadband_s": 0.70428,
+      "rt60_s": 0.80316,
+      "rt60_broadband_s": 0.71804,
       "onset_ms": 20.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": -0.6222,
-      "bass_db": -12.3951,
-      "width": 0.48904,
+      "brightness_db": -1.9103,
+      "bass_db": -12.7175,
+      "width": 0.4838,
       "decay_fit_r2": 0.99925,
-      "density_first_10ms": 0.91875
+      "density_first_10ms": 0.95
     },
     {
       "number": 88,
       "name": "Cinematic Drum Bloom",
       "category": "Cinema",
-      "rt60_s": 3.22007,
-      "rt60_broadband_s": 2.95245,
+      "rt60_s": 3.22102,
+      "rt60_broadband_s": 2.97269,
       "onset_ms": 70.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": -0.8802,
-      "bass_db": -11.5467,
-      "width": 0.98879,
+      "brightness_db": -0.2831,
+      "bass_db": -9.2865,
+      "width": 0.98762,
       "decay_fit_r2": 0.99992,
-      "density_first_10ms": 0.96875
+      "density_first_10ms": 0.9625
     },
     {
       "number": 89,
@@ -1252,15 +1259,15 @@
       "number": 90,
       "name": "Vintage Radio Space",
       "category": "Cinema",
-      "rt60_s": 1.33633,
-      "rt60_broadband_s": 1.2555,
+      "rt60_s": 1.33627,
+      "rt60_broadband_s": 1.25622,
       "onset_ms": 15.25,
       "intrinsic_onset_ms": 0.25,
-      "brightness_db": -9.9833,
-      "bass_db": -10.2984,
-      "width": 0.31916,
+      "brightness_db": -10.7119,
+      "bass_db": -10.5595,
+      "width": 0.31883,
       "decay_fit_r2": 0.99922,
-      "density_first_10ms": 0.96667
+      "density_first_10ms": 0.96458
     },
     {
       "number": 91,
@@ -1322,14 +1329,14 @@
       "number": 95,
       "name": "Mono Compatibility",
       "category": "Mix",
-      "rt60_s": 1.39481,
-      "rt60_broadband_s": 1.27208,
+      "rt60_s": 1.39478,
+      "rt60_broadband_s": 1.26387,
       "onset_ms": 20.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.3587,
-      "bass_db": -15.0867,
+      "brightness_db": 0.1286,
+      "bass_db": -18.9217,
       "width": 0.0,
-      "decay_fit_r2": 0.99912,
+      "decay_fit_r2": 0.99913,
       "density_first_10ms": 0.87292
     },
     {
@@ -1350,15 +1357,15 @@
       "number": 97,
       "name": "Vintage Cohesion",
       "category": "Mix",
-      "rt60_s": 1.60432,
-      "rt60_broadband_s": 1.44611,
+      "rt60_s": 1.60431,
+      "rt60_broadband_s": 1.31062,
       "onset_ms": 35.3333,
       "intrinsic_onset_ms": 0.3333,
-      "brightness_db": 0.5248,
-      "bass_db": -13.4486,
-      "width": 0.63998,
+      "brightness_db": 4.6322,
+      "bass_db": -13.8005,
+      "width": 0.65003,
       "decay_fit_r2": 0.99969,
-      "density_first_10ms": 0.95
+      "density_first_10ms": 0.8
     },
     {
       "number": 98,
@@ -1379,14 +1386,14 @@
       "name": "Wide Instrument Glue",
       "category": "Mix",
       "rt60_s": 1.8284,
-      "rt60_broadband_s": 1.7665,
+      "rt60_broadband_s": 1.75976,
       "onset_ms": 35.375,
       "intrinsic_onset_ms": 0.375,
-      "brightness_db": 9.5801,
-      "bass_db": -11.9992,
-      "width": 0.98569,
+      "brightness_db": 11.8923,
+      "bass_db": -11.6796,
+      "width": 0.98602,
       "decay_fit_r2": 0.99983,
-      "density_first_10ms": 0.82083
+      "density_first_10ms": 0.8625
     },
     {
       "number": 100,
@@ -1405,187 +1412,187 @@
   ],
   "within_failures": [],
   "cross_category_failures": [],
-  "minimum_within_distance": 1.2456249999999989,
+  "minimum_within_distance": 1.1593199999999997,
   "category_distances": [
     {
       "a": "Atmosferas",
       "b": "Bateria",
-      "distance": 10.7865
+      "distance": 8.2691
     },
     {
       "a": "Atmosferas",
       "b": "Cinema",
-      "distance": 3.5021
+      "distance": 2.102
     },
     {
       "a": "Atmosferas",
       "b": "Cordas",
-      "distance": 7.8724
+      "distance": 3.9813
     },
     {
       "a": "Atmosferas",
       "b": "Guitarras",
-      "distance": 7.6276
+      "distance": 4.9174
     },
     {
       "a": "Atmosferas",
       "b": "Mix",
-      "distance": 8.9441
+      "distance": 6.8571
     },
     {
       "a": "Atmosferas",
       "b": "Sopros",
-      "distance": 7.1875
+      "distance": 4.7942
     },
     {
       "a": "Atmosferas",
       "b": "Teclas",
-      "distance": 7.4974
+      "distance": 3.0703
     },
     {
       "a": "Atmosferas",
       "b": "Vocais",
-      "distance": 7.4375
+      "distance": 4.7558
     },
     {
       "a": "Bateria",
       "b": "Cinema",
-      "distance": 10.5121
+      "distance": 8.0583
     },
     {
       "a": "Bateria",
       "b": "Cordas",
-      "distance": 5.5948
+      "distance": 4.2879
     },
     {
       "a": "Bateria",
       "b": "Guitarras",
-      "distance": 4.3716
+      "distance": 3.3517
     },
     {
       "a": "Bateria",
       "b": "Mix",
-      "distance": 1.9479
+      "distance": 1.4121
     },
     {
       "a": "Bateria",
       "b": "Sopros",
-      "distance": 4.5289
+      "distance": 3.4749
     },
     {
       "a": "Bateria",
       "b": "Teclas",
-      "distance": 6.7828
+      "distance": 5.1988
     },
     {
       "a": "Bateria",
       "b": "Vocais",
-      "distance": 4.5831
+      "distance": 3.5133
     },
     {
       "a": "Cinema",
       "b": "Cordas",
-      "distance": 7.5495
+      "distance": 3.7704
     },
     {
       "a": "Cinema",
       "b": "Guitarras",
-      "distance": 7.3047
+      "distance": 4.7066
     },
     {
       "a": "Cinema",
       "b": "Mix",
-      "distance": 8.6698
+      "distance": 6.6462
     },
     {
       "a": "Cinema",
       "b": "Sopros",
-      "distance": 6.8646
+      "distance": 4.5834
     },
     {
       "a": "Cinema",
       "b": "Teclas",
-      "distance": 7.1745
+      "distance": 2.8594
     },
     {
       "a": "Cinema",
       "b": "Vocais",
-      "distance": 7.1146
+      "distance": 4.5449
     },
     {
       "a": "Cordas",
       "b": "Guitarras",
-      "distance": 1.7832
+      "distance": 1.3891
     },
     {
       "a": "Cordas",
       "b": "Mix",
-      "distance": 3.7524
+      "distance": 2.8758
     },
     {
       "a": "Cordas",
       "b": "Sopros",
-      "distance": 1.6414
+      "distance": 2.8346
     },
     {
       "a": "Cordas",
       "b": "Teclas",
-      "distance": 1.7175
+      "distance": 2.9688
     },
     {
       "a": "Cordas",
       "b": "Vocais",
-      "distance": 1.4233
+      "distance": 1.3294
     },
     {
       "a": "Guitarras",
       "b": "Mix",
-      "distance": 2.5292
+      "distance": 1.9396
     },
     {
       "a": "Guitarras",
       "b": "Sopros",
-      "distance": 3.2432
+      "distance": 2.4425
     },
     {
       "a": "Guitarras",
       "b": "Teclas",
-      "distance": 3.5007
+      "distance": 2.3345
     },
     {
       "a": "Guitarras",
       "b": "Vocais",
-      "distance": 2.0108
+      "distance": 1.936
     },
     {
       "a": "Mix",
       "b": "Sopros",
-      "distance": 2.6866
+      "distance": 2.0628
     },
     {
       "a": "Mix",
       "b": "Teclas",
-      "distance": 4.9405
+      "distance": 3.7868
     },
     {
       "a": "Mix",
       "b": "Vocais",
-      "distance": 2.7408
+      "distance": 2.1013
     },
     {
       "a": "Sopros",
       "b": "Teclas",
-      "distance": 2.2539
+      "distance": 1.7239
     },
     {
       "a": "Sopros",
       "b": "Vocais",
-      "distance": 1.415
+      "distance": 1.5052
     },
     {
       "a": "Teclas",
       "b": "Vocais",
-      "distance": 2.1997
+      "distance": 1.6855
     }
   ],
   "failures": []

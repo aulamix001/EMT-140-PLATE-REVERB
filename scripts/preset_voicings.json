@@ -1,0 +1,602 @@
+{
+  "Vocal Long": {
+    "eq_low_freq": 150.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 6500.0,
+    "eq_high_gain": 3.0
+  },
+  "Vocal Tight": {
+    "eq_low_freq": 230.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 10500.0,
+    "eq_high_gain": 7.0
+  },
+  "Vocal Legacy": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 3825.0,
+    "eq_high_gain": -7.0
+  },
+  "Drum Room": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 7000.0,
+    "eq_high_gain": 3.0
+  },
+  "Percussion Short": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -10.0,
+    "eq_high_freq": 8500.0,
+    "eq_high_gain": 8.0
+  },
+  "Strings Bright": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -4.0,
+    "eq_high_freq": 8500.0,
+    "eq_high_gain": 6.0
+  },
+  "Dark Jazz": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 5.0,
+    "eq_high_freq": 2800.0,
+    "eq_high_gain": -9.0
+  },
+  "Ambient Wide": {
+    "eq_low_freq": 200.0,
+    "eq_low_gain": -4.0,
+    "eq_high_freq": 6000.0,
+    "eq_high_gain": 5.0
+  },
+  "Cinematic 5s": {
+    "eq_low_freq": 100.0,
+    "eq_low_gain": 6.0,
+    "eq_high_freq": 3500.0,
+    "eq_high_gain": -6.0
+  },
+  "Modulated Chorus": {
+    "eq_low_freq": 250.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 5.0
+  },
+  "Insert Mono": {
+    "eq_low_freq": 200.0,
+    "eq_low_gain": -5.5,
+    "eq_high_freq": 3825.0,
+    "eq_high_gain": -8.0
+  },
+  "Mastering Glue": {
+    "eq_low_freq": 100.0,
+    "eq_low_gain": -4.0,
+    "eq_high_freq": 12000.0,
+    "eq_high_gain": 3.0
+  },
+  "Lead Intimate": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 4.0,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -5.0
+  },
+  "Lead Pop Air": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -7.5,
+    "eq_high_freq": 11400.0,
+    "eq_high_gain": 8.5
+  },
+  "Ballad Velvet": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 5040.0,
+    "eq_high_gain": -3.0
+  },
+  "Rap Short Plate": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -2.5,
+    "eq_high_freq": 4875.0,
+    "eq_high_gain": 6.0
+  },
+  "Soul Golden": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": -0.0,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -2.5
+  },
+  "Jazz Smoky": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 3840.0,
+    "eq_high_gain": -9.0
+  },
+  "Backing Silk": {
+    "eq_low_freq": 224.0,
+    "eq_low_gain": -8.5,
+    "eq_high_freq": 6175.0,
+    "eq_high_gain": 11.5
+  },
+  "Choir Cathedral Plate": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 4675.0,
+    "eq_high_gain": -5.0
+  },
+  "Spoken Close": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 2.0
+  },
+  "Sibilance Tamer": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 3.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -9.0
+  },
+  "Vocal Dream": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -5.0,
+    "eq_high_freq": 7000.0,
+    "eq_high_gain": 6.0
+  },
+  "Vintage Slap Bloom": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": -4.5
+  },
+  "Snare Chrome": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -9.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 8.0
+  },
+  "Snare Eighties": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 8075.0,
+    "eq_high_gain": 11.0
+  },
+  "Snare Tight Dark": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -8.0
+  },
+  "Rimshot Space": {
+    "eq_low_freq": 84.0,
+    "eq_low_gain": -3.5,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 3.0
+  },
+  "Toms Thunder": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": 7.5,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": 0.5
+  },
+  "Brushes Velvet": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -4.0
+  },
+  "Kick Upper Plate": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -12.0,
+    "eq_high_freq": 6000.0,
+    "eq_high_gain": 4.0
+  },
+  "Clap Spread": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -9.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 8.0
+  },
+  "Shaker Dust": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -8.0
+  },
+  "Congas Copper": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": 6.0,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -0.5
+  },
+  "Drum Parallel": {
+    "eq_low_freq": 168.0,
+    "eq_low_gain": -7.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 3.5
+  },
+  "Cymbal Mist": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -4.0
+  },
+  "Acoustic Wood": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": 9.0,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -8.5
+  },
+  "Acoustic Sparkle": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 6175.0,
+    "eq_high_gain": 8.5
+  },
+  "Nylon Intimate": {
+    "eq_low_freq": 252.0,
+    "eq_low_gain": 6.5,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -6.0
+  },
+  "Electric Surf Plate": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 6.0
+  },
+  "Blues Smoky": {
+    "eq_low_freq": 342.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 2720.0,
+    "eq_high_gain": -12.0
+  },
+  "Clean Arpeggio": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 1.0
+  },
+  "Lead Sustain": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 0.0,
+    "eq_high_freq": 4675.0,
+    "eq_high_gain": -8.5
+  },
+  "Heavy Guitar Depth": {
+    "eq_low_freq": 490.0,
+    "eq_low_gain": -9.5,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": 7.0
+  },
+  "Slide Moonlight": {
+    "eq_low_freq": 154.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 4900.0,
+    "eq_high_gain": 7.5
+  },
+  "Funk Springy Plate": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -4.5,
+    "eq_high_freq": 5600.0,
+    "eq_high_gain": 9.0
+  },
+  "Piano Felt": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": 8.5,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -8.0
+  },
+  "Piano Concert Plate": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": 0.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 3.0
+  },
+  "Rhodes Honey": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 5.0,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": -3.0
+  },
+  "Wurli Amber": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 6.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -8.0
+  },
+  "Organ Chapel": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 3.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -4.0
+  },
+  "Clav Snap": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -8.0,
+    "eq_high_freq": 6000.0,
+    "eq_high_gain": 4.0
+  },
+  "Synth Pluck Halo": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -5.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 8.0
+  },
+  "Analog Pad Drift": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -2.0,
+    "eq_high_freq": 7000.0,
+    "eq_high_gain": 7.0
+  },
+  "FM Bell Shimmer": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -0.5,
+    "eq_high_freq": 9500.0,
+    "eq_high_gain": 9.0
+  },
+  "Celesta Stardust": {
+    "eq_low_freq": 252.0,
+    "eq_low_gain": 4.0,
+    "eq_high_freq": 7590.0,
+    "eq_high_gain": 1.0
+  },
+  "Violin Solo Gold": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -6.5
+  },
+  "Cello Chamber": {
+    "eq_low_freq": 252.0,
+    "eq_low_gain": -7.0,
+    "eq_high_freq": 4675.0,
+    "eq_high_gain": -2.0
+  },
+  "String Ensemble Silk": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 9500.0,
+    "eq_high_gain": 10.0
+  },
+  "Pizzicato Pearl": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -8.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 9.0
+  },
+  "Double Bass Shadow": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -11.0,
+    "eq_high_freq": 6000.0,
+    "eq_high_gain": 5.0
+  },
+  "Harp Silver": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -1.5,
+    "eq_high_freq": 6375.0,
+    "eq_high_gain": 7.0
+  },
+  "Quartet Vintage": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": -4.5,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": -3.0
+  },
+  "Orchestral Swell": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -5.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -5.5
+  },
+  "Trumpet Gold": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 6.0,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": -6.0
+  },
+  "Muted Trumpet Noir": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 7.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -11.0
+  },
+  "Tenor Sax Smoke": {
+    "eq_low_freq": 252.0,
+    "eq_low_gain": 5.5,
+    "eq_high_freq": 3575.0,
+    "eq_high_gain": -12.0
+  },
+  "Alto Sax Shine": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -2.0,
+    "eq_high_freq": 9500.0,
+    "eq_high_gain": 6.0
+  },
+  "Trombone Body": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -11.0,
+    "eq_high_freq": 5100.0,
+    "eq_high_gain": 0.0
+  },
+  "Brass Section Wide": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": -0.5
+  },
+  "Flute Breeze": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 4.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -7.0
+  },
+  "Clarinet Wood": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": 12.0,
+    "eq_high_freq": 3570.0,
+    "eq_high_gain": -4.0
+  },
+  "Infinite Steel": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 7000.0,
+    "eq_high_gain": 8.0
+  },
+  "Frozen Amber": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -7.0
+  },
+  "Silver Cloud": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -7.0,
+    "eq_high_freq": 8075.0,
+    "eq_high_gain": 9.5
+  },
+  "Slow Aurora": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -6.0,
+    "eq_high_freq": 7000.0,
+    "eq_high_gain": 8.0
+  },
+  "Dream Chamber": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 3.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": 1.5
+  },
+  "Metallic Stars": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -9.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 9.0
+  },
+  "Narrow Memory": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 2.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -7.0
+  },
+  "Mono Ghost": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 1.0,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": -2.0
+  },
+  "Soft Horizon": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 3.5,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -3.5
+  },
+  "Analog Nebula": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -10.0,
+    "eq_high_freq": 7000.0,
+    "eq_high_gain": 8.0
+  },
+  "Trailer Steel Tail": {
+    "eq_low_freq": 240.0,
+    "eq_low_gain": -5.0,
+    "eq_high_freq": 8000.0,
+    "eq_high_gain": 5.0
+  },
+  "Noir Corridor": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 6.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -11.0
+  },
+  "SciFi Reactor": {
+    "eq_low_freq": 220.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 5950.0,
+    "eq_high_gain": 4.5
+  },
+  "Distant Footsteps": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -8.0,
+    "eq_high_freq": 6000.0,
+    "eq_high_gain": 1.0
+  },
+  "Dialogue Depth": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": -3.0
+  },
+  "Cinematic Drum Bloom": {
+    "eq_low_freq": 196.0,
+    "eq_low_gain": 6.5,
+    "eq_high_freq": 5040.0,
+    "eq_high_gain": -6.0
+  },
+  "Dream Transition": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 3.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -7.0
+  },
+  "Vintage Radio Space": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 5.5,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -12.0
+  },
+  "Impact Afterglow": {
+    "eq_low_freq": 350.0,
+    "eq_low_gain": -8.0,
+    "eq_high_freq": 6000.0,
+    "eq_high_gain": 1.0
+  },
+  "Final Frame": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -3.0,
+    "eq_high_freq": 9500.0,
+    "eq_high_gain": 6.0
+  },
+  "Mix Bus Subtle": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -2.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 2.0
+  },
+  "Drum Bus Glue": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 3.0,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": -4.0
+  },
+  "Mono Compatibility": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": -4.0,
+    "eq_high_freq": 5500.0,
+    "eq_high_gain": -5.5
+  },
+  "Parallel Brightness": {
+    "eq_low_freq": 160.0,
+    "eq_low_gain": -5.0,
+    "eq_high_freq": 9500.0,
+    "eq_high_gain": 8.0
+  },
+  "Vintage Cohesion": {
+    "eq_low_freq": 140.0,
+    "eq_low_gain": 2.5,
+    "eq_high_freq": 4200.0,
+    "eq_high_gain": 1.5
+  },
+  "Master Dark Space": {
+    "eq_low_freq": 180.0,
+    "eq_low_gain": 4.0,
+    "eq_high_freq": 3200.0,
+    "eq_high_gain": -9.0
+  },
+  "Wide Instrument Glue": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -1.0,
+    "eq_high_freq": 6375.0,
+    "eq_high_gain": 5.0
+  },
+  "Aux Neutral Plate": {
+    "eq_low_freq": 120.0,
+    "eq_low_gain": -2.0,
+    "eq_high_freq": 7500.0,
+    "eq_high_gain": 2.0
+  }
+}

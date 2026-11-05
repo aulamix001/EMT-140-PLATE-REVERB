@@ -4,35 +4,27 @@
 #include <BinaryData.h>
 namespace vintage {
 inline const juce::Image& rackBackground(){
- static const auto image=[] {
-  auto full=juce::SoftwareImageType{}.convert(juce::ImageFileFormat::loadFrom(BinaryData::PanelBackground_png,BinaryData::PanelBackground_pngSize)).rescaled(2011,782);
-  return full.getClippedImage({0,75,2011,707});
- }();return image;
+ // One decoded CPU image; only pointers/needles move. No per-frame texture work.
+ static const auto image=juce::SoftwareImageType{}.convert(juce::ImageFileFormat::loadFrom(BinaryData::PanelBackground_png,BinaryData::PanelBackground_pngSize)).rescaled(2086,732);
+ return image;
 }
-inline const juce::Image& rackKnob(){
+inline const juce::Image& rackMeter(){
  static const auto image=[] {
-  // CPU-backed cached pixels must not retain Direct2D device resources until DLL unload.
-  auto source=juce::SoftwareImageType{}.convert(juce::ImageFileFormat::loadFrom(BinaryData::Knob_png,BinaryData::Knob_pngSize));
-  int left=source.getWidth(),top=source.getHeight(),right=-1,bottom=-1;
-  {juce::Image::BitmapData pixels(source,juce::Image::BitmapData::readOnly);
-   for(int y=0;y<source.getHeight();++y)for(int x=0;x<source.getWidth();++x)
-    if(pixels.getPixelColour(x,y).getAlpha()>16){left=juce::jmin(left,x);right=juce::jmax(right,x);top=juce::jmin(top,y);bottom=juce::jmax(bottom,y);}}
-  return right>=left&&bottom>=top?source.getClippedImage({left,top,right-left+1,bottom-top+1}):juce::Image{};
+  auto source=juce::SoftwareImageType{}.convert(juce::ImageFileFormat::loadFrom(BinaryData::MeterFace_png,BinaryData::MeterFace_pngSize));
+  const auto sx=source.getWidth()/2117.f,sy=source.getHeight()/743.f;
+  return source.getClippedImage(juce::Rectangle<float>(1724*sx,48*sy,352*sx,312*sy).toNearestInt()).createCopy();
  }();return image;
 }
 class RackLook:public Look {
- juce::Image knob{rackKnob()};
 public:
- RackLook()=default;
  void preparePopupMenuWindow(juce::Component& window)override{Look::preparePopupMenuWindow(window);useSoftwareWindowRendering(window);}
+ int getSliderThumbRadius(juce::Slider& slider)override{return slider.getName()=="input-filter"?10:Look::getSliderThumbRadius(slider);}
  void drawRotarySlider(juce::Graphics&g,int x,int y,int w,int h,float pos,float start,float end,juce::Slider&)override{
-  const float cx=x+w*.5f,cy=y+h*.5f,r=23.2f;
-  juce::Path circle;circle.addEllipse(cx-r,cy-r,2*r,2*r);
-  juce::DropShadow(juce::Colours::black.withAlpha(.4f),4,{1,2}).drawForPath(g,circle);
-  juce::Graphics::ScopedSaveState save(g);g.setOpacity(1.0f);
-  // The supplied knob's index is at twelve o'clock (zero radians).
-  g.addTransform(juce::AffineTransform::rotation(start+pos*(end-start),cx,cy));
-  g.drawImage(knob,juce::Rectangle<float>(cx-r,cy-r,2*r,2*r));
+  const float cx=x+w*.5f,cy=y+h*.5f,a=start+pos*(end-start);
+  // Fixed concave body/specular light are in the backplate. Rotate only the index.
+  const float sx=std::sin(a),sy=-std::cos(a);
+  g.setColour(juce::Colours::black.withAlpha(.45f));g.drawLine(cx+sx*12+.6f,cy+sy*12+.8f,cx+sx*21+.6f,cy+sy*21+.8f,2.2f);
+  g.setColour(juce::Colour(0xfff4efdf));g.drawLine(cx+sx*12,cy+sy*12,cx+sx*21,cy+sy*21,1.7f);
  }
  void drawButtonBackground(juce::Graphics&g,juce::Button&b,const juce::Colour&c,bool over,bool down)override{
   if(b.getName()=="rack-damper"||b.getName()=="rack-solo"){
@@ -60,9 +52,10 @@ public:
  bool active=false;
  RackTimeMeter(){setSliderStyle(LinearVertical);setTextBoxStyle(NoTextBox,false,0,0);setRange(.5,5.5,.1);setDoubleClickReturnValue(true,2);setPopupDisplayEnabled(true,true,nullptr);setTooltip("Reverb time | drag / wheel / arrows; double-click: 2 s");}
  void paint(juce::Graphics&g)override{
-  const float y=122.4f-float(getValue()-.5)*15.94f;
-  g.setColour(juce::Colours::black.withAlpha(.4f));g.fillRect(37.f,y+2,18.f,2.f);
-  g.setColour(juce::Colour(0xffb72f23));g.fillRect(37.f,y,18.f,2.f);
+  const double values[]={.5,1,2,3,4,5,5.5};const float positions[]={132.5f,114,99,88.5f,78,51.4f,38.6f};
+  float y=positions[6];for(int i=0;i<6;++i)if(getValue()<=values[i+1]){y=juce::jmap(float(getValue()),float(values[i]),float(values[i+1]),positions[i],positions[i+1]);break;}
+  g.setColour(juce::Colours::black.withAlpha(.4f));g.fillRect(35.f,y+1.3f,21.f,1.7f);
+  g.setColour(juce::Colour(0xffb72f23));g.fillRect(35.f,y,21.f,1.5f);
  }
 };
 }

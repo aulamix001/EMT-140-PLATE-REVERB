@@ -11,7 +11,7 @@
   <PARAM id="balance" value="0" />
   <PARAM id="eq_enable" value="1" />
   <PARAM id="eq_low_freq" value="160" />
-  <PARAM id="eq_low_gain" value="-3" />
+  <PARAM id="eq_low_gain" value="-0.5" />
   <PARAM id="eq_high_freq" value="9500" />
   <PARAM id="eq_high_gain" value="9" />
   <PARAM id="mod_rate" value="0" />
