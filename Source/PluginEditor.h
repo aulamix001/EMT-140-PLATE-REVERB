@@ -7,6 +7,7 @@
 class PlateEditor:public juce::AudioProcessorEditor,private juce::Timer {
 public:
  explicit PlateEditor(PlateProcessor&);~PlateEditor()override;
+ void setSoftwareGraphics(bool);
  void mouseDown(const juce::MouseEvent&)override;void paint(juce::Graphics&)override;void resized()override;
 private:
  PlateProcessor&p;plateui::EditorGraphics graphics;vintage::RackLook look;juce::Component panel;

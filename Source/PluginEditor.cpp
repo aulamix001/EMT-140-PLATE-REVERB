@@ -26,12 +26,13 @@ PlateEditor::PlateEditor(PlateProcessor&proc):AudioProcessorEditor(proc),p(proc)
    if(id==1)menuOwner->p.reset();
    if(id==2)menuOwner->chooseFile(true);
    if(id==3)menuOwner->chooseFile(false);
-   if(id==4||id==5){menuOwner->p.softwareGraphics.store(id==4);menuOwner->graphics.apply();menuOwner->p.updateHostDisplay(AudioProcessor::ChangeDetails().withNonParameterStateChanged(true));}
+   if(id==4||id==5)menuOwner->setSoftwareGraphics(id==4);
   });
  };
  learnButton.onClick=[this]{PopupMenu menu;menu.setLookAndFeel(&softwarePopupLook());for(int i=0;i<20;++i)menu.addItem(i+1,String(platebank::ids[i])+" = "+String(p.get(platebank::ids[i]),2));menu.showMenuAsync(PopupMenu::Options().withTargetComponent(&learnButton),[](int id){if(id>0&&id<=20)SystemClipboard::copyTextToClipboard(platebank::ids[id-1]);});};learnButton.setTooltip("Host automation mapping: select a parameter to copy its stable ID. Not MIDI Learn.");
  setResizable(true,true);setResizeLimits(1043,398,2086,796);getConstrainer()->setFixedAspectRatio(1043.0/398);setSize(1565,597);updatePresetCaption();startTimerHz(30);
 }
+void PlateEditor::setSoftwareGraphics(bool software){p.softwareGraphics.store(software);graphics.apply();p.updateHostDisplay(AudioProcessor::ChangeDetails().withNonParameterStateChanged(true));}
 PlateEditor::~PlateEditor(){
  closing=true;stopTimer();
  // Cancel async UI and parameter callbacks while their controls still exist.

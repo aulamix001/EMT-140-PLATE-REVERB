@@ -45,14 +45,20 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           function Fail-WithLog($file, $phase) {
             $lines = Get-Content $file
-            $details = @($lines | Select-String -Pattern 'error|fatal|FAILED|Assertion|Exception' | Select-Object -First 40) + @($lines | Select-Object -Last 20)
+            $details = @($lines | Select-String -Pattern 'error|fatal|FAILED|Assertion|Exception|Timeout|checkpoint|PASS:|RGBA|Native|Gesture|watchdog|SHUTDOWN' | Select-Object -Last 100) + @($lines | Select-Object -Last 20)
             $message = (($details | ForEach-Object { "$_" }) -join "`n").Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
             Write-Output "::error title=${phase}::$message"
             exit 1
           }
           cmake --build build --config Debug --parallel 2 2>&1 | Tee-Object debug-build.log
           if ($LASTEXITCODE -ne 0) { Fail-WithLog debug-build.log 'Debug build' }
-          ctest --test-dir build -C Debug --output-on-failure 2>&1 | Tee-Object debug-tests.log
+          try {
+            & ./scripts/Run-Lifecycle-Windows.ps1 -Executable build/EditorGestureLifetime_artefacts/Debug/PlateLifetime.exe 2>&1 | Tee-Object debug-lifecycle.log
+          } catch {
+            $_ | Out-String | Add-Content debug-lifecycle.log
+            Fail-WithLog debug-lifecycle.log 'Native lifecycle watchdog'
+          }
+          ctest --test-dir build -C Debug --output-on-failure --stop-on-failure 2>&1 | Tee-Object debug-tests.log
           if ($LASTEXITCODE -ne 0) { Fail-WithLog debug-tests.log 'Debug tests' }
           $validator = (Get-ChildItem validator-build -Recurse -Filter validator.exe | Select-Object -First 1).FullName
           & $validator (Resolve-Path 'build/Plate140_artefacts/Debug/VST3/PLATE 140.vst3').Path 2>&1 | Tee-Object debug-validator.log
@@ -63,7 +69,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PLATE140-Debug-Logs
-          path: debug-*.log
+          path: |
+            debug-*.log
+            debug-*.dmp
+            plate-lifecycle-hang.dmp
+            build/**/*.pdb
           if-no-files-found: ignore
       - name: Build Release
         run: cmake --build build --config Release --parallel 2
