@@ -34,5 +34,12 @@
     "Source/Presets/FactoryPresets.h": "42207d1cf6b1ea132c2ed5920ecbbfaced247ff3",
     "Source/GUI/Assets/PanelBackground.png": "c89756de0e3d581e3adb6489a75afc36e010fc38",
     "Source/GUI/Assets/MeterFace.png": "6252340e3cdd228590cb7de9d9b2a9f65cdf8c50"
-  }
+  },
+  "production_commit": "e6b647b748eac85aefa16d31f83259d04ffee449",
+  "release_tests": 11,
+  "release_test_seconds": 101.68,
+  "asan_ubsan_tests": 7,
+  "asan_test_seconds": 190.26,
+  "pluginval_strictness": 10,
+  "pluginval_seed": 140
 }

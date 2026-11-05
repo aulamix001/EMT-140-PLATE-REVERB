@@ -30,7 +30,7 @@ The original-reference panel artwork is now embedded in the plugin through the P
 binary resource target. Source/GUI/Assets/PanelBackground.png is the static plate;
 knob indices, time pointers, toggles, input-filter cursor, lamp and VU needle are live
 controls drawn over it. The preset toolbar remains functional. No external image
-file is required when installing the VST3. IDs, ranges, DSP and presets are unchanged
-by this UI revision. Windows CI saves a compiled editor screenshot and includes rack-ui.png plus BUILD-COMMIT.txt in the VST3 ZIP.
+file is required when installing the VST3. IDs, ranges, parameter defaults and host normalization remain unchanged.
+The individual factory voicings are documented in docs/PRESET_METRICS_BEFORE_AFTER.md. Windows CI saves a compiled editor screenshot and includes rack-ui.png plus BUILD-COMMIT.txt in the VST3 ZIP.
 
 Windows graphics default to CPU/GDI with CPU image storage (`CHI_WINDOWS_SOFTWARE_GRAPHICS=ON`). Options → Graphics selects Direct2D explicitly; OFF compares upstream factories. See [editor lifetime audit](docs/EDITOR_LIFETIME.md), [measured before/after](docs/PRESET_METRICS_BEFORE_AFTER.md) and [validation](docs/VALIDATION.md).

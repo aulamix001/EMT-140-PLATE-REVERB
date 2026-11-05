@@ -1,14 +1,5 @@
-UpdateCTestConfiguration  from :/workspace/EMT-140-PLATE-REVERB/build/DartConfiguration.tcl
-Parse Config file:/workspace/EMT-140-PLATE-REVERB/build/DartConfiguration.tcl
-Test project /workspace/EMT-140-PLATE-REVERB/build
-Constructing a list of tests
-Done constructing a list of tests
-Updating test list for fixtures
-Added 0 tests to meet fixture requirements
-Checking test dependency graph...
-Checking test dependency graph end
 test 10
-    Start 10: PanelControlAudit
+      Start 10: PanelControlAudit
 
 10: Test command: /workspace/EMT-140-PLATE-REVERB/build/PlatePreview_artefacts/Release/PlatePreview "--control-audit"
 10: Working Directory: /workspace/EMT-140-PLATE-REVERB/build
@@ -48,11 +39,4 @@ test 10
 10: PASS audio wet_solo relative IR difference 0.950559
 10: PASS audio power relative IR difference 1
 10: PASS: all 20 parameters, 10 dial attachments, 3 RTs, A/B/C, all filter positions, toggles and real processor low/high gain audio
-1/1 Test #10: PanelControlAudit ................   Passed    6.61 sec
-
-The following tests passed:
-	PanelControlAudit
-
-100% tests passed out of 1
-
-Total Test time (real) =   6.61 sec
+10/11 Test #10: PanelControlAudit ................   Passed    5.11 sec

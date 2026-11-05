@@ -4,12 +4,12 @@ Registro de 05/11/2026. Código, resultados e limitações são separados abaixo
 
 ## Executado no Linux
 
-Debian 13 x86-64, GCC 14.2, JUCE 8.0.6, C++17, Python 3.12, NumPy 2.3.5/SciPy 1.17.0; Xvfb :102, 2200×1200. Código de produção rastreado em `metrics/provenance.json`, incluindo blobs do engine/banco e SHA256 do VST3 Linux.
+Debian 13 x86-64, GCC 14.2, JUCE 8.0.6, C++17, Python 3.12, NumPy 2.3.5/SciPy 1.17.0; Xvfb :103, 2200×1200. Código de produção rastreado em `metrics/provenance.json`, incluindo blobs do engine/banco e SHA256 do VST3 Linux.
 
 | Verificação | Resultado efetivo |
 |---|---|
 | Build Release, VST3/Standalone/runners | PASS |
-| ctest Release | Dez gates passaram no build final; PanelControlAudit corrigiu a visibilidade do próprio harness e passou separadamente, 6,61 s. Reexecução completa de 11 testes em andamento. |
+| ctest Release | PASS: 11/11, 101,68 s, com todos os controles e o banco final. |
 | Controles e ganhos | PASS: 20 parâmetros alteram o áudio em seu contexto ativo; 10 knobs, hit areas, três RTs/placas e 10 posições de filtro. Ganhos +/-12 dB medidos: graves +/-11,9742 dB, agudos +/-11,9951 dB; EQ OUT e MIX 0 preservam áudio esperado. |
 | Integração nativa dos 100 presets | PASS: 100 respostas de áudio diferentes, 100 XML, estado, limites, biblioteca, A/B, clipboard e navegador flutuante |
 | Host VST3 externo | PASS: 100 programas; get/setCurrentProgram e restauração de estado; RTs chegam ao processor; 100 respostas diferentes |
@@ -20,7 +20,7 @@ Debian 13 x86-64, GCC 14.2, JUCE 8.0.6, C++17, Python 3.12, NumPy 2.3.5/SciPy 1.
 | Comparação RGBA Linux | PASS: 0/934.305 pixels alterados ao trocar a preferência gráfica no mesmo backend Linux; não compara GDI/Direct2D Windows |
 | Regressão de buses e reativação | PASS: mono/estéreo, 0 canais, 0 amostras, pré-prepare/pós-release e rates inválidos |
 | Navegador sob reprodução | PASS: 12 ciclos de fechamento, atualização de busca pendente, áudio finito e message thread responsiva |
-| Debug ASan + UBSan | Revisão anterior: 6/6; build final recompilado, 7 testes (incluindo novos controles/áudio) em execução com detect_leaks=1, halt_on_error=1. |
+| Debug ASan + UBSan | PASS: 7/7, 190,26 s; inclui controles/áudio, detect_leaks=1 e halt_on_error=1; sem relatório de memória/UB/leaks nem JUCE Assertion. |
 | pluginval 1.0.4, nível 10 | PASS no VST3 final; GUI, 44,1/48/96/192 kHz, blocos 32/64/128/256/512/1024, seed 140 |
 | Validator oficial Steinberg 3.8.1 | PASS: 47/47 no Release e 47/47 no Debug instrumentado; SDK fixado em 3cdf9ca5d1f5b1b21e0a86832aa4abe55607bd96 |
 | AudioPluginHost oficial sem alterar fontes | PARCIAL: carregou projeto/estado e abriu/fechou o editor; primeira saída 139, repetições normal e GDB saíram sem falha; causa ainda indeterminada |
@@ -58,10 +58,23 @@ A política CPU/GDI com imagens em CPU é uma escolha de compatibilidade, não g
 . /workspace/tools/build-env.sh
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/workspace/tools/sysroot/usr
 cmake --build build --parallel 3
-DISPLAY=:102 ctest --test-dir build -V --output-on-failure
-PLATE140_PRESET_HOME=/workspace/pasta-de-teste DISPLAY=:102 build/PlatePreview_artefacts/Release/PlatePreview /workspace/plate-final.png
+DISPLAY=:103 ctest --test-dir build -V --output-on-failure
+PLATE140_PRESET_HOME=/workspace/pasta-de-teste DISPLAY=:103 build/PlatePreview_artefacts/Release/PlatePreview /workspace/plate-final.png
 ```
 
 Debug usou -O0 -g1 -fsanitize=address,undefined -fno-omit-frame-pointer e flags de link equivalentes. ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 e UBSAN_OPTIONS=halt_on_error=1; ctest selecionou PlateDSP, PlateSoundBehaviour, EditorGestureLifetime, EditorGestureLifetime125, HostLifecycle e EditorBrowserTeardown. O sandbox inicial impediu o LeakSanitizer de inspecionar threads; executar fora dele resolveu a restrição, mantendo detect_leaks=1. O cache Ninja perdeu dependências entre execuções neste ambiente; a recompilação final usou os comandos de compile/link emitidos por ninja -t commands, seguida das suítes acima, sem alterar o código para evitar testes.
 
 Validator SDK foi compilado em Debug com VSTGUI/plugin/hosting examples OFF; validator permanece disponível nessa configuração. Para carregar o plugin instrumentado, o executável recebeu LD_PRELOAD do libasan do mesmo GCC. AudioPluginHost foi compilado pelo CMake oficial JUCE com JUCE_BUILD_EXTRAS=ON, target AudioPluginHost, e um projeto com estado VST3 real; o encerramento normal foi acionado por X do editor e Ctrl+Q. Esses comandos não substituem o reteste na DAW afetada.
+
+## Ambiente gráfico e repetição final (05/11)
+
+Uma primeira repetição perdeu o servidor Xvfb enquanto os validadores ainda
+executavam. XOpenDisplay(:102) retornou nullptr; pluginval caiu dentro do próprio
+XEmbedComponent ao criar a janela, e o runner de integração ficou sem clipboard.
+A stack foi preservada em validation/diagnostics/pluginval-no-display.txt.
+Nenhum código do produto foi alterado para ignorar esses testes. Uma única sessão
+manteve o Xvfb :103 vivo até terminar, verificou a conexão antes de começar e
+encerrou o display depois: Release 11/11, ASan/UBSan 7/7, runner dos 100 presets
+e pluginval 10 com GUI, seed 140, quatro sample rates e seis block sizes: exit 0.
+As capturas finais estão em images/plate140.png e images/preset-browser.png.
+A medição de CPU em máquinas reais, escuta e validação nas DAWs continuam pendentes.

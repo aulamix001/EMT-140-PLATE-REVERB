@@ -1,0 +1,130 @@
+Environment diagnosis: XOpenDisplay(:102) returned nullptr after Xvfb had exited. Same product binaries passed all validators with Xvfb lifetime bound to the validation session; see docs/VALIDATION.md.
+
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7ffff79786c0 (LWP 102574)]
+Started validating: /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3
+[New Thread 0x7ffff71776c0 (LWP 102575)]
+Random seed: 0x8c
+Validation started
+Strictness level: 10
+-----------------------------------------------------------------
+Starting tests in: pluginval / Scan for plugins located in: /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3...
+Num plugins found: 1
+
+Testing plugin: VST3-PLATE 140-7d764ffd-8c0c8446
+Aulamix: PLATE 140 v0.2.0
+Completed tests in pluginval / Scan for plugins located in: /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3
+-----------------------------------------------------------------
+Starting tests in: pluginval / Open plugin (cold)...
+[New Thread 0x7ffff5b276c0 (LWP 102576)]
+[Thread 0x7ffff5b276c0 (LWP 102576) exited]
+[New Thread 0x7ffff5b276c0 (LWP 102577)]
+[New Thread 0x7ffff53266c0 (LWP 102578)]
+[Thread 0x7ffff5b276c0 (LWP 102577) exited]
+[Thread 0x7ffff53266c0 (LWP 102578) exited]
+[New Thread 0x7ffff53266c0 (LWP 102579)]
+[Thread 0x7ffff53266c0 (LWP 102579) exited]
+Completed tests in pluginval / Open plugin (cold)
+-----------------------------------------------------------------
+Starting tests in: pluginval / Open plugin (warm)...
+[New Thread 0x7ffff53266c0 (LWP 102580)]
+[Thread 0x7ffff53266c0 (LWP 102580) exited]
+[New Thread 0x7ffff53266c0 (LWP 102581)]
+[New Thread 0x7ffff5b276c0 (LWP 102582)]
+Running tests 1 times
+Completed tests in pluginval / Open plugin (warm)
+-----------------------------------------------------------------
+Starting tests in: pluginval / Plugin info...
+
+Plugin name: PLATE 140
+Alternative names: PLATE 140
+SupportsDoublePrecision: no
+Reported latency: 0
+Reported taillength: 7
+Completed tests in pluginval / Plugin info
+-----------------------------------------------------------------
+Starting tests in: pluginval / Plugin programs...
+Num programs: 101
+All program names checked
+
+Changing program
+Completed tests in pluginval / Plugin programs
+-----------------------------------------------------------------
+Starting tests in: pluginval / Editor...
+[Detaching after fork from child process 102583]
+[Detaching after fork from child process 102587]
+
+Thread 1 "pluginval" received signal SIGSEGV, Segmentation fault.
+0x000055555596457b in juce::XEmbedComponent::Pimpl::componentParentHierarchyChanged(juce::Component&) ()
+
+Thread 10 (Thread 0x7ffff5b276c0 (LWP 102582) "pluginval"):
+#0  0x00007ffff7ae272e in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007ffff7ad7388 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007ffff7ad79ac in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007ffff7ada255 in pthread_cond_clockwait () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x00005555557b2dd8 in juce::WaitableEvent::wait(double) const ()
+#5  0x000055555582cce0 in juce::Timer::TimerThread::run() ()
+#6  0x00005555557b2f1c in juce::Thread::threadEntryPoint() ()
+#7  0x00005555557b315d in juce::Thread::createNativeThread(juce::Thread::Priority)::{lambda(void*)#1}::_FUN(void*) ()
+#8  0x00007ffff7ada8bb in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#9  0x00007ffff7b58538 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 9 (Thread 0x7ffff53266c0 (LWP 102581) "pluginval"):
+#0  0x00007ffff7ae272e in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007ffff7ad7388 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007ffff7ad79ac in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007ffff7ada255 in pthread_cond_clockwait () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x00007ffff62fe2a8 in juce::WaitableEvent::wait(double) const () from /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3/Contents/x86_64-linux/PLATE 140.so
+#5  0x00007ffff629d5e8 in juce::Timer::TimerThread::run() () from /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3/Contents/x86_64-linux/PLATE 140.so
+#6  0x00007ffff62fe3db in juce::Thread::threadEntryPoint() () from /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3/Contents/x86_64-linux/PLATE 140.so
+#7  0x00007ffff62fe5d9 in juce::Thread::createNativeThread(juce::Thread::Priority)::{lambda(void*)#1}::_FUN(void*) () from /workspace/EMT-140-PLATE-REVERB/build/Plate140_artefacts/Release/VST3/PLATE 140.vst3/Contents/x86_64-linux/PLATE 140.so
+#8  0x00007ffff7ada8bb in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#9  0x00007ffff7b58538 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 3 (Thread 0x7ffff71776c0 (LWP 102575) "TimoutThread"):
+#0  0x00007ffff7ae272e in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007ffff7ad7388 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007ffff7b23cfa in clock_nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007ffff7b2f113 in nanosleep () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x000055555577dc4d in juce::Thread::sleep(int) ()
+#5  0x0000555555689d0f in non-virtual thunk to PluginsUnitTestRunner::run() ()
+#6  0x00005555557b2f1c in juce::Thread::threadEntryPoint() ()
+#7  0x00005555557b315d in juce::Thread::createNativeThread(juce::Thread::Priority)::{lambda(void*)#1}::_FUN(void*) ()
+#8  0x00007ffff7ada8bb in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#9  0x00007ffff7b58538 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 2 (Thread 0x7ffff79786c0 (LWP 102574) "pluginval"):
+#0  0x00007ffff7ae272e in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007ffff7ad7388 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007ffff7ad79ac in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007ffff7ad9e98 in pthread_cond_wait () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x0000555555da6670 in std::condition_variable::wait(std::unique_lock<std::mutex>&) ()
+#5  0x00005555557b2e2b in juce::WaitableEvent::wait(double) const ()
+#6  0x000055555566fe30 in PluginTests::testType(juce::PluginDescription const&) ()
+#7  0x0000555555670280 in PluginTests::runTest() ()
+#8  0x00005555557f63d7 in juce::UnitTestRunner::runTests(juce::Array<juce::UnitTest*, juce::DummyCriticalSection, 0> const&, long long) ()
+#9  0x000055555568bd02 in runTests(PluginTests&, std::function<void (juce::String const&)>) ()
+#10 0x0000555555690445 in AsyncValidator::run() ()
+#11 0x0000555555e10054 in execute_native_thread_routine ()
+#12 0x00007ffff7ada8bb in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#13 0x00007ffff7b58538 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 1 (Thread 0x7ffff797a140 (LWP 102571) "pluginval"):
+#0  0x000055555596457b in juce::XEmbedComponent::Pimpl::componentParentHierarchyChanged(juce::Component&) ()
+#1  0x00005555559d7503 in juce::Component::internalHierarchyChanged() ()
+#2  0x0000555555a011e2 in juce::Component::addChildComponent(juce::Component&, int) ()
+#3  0x00005555558b0aea in non-virtual thunk to juce::VST3PluginWindow::componentVisibilityChanged() ()
+#4  0x00005555559d4749 in juce::ComponentMovementWatcher::componentParentHierarchyChanged(juce::Component&) ()
+#5  0x00005555559d7503 in juce::Component::internalHierarchyChanged() ()
+#6  0x0000555555a18bfe in juce::Component::addToDesktop(int, void*) ()
+#7  0x0000555555671a30 in createAndShowEditorOnMessageThread(juce::AudioPluginInstance&) ()
+#8  0x0000555555678e26 in EditorTest::runTest(PluginTests&, juce::AudioPluginInstance&) ()
+#9  0x000055555566efdf in std::_Function_handler<void (), PluginTests::testType(juce::PluginDescription const&)::{lambda()#1}>::_M_invoke(std::_Any_data const&) ()
+#10 0x000055555582c63a in std::_Function_handler<void (int), juce::InternalMessageQueue::InternalMessageQueue()::{lambda(int)#1}>::_M_invoke(std::_Any_data const&, int&&) ()
+#11 0x000055555581f3a2 in std::_Function_handler<void (), juce::LinuxEventLoop::registerFdCallback(int, std::function<void (int)>, short)::{lambda()#1}>::_M_invoke(std::_Any_data const&) ()
+#12 0x00005555558296b1 in juce::MessageManager::runDispatchLoop() ()
+#13 0x0000555555654a41 in juce::JUCEApplicationBase::main() ()
+#14 0x00007ffff7a71ca8 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#15 0x00007ffff7a71d65 in __libc_start_main () from /lib/x86_64-linux-gnu/libc.so.6
+#16 0x00005555556596b5 in _start ()
