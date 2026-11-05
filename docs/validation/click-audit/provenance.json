@@ -1,0 +1,17 @@
+{
+  "production_commit": "fea40a4eec01314e1d61e3bc20f54f1a320088e9",
+  "baseline_commit": "e6b647b748eac85aefa16d31f83259d04ffee449",
+  "windows_run": 42085132758,
+  "windows_release": "v0.2.1-dev.1",
+  "windows_zip_sha256": "d050076d4435b6f1a7a2e0a5e40bc35f37f37c04eead05c6edd8c1eebf8d9034",
+  "linux_ctests": 13,
+  "asan_ubsan_tests": 9,
+  "source_blobs": {
+    "Source/DSP/PlateEngine.h": "2bc9e05ff5f3f1d5d820b4f24e091c16d9a46242",
+    "Source/PluginProcessor.cpp": "d2577aef447a8d298f93816d73658a95319fc7ce",
+    "Source/PluginProcessor.h": "4963b6a384d083efc8e7da43a9667ee7e81831a5",
+    "Source/Common/ParameterTransactions.h": "cd75171772c5e6a5828b56e8c66fafb3c3d7d9ef",
+    "Source/PluginEditor.cpp": "f9262565cc549354a7f1b9f4099d1b0b7a0a7304"
+  },
+  "bank_sha256": "ee2a0b800cbb761e22a91cb355ff5a18492ef10f623e658e25e2ae05307c8656"
+}

@@ -1,6 +1,9 @@
 # PLATE 140
 Original C++17/JUCE 8 plate-inspired reverb by Aulamix. The panel displays the historical EMT 140 / Elektromesstechnik Wilhelm Franz legends at the user’s request; the plugin remains an independent development. Native VST3 and Standalone; AU on macOS. Scalable original-reference panel editor with embedded artwork and live controls, three independent plate tanks, 100 original factory presets, XML state, A/B comparison and user preset import/export.
 
+## Download Windows x64
+[PLATE 140 v0.2.1-dev.1 — compiled VST3 and Standalone](https://github.com/aulamix001/EMT-140-PLATE-REVERB/releases/download/v0.2.1-dev.1/PLATE140-Windows-x64.zip). Close the DAW, replace the full PLATE 140.vst3 folder and rescan. Native Windows automated gates passed; Reaper, Studio One 8 and listening remain untested.
+
 ## Build
 Install CMake ≥3.22, a C++17 compiler, Git and Python 3.12. Install metric dependencies with `python -m pip install -r requirements-metrics.txt`. Linux also needs ALSA, X11/Xext/Xinerama/Xrandr/Xcursor/Xrender, FreeType/fontconfig development packages. JUCE 8.0.6 is fetched at a fixed commit if `JUCE_PATH` is not set.
 

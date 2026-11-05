@@ -1,0 +1,16 @@
+{
+  "release": "v0.2.1-dev.1",
+  "commit": "fea40a4eec01314e1d61e3bc20f54f1a320088e9",
+  "sha256": "d050076d4435b6f1a7a2e0a5e40bc35f37f37c04eead05c6edd8c1eebf8d9034",
+  "bytes": 15716536,
+  "module": "VST3/PLATE 140.vst3/Contents/x86_64-win/PLATE 140.vst3",
+  "architecture": "PE32+ AMD64",
+  "presets": 100,
+  "aux": 73,
+  "insert": 27,
+  "factory_bank_matches": true,
+  "xml_maps_match": true,
+  "crc_ok": true,
+  "windows_validation": "Commit: fea40a4eec01314e1d61e3bc20f54f1a320088e9\r\nWindows Server 2022, MSVC x64. Debug build/ctest/official Steinberg validator: PASS. Release build/ctest/native preset integration/VST3 removal/pluginval level 10: PASS.\r\nStudio One 8/8.4, Reaper, physical mixed DPI and real listening: NOT TESTED.\r\n",
+  "download": "https://github.com/aulamix001/EMT-140-PLATE-REVERB/releases/download/v0.2.1-dev.1/PLATE140-Windows-x64.zip"
+}

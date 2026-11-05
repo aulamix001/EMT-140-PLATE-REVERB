@@ -45,8 +45,14 @@ dos tons/cronômetro; não é porcentagem global da máquina nem teste ASIO. P99
 não são gates absolutos em VM. O fixture antigo só é compilado no benchmark.
 O áudio estacionário deve manter a mesma energia dentro da tolerância registrada.
 
-Windows 0.2.1: compilação/validação nativa será executada no workflow associado
-ao commit da correção. O ZIP só é publicado após os gates Debug e Release.
-Studio One 8, Reaper e escuta real NÃO foram executados nesta auditoria.
+Windows 0.2.1: **PASS** no [workflow 42085132758](https://github.com/aulamix001/EMT-140-PLATE-REVERB/actions/runs/42085132758), commit `fea40a4eec01314e1d61e3bc20f54f1a320088e9`. Debug/Release build e ctest, validator oficial, benchmark nativo, integração dos 100 presets, remoção real do VST3 e pluginval nível 10 passaram. O ZIP foi baixado e conferido: CRC, SHA256, PE32+ AMD64, commit, 100 XML e Bank.json iguais ao fonte. Dados em `validation/click-audit/windows-package.json` e `windows-ci.txt`.
+
+[Download Windows x64 v0.2.1-dev.1](https://github.com/aulamix001/EMT-140-PLATE-REVERB/releases/download/v0.2.1-dev.1/PLATE140-Windows-x64.zip) — 15716536 bytes; SHA256 `d050076d4435b6f1a7a2e0a5e40bc35f37f37c04eead05c6edd8c1eebf8d9034`.
+
+O workflow geral aparece como Failure apenas porque o job de PR foi bloqueado: `GitHub Actions is not permitted to create or approve pull requests`. Os jobs de build e publicação passaram. A branch `fix-presets-audibility` contém os commits; o PR automático não foi criado.
+
+Studio One 8, Reaper, ASIO físico/DPC e escuta real **NÃO foram executados**. Os defeitos de código reproduzidos foram corrigidos; não se afirma que todos os estalos da máquina do usuário foram eliminados sem esse teste final.
 
 Benchmark Linux repetido sem compilação concorrente: queda mediana de 59.4–65.9% nas oito configurações. A 48 kHz: 4.139→1.589% sem modulação e 5.167→1.764% com modulação (percentual de um núcleo; valores completos no JSON).
+
+Para reproduzir o ensaio de headroom: `g++ -std=c++17 -O3 -I Source docs/validation/click-audit/headroom-probe.cpp -o headroom-probe` e execute o binário redirecionando a saída para CSV. O fixture antigo do benchmark é o blob original do commit e6b647b, usado somente no executável de comparação.

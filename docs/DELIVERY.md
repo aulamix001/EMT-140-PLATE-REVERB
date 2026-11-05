@@ -1,3 +1,11 @@
+# Current delivery: PLATE 140 0.2.1 crackle fixes
+
+[Download Windows x64 v0.2.1-dev.1](https://github.com/aulamix001/EMT-140-PLATE-REVERB/releases/download/v0.2.1-dev.1/PLATE140-Windows-x64.zip). Production commit `fea40a4eec01314e1d61e3bc20f54f1a320088e9`; verified PE32+ AMD64, ZIP CRC/SHA256 and all 100 preset mappings. Windows Debug/Release gates and pluginval 10 passed in [run 42085132758](https://github.com/aulamix001/EMT-140-PLATE-REVERB/actions/runs/42085132758).
+
+Close the DAW, replace the full PLATE 140.vst3 folder under C:\Program Files\Common Files\VST3, rescan and check plugin version 0.2.1. Existing parameter IDs/ranges and preset formats are unchanged. See CRACKLE_AUDIT.md for exact fixes and measurements. Studio One 8, Reaper, physical ASIO/DPC and listening remain untested. PR creation is blocked by the repository's Actions permission; build/release succeeded.
+
+The following record describes the previous 0.2.0 delivery.
+
 # Development delivery: 100 presets and floating browser
 C++17/JUCE 8 source includes 100 embedded factory programs, 100 portable XML presets, a JSON manifest, 20-parameter CSV mapping and Portuguese usage guide in Presets/PLATE140-100.
 
