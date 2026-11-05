@@ -23,6 +23,7 @@ private:
  std::unique_ptr<PresetWindow> presetWindow;juce::ValueTree stateA,stateB;bool usingB=false,closing=false;
  void openPresets();void updatePresetCaption();
  std::unique_ptr<juce::FileChooser> chooser;juce::ValueTree alternate;float vu=0;bool bState=false;int presetIndex=-1;
+ std::array<float,20> displayed{};bool firstDisplay=true;
  void timerCallback()override;void chooseFile(bool saving);void drawPanel(juce::Graphics&);
  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PlateEditor)
 };

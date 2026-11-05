@@ -35,7 +35,7 @@ inline void runControlAudit(){
  for(const char*id:{"power","eq_enable","wet_solo"}){auto*button=dynamic_cast<juce::Button*>(find(editor,id,find));require(button!=nullptr,"Missing toggle");for(bool value:{false,true}){button->setToggleState(value,juce::sendNotificationSync);require(processor.get(id)==float(value),"Toggle attachment mismatch");}}
  auto dial=[&](const char*id,float value){auto*s=dynamic_cast<juce::Slider*>(find(editor,id,find));require(s!=nullptr,"Missing audio test dial");s->setValue(value,juce::sendNotificationSync);};
  auto render=[&](double frequency,float lowGain,float highGain,bool equalizer,bool wet,float mix){
-  processor.reset();processor.set("input_filter_model",2);processor.set("wet_solo",wet?1.f:0.f);processor.set("eq_enable",equalizer?1.f:0.f);
+  processor.resetToDefaults();processor.set("input_filter_model",2);processor.set("wet_solo",wet?1.f:0.f);processor.set("eq_enable",equalizer?1.f:0.f);
   // Use the same live controls as the user, not direct raw DSP parameter assignment.
   dial("eq_low_freq",200);dial("eq_high_freq",2000);dial("eq_low_gain",lowGain);dial("eq_high_gain",highGain);dial("predelay",0);dial("mix",mix);
   processor.prepareToPlay(48000,256);juce::AudioBuffer<float> block(2,256);juce::MidiBuffer midi;double energy=0;
@@ -52,7 +52,7 @@ inline void runControlAudit(){
  // Inactive parameters (e.g. MIX under WET SOLO) are deliberately tested separately.
  const std::array<std::pair<float,float>,20> extremes{{{0,2},{.6f,5.5f},{.6f,5.5f},{.6f,5.5f},{2,0},{0,2},{0,5},{0,100},{-100,100},{0,1},{20,2000},{-12,12},{200,20000},{-12,12},{0,1},{0,10},{0,250},{0,100},{0,1},{0,1}}};
  auto impulse=[&](int index,float value){
-  processor.reset();processor.set("input_filter_model",2);processor.set("predelay",0);
+  processor.resetToDefaults();processor.set("input_filter_model",2);processor.set("predelay",0);
   if(index>=1&&index<=3)processor.set("plate_select",float(index-1));
   if(index==5)processor.set("input_filter_model",0);if(index==6)processor.set("input_filter_model",1);
   if(index==9){processor.set("eq_low_gain",12);processor.set("eq_high_gain",-12);}

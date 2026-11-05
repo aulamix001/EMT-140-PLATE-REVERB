@@ -1,0 +1,2 @@
+Host reset program 7 -> 100
+HOST RESET CHANGED PRESET/PARAMETERS

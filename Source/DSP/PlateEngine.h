@@ -11,21 +11,30 @@ struct Parameters {
  double width=100,balance=0,lowFreq=120,lowGain=0,highFreq=8000,highGain=0,rate=0,depth=0,predelay=50,mix=15;
  bool eq=true,wetSolo=true,power=true;
 };
-struct Smooth { double value=0, k=0.001; void prepare(double sr,double seconds=.05){k=1-std::exp(-1/(sr*seconds));} double next(double target){return value+=k*(target-value);} };
+struct Smooth { double value=0, k=0.001; void prepare(double sr,double seconds=.05){k=1-std::exp(-1/(sr*seconds));} double next(double target){if(value==target)return value;value+=k*(target-value);if(std::abs(target-value)<1e-10*std::max(1.,std::abs(target)))value=target;return value;} };
 struct Biquad {
  double b0=1,b1=0,b2=0,a1=0,a2=0,z1=0,z2=0;
- void shelf(double sr,double hz,double db,bool high) {
+ double lastSr=-1,lastHz=-1,lastDb=1e30;bool lastHigh=false;
+ std::array<double,5> goal{},increment{};int rampLeft=0;
+ void reset()noexcept{z1=z2=0;rampLeft=0;lastSr=-1;}
+ void shelf(double sr,double hz,double db,bool high,int ramp=0) {
+  if(sr==lastSr&&hz==lastHz&&db==lastDb&&high==lastHigh)return;
+  lastSr=sr;lastHz=hz;lastDb=db;lastHigh=high;
+  const std::array<double,5> old{{b0,b1,b2,a1,a2}};
   hz=std::clamp(hz,10.,sr*.45); double A=std::pow(10.,db/40),w=2*pi*hz/sr,c=std::cos(w),s=std::sin(w),q=std::sqrt(2*A)*s;
   double a0;
   if(high){b0=A*((A+1)+(A-1)*c+q); b1=-2*A*((A-1)+(A+1)*c); b2=A*((A+1)+(A-1)*c-q); a0=(A+1)-(A-1)*c+q; a1=2*((A-1)-(A+1)*c); a2=(A+1)-(A-1)*c-q;}
   else {b0=A*((A+1)-(A-1)*c+q); b1=2*A*((A-1)-(A+1)*c); b2=A*((A+1)-(A-1)*c-q); a0=(A+1)+(A-1)*c+q; a1=-2*((A-1)+(A+1)*c); a2=(A+1)+(A-1)*c-q;}
   b0/=a0;b1/=a0;b2/=a0;a1/=a0;a2/=a0;
+  goal={{b0,b1,b2,a1,a2}};rampLeft=ramp;
+  if(ramp>0){for(int i=0;i<5;++i)increment[size_t(i)]=(goal[size_t(i)]-old[size_t(i)])/ramp;b0=old[0];b1=old[1];b2=old[2];a1=old[3];a2=old[4];}
  }
- double tick(double x){double y=b0*x+z1;z1=b1*x-a1*y+z2;z2=b2*x-a2*y; if(std::abs(z1)<1e-30)z1=0;if(std::abs(z2)<1e-30)z2=0;return y;}
+ double tick(double x){if(rampLeft>0){b0+=increment[0];b1+=increment[1];b2+=increment[2];a1+=increment[3];a2+=increment[4];if(--rampLeft==0){b0=goal[0];b1=goal[1];b2=goal[2];a1=goal[3];a2=goal[4];}}double y=b0*x+z1;z1=b1*x-a1*y+z2;z2=b2*x-a2*y; if(std::abs(z1)<1e-30)z1=0;if(std::abs(z2)<1e-30)z2=0;return y;}
 };
 struct Delay {
  std::vector<double> data; size_t pos=0;
  void prepare(int length){data.assign(std::max(2,length),0);pos=0;}
+ void clear()noexcept{std::fill(data.begin(),data.end(),0.);pos=0;}
  double read(double samples)const {
   const double delay=std::clamp(samples,1.,double(data.size()-1));
   const auto whole=size_t(delay);const double fraction=delay-double(whole);
@@ -41,6 +50,22 @@ struct Delay {
  double allpass(double x,double coefficient=.65){auto d=oldest();double y=d-coefficient*x;push(x+coefficient*y);return y;}
 
 };
+// Changing pre-delay crossfades stationary read heads instead of sweeping the
+// read pointer through the buffer (which creates a large Doppler burst).
+struct PredelayHeads {
+ double from=0,to=0;int elapsed=0,length=1;bool fading=false;
+ void prepare(double sr)noexcept{length=std::max(1,int(sr*.03));}
+ void initialize(double samples)noexcept{from=to=samples;elapsed=0;fading=false;}
+ struct Position{double from,to,mix;};
+ Position next(double target)noexcept{
+  if(!fading&&target!=to){from=to;to=target;elapsed=0;fading=true;}
+  if(!fading)return {to,to,0};
+  const double x=double(elapsed)/length,w=x*x*(3-2*x);
+  const Position out{from,to,w};
+  if(++elapsed>length){fading=false;from=to;}
+  return out;
+ }
+};
 // All tuning is an independent plate-inspired design, not a proprietary circuit model.
 struct Tank {
  std::array<Delay,16> lines,dispersion;
@@ -53,9 +78,12 @@ struct Tank {
  Smooth rt;
  std::array<Biquad,2> pickupColour;
  double sr=48000,damping=0,allpassCoefficient=.55,inputCoefficient=.67,lowRatio=1.02,highRatio=.45,earlyGain=.14;
- int counter=0,modelIndex=0;
+ int counter=0,modelIndex=0;double cachedRt=-1;
+ void clear()noexcept{
+  for(auto&d:lines)d.clear();for(auto&d:dispersion)d.clear();for(auto&d:diffusion)d.clear();for(auto&d:sideDiffusion)d.clear();early.clear();earlySide.clear();low.fill(0);counter=0;cachedRt=-1;for(auto&f:pickupColour)f.reset();for(auto&s:excursion)s.value=0;
+ }
  void prepare(double sampleRate,int model){
-  sr=sampleRate;modelIndex=model;counter=0;rt.prepare(sr);rt.value=2;low.fill(0);
+  sr=sampleRate;modelIndex=model;counter=0;cachedRt=-1;rt.prepare(sr);rt.value=2;low.fill(0);
   static constexpr int lengths[3][16]={
    {149,211,293,353,431,503,593,683,787,907,1031,1163,1301,1451,1613,1783},
    {97,163,229,307,397,487,607,739,883,1033,1193,1361,1543,1733,1933,2141},
@@ -83,11 +111,11 @@ struct Tank {
  }
  std::array<double,2> tick(double x,double target,double modulationSamples,double sine,double cosine,double side=0){
   rt.next(target);for(auto&d:diffusion)x=d.allpass(x,inputCoefficient);early.push(x);for(auto&d:sideDiffusion)side=d.allpass(side,inputCoefficient);earlySide.push(side);
+  if(counter==0&&rt.value!=cachedRt){cachedRt=rt.value;for(int i=0;i<16;++i){gainLow[i]=std::exp(-6.907755278982137*roundTrip[i]/(std::max(.3,rt.value)*lowRatio));gainHigh[i]=std::exp(-6.907755278982137*roundTrip[i]/(std::max(.3,rt.value)*highRatio));}}
   std::array<double,16> y{};double sum=0;
   for(int i=0;i<16;++i){double amplitude=excursion[i].next(std::min(modulationSamples,std::min(sr*.006,double(nominal[i])*.35)));if(amplitude<1e-9){excursion[i].value=0;y[i]=lines[i].readInteger(nominal[i]);}else y[i]=lines[i].read(double(nominal[i])+amplitude*(sine*phaseCos[i]+cosine*phaseSin[i]));sum+=y[i];}
   std::array<double,2> out{};
   for(int i=0;i<16;++i){
-   if(counter==0){gainLow[i]=std::exp(-6.907755278982137*roundTrip[i]/(std::max(.3,rt.value)*lowRatio));gainHigh[i]=std::exp(-6.907755278982137*roundTrip[i]/(std::max(.3,rt.value)*highRatio));}
    double mixed=y[i]-sum/8;low[i]=(1-damping)*mixed+damping*low[i];
    double feedback=gainHigh[i]*mixed+(gainLow[i]-gainHigh[i])*low[i];
    feedback=dispersion[i].allpass(feedback,allpassCoefficient);
@@ -106,26 +134,42 @@ class Engine {
  double sr=48000,phase=0,modulationSamples=0,lastRate=-1,lastDepth=-1,lfoSine=0,lfoCosine=1,dcPrevious=0,dcState=0,dcPreviousSide=0,dcStateSide=0,dcCoefficient=0;unsigned filterCounter=0;
  std::array<Tank,3> tanks;std::array<Delay,2> predelay;
  std::array<Biquad,2> input,eqLow,eqHigh;
- std::array<Smooth,3> select;Smooth width,balance,delay,mix,power,solo,eqOn,lowF,lowG,highF,highG,filterHz,filterDb;
-public:
- void prepare(double sampleRate){sr=sampleRate;phase=0;lastRate=lastDepth=-1;modulationSamples=0;lfoSine=0;lfoCosine=1;dcPrevious=dcState=dcPreviousSide=dcStateSide=0;dcCoefficient=std::exp(-2*pi*8/sr);filterCounter=0;input={};eqLow={};eqHigh={};for(int i=0;i<3;++i){tanks[i].prepare(sr,i);select[i].prepare(sr);select[i].value=i==0?1:0;}
-  for(auto&d:predelay)d.prepare(int(sr*.251)+4);
-  for(auto*s:{&width,&balance,&delay,&mix,&power,&solo,&eqOn,&lowF,&lowG,&highF,&highG,&filterHz,&filterDb})s->prepare(sr);
-  width.value=1;balance.value=0;delay.value=.05*sr;mix.value=.15;power.value=1;solo.value=1;eqOn.value=1;lowF.value=120;highF.value=8000;lowG.value=highG.value=0;filterHz.value=80;filterDb.value=-10;
+ std::array<Smooth,3> select;Smooth width,balance,mix,power,solo,eqOn,lowF,lowG,highF,highG,filterHz,filterDb;
+ PredelayHeads readHeads;bool initialized=false,filtersReady=false;std::array<bool,3> running{};
+ void initialize(const Parameters&p)noexcept{
+  initialized=true;for(int i=0;i<3;++i){running[i]=i==p.plate;select[i].value=i==p.plate?1:0;tanks[i].rt.value=p.rt[i];}
+  width.value=p.width*.01;balance.value=p.balance*.01;mix.value=p.mix*.01;power.value=p.power?1:0;solo.value=p.wetSolo?1:0;eqOn.value=p.eq?1:0;
+  lowF.value=p.lowFreq;lowG.value=p.lowGain;highF.value=p.highFreq;highG.value=p.highGain;
+  const double mh[]={90,125,180,250,270,360},ed[]={-4,-10,-16};filterHz.value=p.filterModel==2?80:p.filterModel==0?80:mh[std::clamp(p.martech,0,5)];filterDb.value=p.filterModel==2?0:p.filterModel==0?ed[std::clamp(p.emt,0,2)]:-12;
+  readHeads.initialize(p.predelay*.001*sr);
  }
+public:
+ void prepare(double sampleRate){sr=sampleRate;initialized=filtersReady=false;readHeads.prepare(sr);phase=0;lastRate=lastDepth=-1;modulationSamples=0;lfoSine=0;lfoCosine=1;dcPrevious=dcState=dcPreviousSide=dcStateSide=0;dcCoefficient=std::exp(-2*pi*8/sr);filterCounter=0;input={};eqLow={};eqHigh={};for(int i=0;i<3;++i){tanks[i].prepare(sr,i);select[i].prepare(sr);select[i].value=i==0?1:0;}
+  for(auto&d:predelay)d.prepare(int(sr*.251)+4);
+  for(auto*s:{&width,&balance,&mix,&power,&solo,&eqOn,&lowF,&lowG,&highF,&highG,&filterHz,&filterDb})s->prepare(sr);
+  width.value=1;balance.value=0;mix.value=.15;power.value=1;solo.value=1;eqOn.value=1;lowF.value=120;highF.value=8000;lowG.value=highG.value=0;filterHz.value=80;filterDb.value=-10;
+ }
+ void reset()noexcept{for(auto&t:tanks)t.clear();for(auto&d:predelay)d.clear();for(auto&f:input)f.reset();for(auto&f:eqLow)f.reset();for(auto&f:eqHigh)f.reset();initialized=filtersReady=false;phase=0;lastRate=lastDepth=-1;modulationSamples=0;lfoSine=0;lfoCosine=1;dcPrevious=dcState=dcPreviousSide=dcStateSide=0;filterCounter=0;}
  std::array<double,2> tick(double l,double r,const Parameters&p){
   if(!std::isfinite(l))l=0;if(!std::isfinite(r))r=0;
+  if(!initialized)initialize(p);
   double on=power.next(p.power?1:0);if(on<1e-7&&!p.power)return {l,r};
   const double mh[]={90,125,180,250,270,360},ed[]={-4,-10,-16};
   filterHz.next(p.filterModel==2?80:p.filterModel==0?80:mh[std::clamp(p.martech,0,5)]);filterDb.next(p.filterModel==2?0:p.filterModel==0?ed[std::clamp(p.emt,0,2)]:-12);
   lowF.next(p.lowFreq);lowG.next(p.lowGain);highF.next(p.highFreq);highG.next(p.highGain);
-  if((filterCounter++%32)==0){for(int c=0;c<2;++c){input[c].shelf(sr,filterHz.value,filterDb.value,false);eqLow[c].shelf(sr,lowF.value,lowG.value,false);eqHigh[c].shelf(sr,highF.value,highG.value,true);}}
+  if((filterCounter++%32)==0){const int ramp=filtersReady?32:0;for(int c=0;c<2;++c){input[c].shelf(sr,filterHz.value,filterDb.value,false,ramp);eqLow[c].shelf(sr,lowF.value,lowG.value,false,ramp);eqHigh[c].shelf(sr,highF.value,highG.value,true,ramp);}filtersReady=true;}
   if(p.rate!=lastRate||p.depth!=lastDepth){lastRate=p.rate;lastDepth=p.depth;modulationSamples=p.rate>0&&p.depth>0?std::expm1(std::log(2.)*p.depth/1200)*sr/(2*pi*p.rate):0;}
   double filteredL=input[0].tick(l),filteredR=input[1].tick(r);double conditioned=(filteredL+filteredR)*.5;double conditionedSide=(filteredL-filteredR)*.5;double blockedSide=conditionedSide-dcPreviousSide+dcCoefficient*dcStateSide;dcPreviousSide=conditionedSide;dcStateSide=std::abs(blockedSide)<1e-30?0:blockedSide;double sideInput=std::tanh(blockedSide*1.05)/1.05;double blocked=conditioned-dcPrevious+dcCoefficient*dcState;dcPrevious=conditioned;dcState=std::abs(blocked)<1e-30?0:blocked;double x=std::tanh(blocked*1.05)/1.05;
   if(p.rate>0){phase+=2*pi*p.rate/sr;if(phase>2*pi)phase-=2*pi;lfoSine=std::sin(phase);lfoCosine=std::cos(phase);}
   double sine=lfoSine,cosine=lfoCosine;
-  std::array<double,2> wet{};for(int i=0;i<3;++i){auto y=tanks[i].tick(x,p.rt[i],modulationSamples,sine,cosine,sideInput);double a=select[i].next(i==p.plate?1:0);for(int c=0;c<2;++c)wet[c]+=a*y[c];}
-  double d=delay.next(p.predelay*.001*sr),e=eqOn.next(p.eq?1:0);for(int c=0;c<2;++c){predelay[c].push(wet[c]);wet[c]=3.0*predelay[c].read(d+1);double filtered=eqHigh[c].tick(eqLow[c].tick(wet[c]));wet[c]+=e*(filtered-wet[c]);}
+  std::array<double,2> wet{};for(int i=0;i<3;++i){
+   const double a=select[i].next(i==p.plate?1:0);
+   if(i==p.plate&&!running[i]){running[i]=true;tanks[i].rt.value=p.rt[i];}
+   if(!running[i])continue;
+   if(i!=p.plate&&a<1e-7){tanks[i].clear();select[i].value=0;running[i]=false;continue;}
+   const auto y=tanks[i].tick(x,p.rt[i],modulationSamples,sine,cosine,sideInput);for(int c=0;c<2;++c)wet[c]+=a*y[c];
+  }
+  const auto heads=readHeads.next(p.predelay*.001*sr);double e=eqOn.next(p.eq?1:0);for(int c=0;c<2;++c){predelay[c].push(wet[c]);double first=predelay[c].read(heads.from+1);wet[c]=3.0*(heads.mix==0?first:first+heads.mix*(predelay[c].read(heads.to+1)-first));double filtered=eqHigh[c].tick(eqLow[c].tick(wet[c]));wet[c]+=e*(filtered-wet[c]);}
   double w=width.next(p.width*.01),b=balance.next(p.balance*.01),mid=(wet[0]+wet[1])*.5,side=(wet[0]-wet[1])*.5*w;wet={(mid+side)*(b>0?1-b:1),(mid-side)*(b<0?1+b:1)};
   double m=mix.next(p.mix*.01),s=solo.next(p.wetSolo?1:0);m+=(1-m)*s;return {l+on*m*(wet[0]-l),r+on*m*(wet[1]-r)};
  }

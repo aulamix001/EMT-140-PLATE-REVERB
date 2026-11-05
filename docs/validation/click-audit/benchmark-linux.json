@@ -1,0 +1,482 @@
+{
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "baseline_commit": "e6b647b748eac85aefa16d31f83259d04ffee449",
+  "repeats": 3,
+  "block_size": 64,
+  "summaries": [
+    {
+      "sample_rate": 44100,
+      "modulated": false,
+      "before_cpu_percent": 3.25287,
+      "after_cpu_percent": 1.30812,
+      "reduction_percent": 59.7856661963128,
+      "before_p99_us": 117.978,
+      "after_p99_us": 52.89
+    },
+    {
+      "sample_rate": 44100,
+      "modulated": true,
+      "before_cpu_percent": 5.12364,
+      "after_cpu_percent": 1.5344,
+      "reduction_percent": 70.05254077179505,
+      "before_p99_us": 138.8,
+      "after_p99_us": 75.344
+    },
+    {
+      "sample_rate": 48000,
+      "modulated": false,
+      "before_cpu_percent": 3.46404,
+      "after_cpu_percent": 1.46361,
+      "reduction_percent": 57.74846710777011,
+      "before_p99_us": 116.385,
+      "after_p99_us": 67.832
+    },
+    {
+      "sample_rate": 48000,
+      "modulated": true,
+      "before_cpu_percent": 4.46847,
+      "after_cpu_percent": 1.65909,
+      "reduction_percent": 62.87118409656996,
+      "before_p99_us": 146.922,
+      "after_p99_us": 67.361
+    },
+    {
+      "sample_rate": 96000,
+      "modulated": false,
+      "before_cpu_percent": 9.11667,
+      "after_cpu_percent": 2.91813,
+      "reduction_percent": 67.9912731293334,
+      "before_p99_us": 124.218,
+      "after_p99_us": 66.47
+    },
+    {
+      "sample_rate": 96000,
+      "modulated": true,
+      "before_cpu_percent": 9.88308,
+      "after_cpu_percent": 3.21689,
+      "reduction_percent": 67.45053161565018,
+      "before_p99_us": 141.944,
+      "after_p99_us": 55.334
+    },
+    {
+      "sample_rate": 192000,
+      "modulated": false,
+      "before_cpu_percent": 15.2667,
+      "after_cpu_percent": 5.79062,
+      "reduction_percent": 62.070257488520774,
+      "before_p99_us": 116.756,
+      "after_p99_us": 50.336
+    },
+    {
+      "sample_rate": 192000,
+      "modulated": true,
+      "before_cpu_percent": 21.569,
+      "after_cpu_percent": 6.79174,
+      "reduction_percent": 68.51156752746999,
+      "before_p99_us": 154.784,
+      "after_p99_us": 82.445
+    }
+  ],
+  "runs": {
+    "before": [
+      [
+        {
+          "sr": 44100,
+          "modulated": false,
+          "cpu_percent": 3.25287,
+          "p99_block_us": 117.978,
+          "max_block_us": 1013.67,
+          "energy": 39.7718
+        },
+        {
+          "sr": 44100,
+          "modulated": true,
+          "cpu_percent": 4.05591,
+          "p99_block_us": 129.405,
+          "max_block_us": 3078.82,
+          "energy": 53.943
+        },
+        {
+          "sr": 48000,
+          "modulated": false,
+          "cpu_percent": 3.41887,
+          "p99_block_us": 99.13,
+          "max_block_us": 247.584,
+          "energy": 61.6346
+        },
+        {
+          "sr": 48000,
+          "modulated": true,
+          "cpu_percent": 4.30861,
+          "p99_block_us": 121.864,
+          "max_block_us": 478.733,
+          "energy": 59.9959
+        },
+        {
+          "sr": 96000,
+          "modulated": false,
+          "cpu_percent": 6.94068,
+          "p99_block_us": 106.421,
+          "max_block_us": 316.158,
+          "energy": 123.116
+        },
+        {
+          "sr": 96000,
+          "modulated": true,
+          "cpu_percent": 8.46244,
+          "p99_block_us": 109.125,
+          "max_block_us": 593.597,
+          "energy": 120.503
+        },
+        {
+          "sr": 192000,
+          "modulated": false,
+          "cpu_percent": 13.4726,
+          "p99_block_us": 96.696,
+          "max_block_us": 321.296,
+          "energy": 245.17
+        },
+        {
+          "sr": 192000,
+          "modulated": true,
+          "cpu_percent": 18.0787,
+          "p99_block_us": 154.784,
+          "max_block_us": 2328.97,
+          "energy": 240.112
+        }
+      ],
+      [
+        {
+          "sr": 44100,
+          "modulated": false,
+          "cpu_percent": 3.20696,
+          "p99_block_us": 120.833,
+          "max_block_us": 313.264,
+          "energy": 39.7718
+        },
+        {
+          "sr": 44100,
+          "modulated": true,
+          "cpu_percent": 5.12364,
+          "p99_block_us": 138.8,
+          "max_block_us": 1173.85,
+          "energy": 53.943
+        },
+        {
+          "sr": 48000,
+          "modulated": false,
+          "cpu_percent": 3.46404,
+          "p99_block_us": 116.385,
+          "max_block_us": 315.727,
+          "energy": 61.6346
+        },
+        {
+          "sr": 48000,
+          "modulated": true,
+          "cpu_percent": 4.46847,
+          "p99_block_us": 152.21,
+          "max_block_us": 901.502,
+          "energy": 59.9959
+        },
+        {
+          "sr": 96000,
+          "modulated": false,
+          "cpu_percent": 9.11667,
+          "p99_block_us": 132.931,
+          "max_block_us": 450.911,
+          "energy": 123.116
+        },
+        {
+          "sr": 96000,
+          "modulated": true,
+          "cpu_percent": 9.88308,
+          "p99_block_us": 172.41,
+          "max_block_us": 5230.29,
+          "energy": 120.503
+        },
+        {
+          "sr": 192000,
+          "modulated": false,
+          "cpu_percent": 15.3729,
+          "p99_block_us": 116.756,
+          "max_block_us": 2003.05,
+          "energy": 245.17
+        },
+        {
+          "sr": 192000,
+          "modulated": true,
+          "cpu_percent": 22.3377,
+          "p99_block_us": 137.868,
+          "max_block_us": 2842.73,
+          "energy": 240.112
+        }
+      ],
+      [
+        {
+          "sr": 44100,
+          "modulated": false,
+          "cpu_percent": 3.66648,
+          "p99_block_us": 100.492,
+          "max_block_us": 658.244,
+          "energy": 39.7718
+        },
+        {
+          "sr": 44100,
+          "modulated": true,
+          "cpu_percent": 5.89581,
+          "p99_block_us": 144.849,
+          "max_block_us": 1839.48,
+          "energy": 53.943
+        },
+        {
+          "sr": 48000,
+          "modulated": false,
+          "cpu_percent": 4.64219,
+          "p99_block_us": 150.087,
+          "max_block_us": 1980.6,
+          "energy": 61.6346
+        },
+        {
+          "sr": 48000,
+          "modulated": true,
+          "cpu_percent": 6.45956,
+          "p99_block_us": 146.922,
+          "max_block_us": 460.766,
+          "energy": 59.9959
+        },
+        {
+          "sr": 96000,
+          "modulated": false,
+          "cpu_percent": 10.5163,
+          "p99_block_us": 124.218,
+          "max_block_us": 167.302,
+          "energy": 123.116
+        },
+        {
+          "sr": 96000,
+          "modulated": true,
+          "cpu_percent": 11.6657,
+          "p99_block_us": 141.944,
+          "max_block_us": 646.667,
+          "energy": 120.503
+        },
+        {
+          "sr": 192000,
+          "modulated": false,
+          "cpu_percent": 15.2667,
+          "p99_block_us": 117.627,
+          "max_block_us": 621.599,
+          "energy": 245.17
+        },
+        {
+          "sr": 192000,
+          "modulated": true,
+          "cpu_percent": 21.569,
+          "p99_block_us": 161.103,
+          "max_block_us": 3119.57,
+          "energy": 240.112
+        }
+      ]
+    ],
+    "after": [
+      [
+        {
+          "sr": 44100,
+          "modulated": false,
+          "cpu_percent": 1.40596,
+          "p99_block_us": 75.374,
+          "max_block_us": 979.833,
+          "energy": 39.7718
+        },
+        {
+          "sr": 44100,
+          "modulated": true,
+          "cpu_percent": 1.59532,
+          "p99_block_us": 87.272,
+          "max_block_us": 1643.28,
+          "energy": 53.943
+        },
+        {
+          "sr": 48000,
+          "modulated": false,
+          "cpu_percent": 1.46361,
+          "p99_block_us": 74.213,
+          "max_block_us": 229.918,
+          "energy": 61.6346
+        },
+        {
+          "sr": 48000,
+          "modulated": true,
+          "cpu_percent": 1.65909,
+          "p99_block_us": 75.804,
+          "max_block_us": 497.803,
+          "energy": 59.9959
+        },
+        {
+          "sr": 96000,
+          "modulated": false,
+          "cpu_percent": 2.84144,
+          "p99_block_us": 70.447,
+          "max_block_us": 357.681,
+          "energy": 123.116
+        },
+        {
+          "sr": 96000,
+          "modulated": true,
+          "cpu_percent": 3.21689,
+          "p99_block_us": 67.532,
+          "max_block_us": 451.483,
+          "energy": 120.503
+        },
+        {
+          "sr": 192000,
+          "modulated": false,
+          "cpu_percent": 5.79062,
+          "p99_block_us": 70.787,
+          "max_block_us": 2485.4,
+          "energy": 245.17
+        },
+        {
+          "sr": 192000,
+          "modulated": true,
+          "cpu_percent": 6.75243,
+          "p99_block_us": 79.621,
+          "max_block_us": 329.318,
+          "energy": 240.112
+        }
+      ],
+      [
+        {
+          "sr": 44100,
+          "modulated": false,
+          "cpu_percent": 1.30114,
+          "p99_block_us": 52.89,
+          "max_block_us": 258.562,
+          "energy": 39.7718
+        },
+        {
+          "sr": 44100,
+          "modulated": true,
+          "cpu_percent": 1.45301,
+          "p99_block_us": 45.218,
+          "max_block_us": 237.089,
+          "energy": 53.943
+        },
+        {
+          "sr": 48000,
+          "modulated": false,
+          "cpu_percent": 1.3892,
+          "p99_block_us": 55.825,
+          "max_block_us": 139.922,
+          "energy": 61.6346
+        },
+        {
+          "sr": 48000,
+          "modulated": true,
+          "cpu_percent": 1.59774,
+          "p99_block_us": 67.361,
+          "max_block_us": 266.133,
+          "energy": 59.9959
+        },
+        {
+          "sr": 96000,
+          "modulated": false,
+          "cpu_percent": 2.91813,
+          "p99_block_us": 40.131,
+          "max_block_us": 6766.71,
+          "energy": 123.116
+        },
+        {
+          "sr": 96000,
+          "modulated": true,
+          "cpu_percent": 3.19508,
+          "p99_block_us": 54.732,
+          "max_block_us": 1620.72,
+          "energy": 120.503
+        },
+        {
+          "sr": 192000,
+          "modulated": false,
+          "cpu_percent": 5.50737,
+          "p99_block_us": 40.151,
+          "max_block_us": 1550.82,
+          "energy": 245.17
+        },
+        {
+          "sr": 192000,
+          "modulated": true,
+          "cpu_percent": 6.79174,
+          "p99_block_us": 82.445,
+          "max_block_us": 1231.07,
+          "energy": 240.112
+        }
+      ],
+      [
+        {
+          "sr": 44100,
+          "modulated": false,
+          "cpu_percent": 1.30812,
+          "p99_block_us": 45.148,
+          "max_block_us": 220.834,
+          "energy": 39.7718
+        },
+        {
+          "sr": 44100,
+          "modulated": true,
+          "cpu_percent": 1.5344,
+          "p99_block_us": 75.344,
+          "max_block_us": 633.407,
+          "energy": 53.943
+        },
+        {
+          "sr": 48000,
+          "modulated": false,
+          "cpu_percent": 1.50495,
+          "p99_block_us": 67.832,
+          "max_block_us": 1953.36,
+          "energy": 61.6346
+        },
+        {
+          "sr": 48000,
+          "modulated": true,
+          "cpu_percent": 1.67139,
+          "p99_block_us": 45.098,
+          "max_block_us": 269.757,
+          "energy": 59.9959
+        },
+        {
+          "sr": 96000,
+          "modulated": false,
+          "cpu_percent": 3.7113,
+          "p99_block_us": 66.47,
+          "max_block_us": 386.634,
+          "energy": 123.116
+        },
+        {
+          "sr": 96000,
+          "modulated": true,
+          "cpu_percent": 3.98895,
+          "p99_block_us": 55.334,
+          "max_block_us": 115.365,
+          "energy": 120.503
+        },
+        {
+          "sr": 192000,
+          "modulated": false,
+          "cpu_percent": 7.61953,
+          "p99_block_us": 50.336,
+          "max_block_us": 474.567,
+          "energy": 245.17
+        },
+        {
+          "sr": 192000,
+          "modulated": true,
+          "cpu_percent": 8.52907,
+          "p99_block_us": 100.252,
+          "max_block_us": 1041.99,
+          "energy": 240.112
+        }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+UpdateCTestConfiguration  from :/workspace/EMT-140-PLATE-REVERB/build/DartConfiguration.tcl
+Parse Config file:/workspace/EMT-140-PLATE-REVERB/build/DartConfiguration.tcl
+Test project /workspace/EMT-140-PLATE-REVERB/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 11
+    Start 11: HostAudioContinuity
+
+11: Test command: /workspace/EMT-140-PLATE-REVERB/build/PlatePreview_artefacts/Release/PlatePreview "--audio-continuity"
+11: Working Directory: /workspace/EMT-140-PLATE-REVERB/build
+11: Test timeout computed to be: 120
+11: PASS: actual AudioProcessor::reset preserves preset/program and clears DSP history
+11: PASS: bit-identical processor output with zero/odd/1/32/100/512/520/1024/2048-sample blocks
+11: PASS: audio continues bit-identically while the actual preset loader is suspended mid-write
+11: PASS: invalid host parameter/audio values are contained
+1/1 Test #11: HostAudioContinuity ..............   Passed    0.07 sec
+
+The following tests passed:
+	HostAudioContinuity
+
+100% tests passed out of 1
+
+Total Test time (real) =   0.07 sec

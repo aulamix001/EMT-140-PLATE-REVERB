@@ -87,6 +87,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Tests
         run: ctest --test-dir build -C Release --output-on-failure
+      - name: Realtime engine benchmark
+        run: python scripts/benchmark_click_fixes.py --before build/Release/ClickProbeBaseline.exe --after build/Release/ClickProbe.exe --out build/click-benchmark
       - name: Preset and floating-browser integration
         shell: pwsh
         run: |
@@ -119,6 +121,8 @@ jobs:
           path: |
             removal-*.log
             teardown-*.log
+            build/click-benchmark/*.json
+            build/click-benchmark/*.txt
           if-no-files-found: ignore
       - name: Save compiled editor screenshot
         uses: actions/upload-artifact@v4
@@ -132,7 +136,7 @@ jobs:
           Expand-Archive pluginval.zip -DestinationPath validator
           $validator = (Get-ChildItem validator -Recurse -Filter pluginval.exe | Select-Object -First 1).FullName
           $bundle = (Get-ChildItem build/Plate140_artefacts/Release/VST3 -Filter *.vst3 | Select-Object -First 1).FullName
-          & $validator --strictness-level 10 --sample-rates 44100,48000,96000,192000 --block-sizes 32,64,128,256,512,1024 --validate $bundle
+          & $validator --strictness-level 10 --sample-rates 44100,48000,96000,192000 --block-sizes 32,64,100,128,256,512,520,1024 --validate $bundle
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Package and verify Windows AMD64 binaries
         shell: pwsh
@@ -184,10 +188,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v0.2.0-dev.2' }}
+          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || 'v0.2.1-dev.1' }}
           RELEASE_COMMIT: ${{ github.sha }}
         run: |
-          gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --target "$RELEASE_COMMIT" --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Development VST3 and Standalone Windows x64: reference-panel UI, corrected physical knob scales, all 20 controls audited through audio, 100 individually voiced presets (minimum tonal/decay contrast across all 4,950 pairs). Debug/Release tests, native lifecycle, official validator and pluginval level 10 passed. Studio One 8, Reaper and listening validation remain pending."
+          gh release create "$RELEASE_TAG" PLATE140-Windows-x64.zip PLATE140-Windows-x64-Debug.zip SHA256SUMS.txt BUILD-COMMIT.txt --target "$RELEASE_COMMIT" --prerelease --title "PLATE 140 Windows x64 ($RELEASE_TAG)" --notes "Windows x64 crackle fixes: preserve presets on host reset, correct dry/bypass initialization, crossfade pre-delay read heads, coherent preset changes, interpolated filter coefficients, lower DSP/GUI CPU. Same 20 parameters and 100 voiced presets. Debug/Release tests, native lifecycle, official validator and pluginval level 10 passed. Studio One 8, Reaper and listening validation remain pending."
 
   open-pr:
     needs: build
@@ -208,7 +212,7 @@ jobs:
             echo "::notice title=Pull request::$existing"
           else
             set +e
-            gh pr create --base main --head fix-presets-audibility --title "Corrige painel EMT, mapeamento dos controles e contraste dos 100 presets" --body-file docs/PR_DESCRIPTION.md > pr-result.txt 2>&1
+            gh pr create --base main --head fix-presets-audibility --title "Corrige estalos, presets e ciclo de vida do PLATE 140" --body-file docs/PR_DESCRIPTION.md > pr-result.txt 2>&1
             result=$?
             set -e
             if [ "$result" -ne 0 ]; then

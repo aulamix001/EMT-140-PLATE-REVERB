@@ -12,7 +12,7 @@ int main(){try{
   for(int i=0;i<int(sr);++i){a.tick(0,0,off);b.tick(0,0,depth);c.tick(0,0,rate);}rendering=true;bool identical=true,finite=true;int first=-1;
   for(int i=0;i<int(sr*.15);++i){double x=i==0?.5:0;auto u=a.tick(x,x,off),v=b.tick(x,x,depth),w=c.tick(x,x,rate);identical=identical&&(u==v)&&(u==w);finite=finite&&std::isfinite(u[0])&&std::isfinite(u[1]);if(first<0&&(std::abs(u[0])+std::abs(u[1])>1e-6))first=i;}
   rendering=false;require(identical,"rate zero or depth zero must be bit-identical to stationary tank");require(finite,"finite output");require(first>=0&&first/sr<.002,"wet onset must occur within 2 ms of zero predelay");
-  plate::Parameters p;p.rate=1;p.depth=10;p.rt={5.5,5.5,5.5};p.plate=2;rendering=true;for(int i=0;i<int(sr*.25);++i){auto y=a.tick(.2*std::sin(i*.1),.2*std::sin(i*.13),p);finite=finite&&std::isfinite(y[0])&&std::isfinite(y[1])&&std::abs(y[0])<20&&std::abs(y[1])<20;}rendering=false;require(finite,"bounded maximum-depth modulation");
+  plate::Parameters p;p.rate=1;p.depth=10;p.rt={5.5,5.5,5.5};p.plate=2;rendering=true;for(int i=0;i<int(sr*.25);++i){auto y=a.tick(.2*std::sin(i*.1),.2*std::sin(i*.13),p);finite=finite&&std::isfinite(y[0])&&std::isfinite(y[1])&&std::abs(y[0])<20&&std::abs(y[1])<20;}a.reset();for(int i=0;i<1024;++i)a.tick(0,0,p);rendering=false;require(finite,"bounded maximum-depth modulation");
  }
  require(allocations==0,"no allocations in tick, including live modulation");std::cout<<"PASS: exact modulation OFF, early density onset, maximum-depth stability and zero callback allocations at 4 sample rates\n";
  }catch(const std::exception&e){rendering=false;std::cerr<<e.what()<<'\n';return 1;}}

@@ -1,3 +1,11 @@
+# Atualização 0.2.1 — correção de estalos
+
+[Auditoria completa e provas antes/depois](CRACKLE_AUDIT.md). Linux Release
+13/13, integração dos 100 presets, pluginval 10 e validator 47/47 executados.
+ASan/UBSan da revisão e Windows 0.2.1 em andamento; o registro 0.2.0 abaixo é
+histórico, não deve ser confundido com a validação do novo binário.
+Studio One 8, Reaper e escuta real continuam não executados.
+
 # Validação — PLATE 140 0.2.0
 
 Registro de 05/11/2026. Código, resultados e limitações são separados abaixo. Os registros antigos em `measurements.json` e `validation/audibility` descrevem revisões anteriores; não substituem estas medições. Banco, IDs, faixas, passos e defaults: os 20 parâmetros existentes foram preservados. Não há 25 parâmetros nem MIDI Learn neste produto.

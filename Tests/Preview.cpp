@@ -3,6 +3,7 @@
 #include "HostLifecycle.h"
 #include "EditorTeardown.h"
 #include "ControlAudit.h"
+#include "AudioContinuity.h"
 #include <iostream>
 #include <stdexcept>
 #include <set>
@@ -11,14 +12,14 @@ class PreviewApp:public juce::JUCEApplication {
  std::unique_ptr<PlateProcessor> processor;std::unique_ptr<PlateEditor> editor;
 public:
  const juce::String getApplicationName()override{return "PlatePreview";}const juce::String getApplicationVersion()override{return "0.1.0";}
- void initialise(const juce::String&args)override{if(args=="--control-audit"){try{runControlAudit();}catch(const std::exception&e){std::cerr<<e.what()<<std::endl;setApplicationReturnValue(1);}quit();return;}if(args=="--editor-teardown"){teardownTest=std::make_unique<EditorTeardownRegression>([this](bool ok){setApplicationReturnValue(ok?0:1);quit();});return;}if(args=="--host-lifecycle"){runHostLifecycleRegression();quit();return;}processor=std::make_unique<PlateProcessor>();processor->prepareToPlay(48000,512);
+ void initialise(const juce::String&args)override{if(args=="--audio-continuity"){try{runAudioContinuityAudit();}catch(const std::exception&e){std::cerr<<e.what()<<std::endl;setApplicationReturnValue(1);}quit();return;}if(args=="--control-audit"){try{runControlAudit();}catch(const std::exception&e){std::cerr<<e.what()<<std::endl;setApplicationReturnValue(1);}quit();return;}if(args=="--editor-teardown"){teardownTest=std::make_unique<EditorTeardownRegression>([this](bool ok){setApplicationReturnValue(ok?0:1);quit();});return;}if(args=="--host-lifecycle"){runHostLifecycleRegression();quit();return;}processor=std::make_unique<PlateProcessor>();processor->prepareToPlay(48000,512);
  auto check=[](bool ok,const char*msg){if(!ok)throw std::runtime_error(msg);};
  processor->set("reverb_time_a",1.3f);processor->set("reverb_time_b",4.1f);processor->set("plate_select",1);check(std::abs(processor->get("reverb_time_a")-1.3f)<.001,"independent RT");
- processor->set("mix",27);processor->set("wet_solo",1);juce::MemoryBlock memory;processor->getStateInformation(memory);processor->reset();processor->setStateInformation(memory.getData(),int(memory.getSize()));check(std::abs(processor->get("mix")-27)<.001,"state recall mix");check(std::abs(processor->get("reverb_time_b")-4.1f)<.001,"state recall RT");check(processor->get("wet_solo")>.5,"state recall solo");
+ processor->set("mix",27);processor->set("wet_solo",1);juce::MemoryBlock memory;processor->getStateInformation(memory);processor->resetToDefaults();processor->setStateInformation(memory.getData(),int(memory.getSize()));check(std::abs(processor->get("mix")-27)<.001,"state recall mix");check(std::abs(processor->get("reverb_time_b")-4.1f)<.001,"state recall RT");check(processor->get("wet_solo")>.5,"state recall solo");
  check(processor->getNumPrograms()==101,"Default plus 100 host programs");check(PlateProcessor::presetNames().size()==100,"100 preset names");
  std::set<uint64_t> audioFingerprints;for(int preset=0;preset<platebank::count;++preset){processor->loadPreset(preset);auto&spec=platebank::presets[preset];
   for(int j=0;j<20;++j)check(std::abs(processor->get(platebank::ids[j])-spec.values[size_t(j)])<.001,"embedded parameter mapping");
-  juce::MemoryBlock state;processor->getStateInformation(state);processor->reset();processor->setStateInformation(state.getData(),int(state.getSize()));
+  juce::MemoryBlock state;processor->getStateInformation(state);processor->resetToDefaults();processor->setStateInformation(state.getData(),int(state.getSize()));
   for(int j=0;j<20;++j)check(std::abs(processor->get(platebank::ids[j])-spec.values[size_t(j)])<.001,"preset session recall");
   juce::String filename=juce::String(preset+1).paddedLeft('0',3)+"_"+juce::String(spec.name).replaceCharacter(' ','_')+".xml";
   auto file=juce::File::getCurrentWorkingDirectory().getChildFile("Presets/PLATE140-100").getChildFile(filename);auto xml=juce::XmlDocument::parse(file);check(xml!=nullptr,"XML preset file exists");processor->state.replaceState(juce::ValueTree::fromXml(*xml));
@@ -30,10 +31,10 @@ public:
  processor->loadPreset(0);juce::MemoryBlock canonical;processor->getStateInformation(canonical);processor->state.getParameter("wet_solo")->setValueNotifyingHost(.835745f);processor->state.getParameter("power")->setValueNotifyingHost(.742717f);processor->setStateInformation(canonical.getData(),int(canonical.getSize()));check(processor->state.getParameter("wet_solo")->getValue()==1.f,"fractional host wet solo restored exactly");check(processor->state.getParameter("power")->getValue()==1.f,"fractional host power restored exactly");
  auto reordered=processor->state.copyState();reordered.removeProperty("version",nullptr);reordered.setProperty("host_metadata","compatible",nullptr);reordered.moveChild(19,0,nullptr);processor->set("mix",23);processor->restoreState(reordered);check(processor->get("mix")==100,"valid legacy reordered state accepted");
  processor->softwareGraphics=false;processor->getStateInformation(canonical);processor->softwareGraphics=true;processor->setStateInformation(canonical.getData(),int(canonical.getSize()));check(!processor->softwareGraphics.load(),"graphics preference recalled");processor->loadPreset(1);check(!processor->softwareGraphics.load(),"factory preset preserves graphics preference");auto legacy=processor->state.copyState();legacy.removeProperty("graphicsMode",nullptr);processor->restoreState(legacy);check(processor->softwareGraphics.load()==bool(PLATE_COMPATIBLE_GRAPHICS),"legacy graphics default");
- processor->reset();std::cout<<"PASS: 100 embedded presets, 100 XML mappings, session recall, bounds, audio and user library persistence\n";
+ processor->resetToDefaults();std::cout<<"PASS: 100 embedded presets, 100 XML mappings, session recall, bounds, audio and user library persistence\n";
 
  check(vintage::rackBackground().isValid()&&vintage::rackBackground().getWidth()==2086,"embedded reference artwork loaded");
- processor->reset();auto* pre=processor->state.getParameter("predelay");auto* mix=processor->state.getParameter("mix");check(std::abs(pre->convertFrom0to1(.5f)-50)<.15,"predelay center");check(std::abs(mix->convertFrom0to1(.5f)-15)<.15,"mix center");
+ processor->resetToDefaults();auto* pre=processor->state.getParameter("predelay");auto* mix=processor->state.getParameter("mix");check(std::abs(pre->convertFrom0to1(.5f)-50)<.15,"predelay center");check(std::abs(mix->convertFrom0to1(.5f)-15)<.15,"mix center");
  juce::AudioBuffer<float> audio(2,512);juce::MidiBuffer midi;for(int b=0;b<100;++b){for(int i=0;i<512;++i){float x=.25f*std::sin(float((b*512+i)*2*plate::pi*220/48000));audio.setSample(0,i,x);audio.setSample(1,i,x);}processor->processBlock(audio,midi);}
  std::cout<<"PASS: native parameter/state/preset/taper/audio integration\n";
  juce::Desktop::getInstance().getMainMouseSource().setScreenPosition({2050,950});editor=std::make_unique<PlateEditor>(*processor);editor->setSize(1565,597);editor->addToDesktop(0);editor->setVisible(true);

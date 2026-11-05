@@ -13,6 +13,9 @@ Windows: Visual Studio 2022 x64 C++ desktop workload, then configure with `-G "V
 
 Linux cloud instance: source `/workspace/tools/build-env.sh` first; use the configured build cache. Run `PlatePreview /absolute/output.png` under Xvfb to render the actual native editor without audio hardware. No web server is needed.
 
+## Crackle fixes in 0.2.1
+Host reset preserves the loaded preset and only clears DSP history. Dry MIX 0/bypass starts correctly, pre-delay changes crossfade fixed taps, filters interpolate coefficients and preset changes use coherent snapshots. Inactive plates and static GUI areas avoid continuous processing/repainting. See [crackle audit](docs/CRACKLE_AUDIT.md) for actual tests and remaining DAW/driver limitations.
+
 ## Controls
 Plate A/B/C buttons select a tank, each retaining its 0.5–5.5 s time. Drag the vertical time meters, scroll, use arrow keys or ± buttons. All knobs support drag, wheel, keyboard arrows, tooltips and double-click default. Host parameter controls provide precise numeric entry. Input filter is a shared 10-position selector: OFF, M90/125/180/250/270/360, E−4/−10/−16. EQ and filter do not change on plate selection. Wet Solo defaults on; disable it for insert dry/wet use. Power is a smoothed dry bypass. VU reads output RMS with 300 ms smoothing and decays when bypassed.
 

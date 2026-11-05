@@ -1,0 +1,4 @@
+mix0 first sample=7.08238e-05 (expected 0.2)
+bypass first sample=8.3316e-05 (expected 0.2)
+steady mod=0 CPU_one_core_percent=3.5456 checksum=125.274
+steady mod=1 CPU_one_core_percent=4.50474 checksum=121.007
