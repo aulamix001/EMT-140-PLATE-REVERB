@@ -24,15 +24,16 @@ Os buffers 100 e 520 informados foram incluídos explicitamente nos testes.
 - Fronteiras de buffer: áudio real do processor bit-idêntico com buffers 0/1/7/32/100/127/512/520/1024/2048. Sem tamanho de FFT ou bloco fixo no motor.
 - Sample rates: regressões em 44,1/48/96/192 kHz, mono/estéreo, buses vazios e reativação.
 - Denormais: ScopedNoDenormals no callback, zeros exatos/snap de estados pequenos e teste de silêncio. Reset do DSP não faz alocações; teste de new cobre reset e processamento nas quatro taxas.
-- Memória/índices: wrap fracionário seguro mantido; ASan/UBSan da revisão atual em andamento. Resultados finais em VALIDATION.md.
+- Memória/índices: wrap fracionário seguro mantido; ASan/UBSan: 9/9 testes, 159,59 s, detect_leaks=1/halt_on_error=1; sem relatório de memória/UB/leaks nem JUCE Assertion. Resultados finais em VALIDATION.md.
 - Valores inválidos: snapshot de parâmetros conserva o último valor finito e limita faixas; NaN/Inf no áudio não contaminam a rede. Teste no processor real.
+- Headroom: probe de 80/997/8003 Hz com pico −18,42 dBFS, 4 s por preset, medindo os 2 s finais: 100/100 abaixo de 0 dBFS; pior pico de saída −14,135 dBFS (Slow Aurora). CSV em validation/click-audit/headroom.csv. Isso não garante headroom para sinais mais altos ou outras sessões.
 - Clipping de ganho/retorno, picos do master e underruns ASIO/DPC continuam dependentes da sessão/driver. A cadeia usa ponto flutuante e não ganhou limiter ou normalização ocultos. Não se apresenta medição offline como prova de ausência de underruns na DAW.
 - O teste cobre renderizações, estado, transições, finitude e custo de CPU; não substitui escuta ou validação nas duas DAWs com a interface de áudio do usuário.
 
 ## Validação executada
 
 Linux Release: 13/13 ctests, 58,71 s; teste adicional dos buffers informados,
-0,07 s; 100 presets reais distintos, importação, recall, A/B, clipboard e browser;
+0,07 s; ASan/UBSan 9/9 (159,59 s), com leak detection; 100 presets reais distintos, importação, recall, A/B, clipboard e browser;
 pluginval nível 10 em quatro taxas; Steinberg 47/47. Os 4.950 pares do banco
 continuam passando o contraste mínimo existente; nenhum ID/faixa/default foi
 alterado e as receitas de fábrica não foram modificadas.
@@ -47,3 +48,5 @@ O áudio estacionário deve manter a mesma energia dentro da tolerância registr
 Windows 0.2.1: compilação/validação nativa será executada no workflow associado
 ao commit da correção. O ZIP só é publicado após os gates Debug e Release.
 Studio One 8, Reaper e escuta real NÃO foram executados nesta auditoria.
+
+Benchmark Linux repetido sem compilação concorrente: queda mediana de 59.4–65.9% nas oito configurações. A 48 kHz: 4.139→1.589% sem modulação e 5.167→1.764% com modulação (percentual de um núcleo; valores completos no JSON).

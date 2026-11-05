@@ -7,74 +7,74 @@
     {
       "sample_rate": 44100,
       "modulated": false,
-      "before_cpu_percent": 3.25287,
-      "after_cpu_percent": 1.30812,
-      "reduction_percent": 59.7856661963128,
-      "before_p99_us": 117.978,
-      "after_p99_us": 52.89
+      "before_cpu_percent": 3.62322,
+      "after_cpu_percent": 1.47022,
+      "reduction_percent": 59.42228183770237,
+      "before_p99_us": 193.993,
+      "after_p99_us": 107.513
     },
     {
       "sample_rate": 44100,
       "modulated": true,
-      "before_cpu_percent": 5.12364,
-      "after_cpu_percent": 1.5344,
-      "reduction_percent": 70.05254077179505,
-      "before_p99_us": 138.8,
-      "after_p99_us": 75.344
+      "before_cpu_percent": 4.7127,
+      "after_cpu_percent": 1.75051,
+      "reduction_percent": 62.8554756296815,
+      "before_p99_us": 273.363,
+      "after_p99_us": 103.927
     },
     {
       "sample_rate": 48000,
       "modulated": false,
-      "before_cpu_percent": 3.46404,
-      "after_cpu_percent": 1.46361,
-      "reduction_percent": 57.74846710777011,
-      "before_p99_us": 116.385,
-      "after_p99_us": 67.832
+      "before_cpu_percent": 4.13881,
+      "after_cpu_percent": 1.5892,
+      "reduction_percent": 61.60248960449985,
+      "before_p99_us": 259.511,
+      "after_p99_us": 101.193
     },
     {
       "sample_rate": 48000,
       "modulated": true,
-      "before_cpu_percent": 4.46847,
-      "after_cpu_percent": 1.65909,
-      "reduction_percent": 62.87118409656996,
-      "before_p99_us": 146.922,
-      "after_p99_us": 67.361
+      "before_cpu_percent": 5.1666,
+      "after_cpu_percent": 1.7639,
+      "reduction_percent": 65.85955947818681,
+      "before_p99_us": 267.273,
+      "after_p99_us": 103.766
     },
     {
       "sample_rate": 96000,
       "modulated": false,
-      "before_cpu_percent": 9.11667,
-      "after_cpu_percent": 2.91813,
-      "reduction_percent": 67.9912731293334,
-      "before_p99_us": 124.218,
-      "after_p99_us": 66.47
+      "before_cpu_percent": 7.75904,
+      "after_cpu_percent": 3.01646,
+      "reduction_percent": 61.12328329277849,
+      "before_p99_us": 209.396,
+      "after_p99_us": 99.58
     },
     {
       "sample_rate": 96000,
       "modulated": true,
-      "before_cpu_percent": 9.88308,
-      "after_cpu_percent": 3.21689,
-      "reduction_percent": 67.45053161565018,
-      "before_p99_us": 141.944,
-      "after_p99_us": 55.334
+      "before_cpu_percent": 9.72423,
+      "after_cpu_percent": 3.56972,
+      "reduction_percent": 63.290461044216364,
+      "before_p99_us": 216.016,
+      "after_p99_us": 101.503
     },
     {
       "sample_rate": 192000,
       "modulated": false,
-      "before_cpu_percent": 15.2667,
-      "after_cpu_percent": 5.79062,
-      "reduction_percent": 62.070257488520774,
-      "before_p99_us": 116.756,
-      "after_p99_us": 50.336
+      "before_cpu_percent": 15.2401,
+      "after_cpu_percent": 6.03563,
+      "reduction_percent": 60.39638847514124,
+      "before_p99_us": 183.717,
+      "after_p99_us": 92.53
     },
     {
       "sample_rate": 192000,
       "modulated": true,
-      "before_cpu_percent": 21.569,
-      "after_cpu_percent": 6.79174,
-      "reduction_percent": 68.51156752746999,
-      "before_p99_us": 154.784,
-      "after_p99_us": 82.445
+      "before_cpu_percent": 19.6936,
+      "after_cpu_percent": 7.06712,
+      "reduction_percent": 64.1146362269976,
+      "before_p99_us": 223.908,
+      "after_p99_us": 95.194
     }
   ],
   "runs": {
@@ -83,65 +83,65 @@
         {
           "sr": 44100,
           "modulated": false,
-          "cpu_percent": 3.25287,
-          "p99_block_us": 117.978,
-          "max_block_us": 1013.67,
+          "cpu_percent": 3.62322,
+          "p99_block_us": 193.993,
+          "max_block_us": 784.896,
           "energy": 39.7718
         },
         {
           "sr": 44100,
           "modulated": true,
-          "cpu_percent": 4.05591,
-          "p99_block_us": 129.405,
-          "max_block_us": 3078.82,
+          "cpu_percent": 4.7127,
+          "p99_block_us": 273.363,
+          "max_block_us": 670.843,
           "energy": 53.943
         },
         {
           "sr": 48000,
           "modulated": false,
-          "cpu_percent": 3.41887,
-          "p99_block_us": 99.13,
-          "max_block_us": 247.584,
+          "cpu_percent": 4.07863,
+          "p99_block_us": 260.273,
+          "max_block_us": 3029.03,
           "energy": 61.6346
         },
         {
           "sr": 48000,
           "modulated": true,
-          "cpu_percent": 4.30861,
-          "p99_block_us": 121.864,
-          "max_block_us": 478.733,
+          "cpu_percent": 5.1666,
+          "p99_block_us": 267.273,
+          "max_block_us": 1853.27,
           "energy": 59.9959
         },
         {
           "sr": 96000,
           "modulated": false,
-          "cpu_percent": 6.94068,
-          "p99_block_us": 106.421,
-          "max_block_us": 316.158,
+          "cpu_percent": 7.75904,
+          "p99_block_us": 217.008,
+          "max_block_us": 1003.45,
           "energy": 123.116
         },
         {
           "sr": 96000,
           "modulated": true,
-          "cpu_percent": 8.46244,
-          "p99_block_us": 109.125,
-          "max_block_us": 593.597,
+          "cpu_percent": 10.2342,
+          "p99_block_us": 251.159,
+          "max_block_us": 9646.08,
           "energy": 120.503
         },
         {
           "sr": 192000,
           "modulated": false,
-          "cpu_percent": 13.4726,
-          "p99_block_us": 96.696,
-          "max_block_us": 321.296,
+          "cpu_percent": 15.3358,
+          "p99_block_us": 198.46,
+          "max_block_us": 1438.24,
           "energy": 245.17
         },
         {
           "sr": 192000,
           "modulated": true,
-          "cpu_percent": 18.0787,
-          "p99_block_us": 154.784,
-          "max_block_us": 2328.97,
+          "cpu_percent": 19.6936,
+          "p99_block_us": 223.908,
+          "max_block_us": 12882.3,
           "energy": 240.112
         }
       ],
@@ -149,65 +149,65 @@
         {
           "sr": 44100,
           "modulated": false,
-          "cpu_percent": 3.20696,
-          "p99_block_us": 120.833,
-          "max_block_us": 313.264,
+          "cpu_percent": 3.29118,
+          "p99_block_us": 127.903,
+          "max_block_us": 315.436,
           "energy": 39.7718
         },
         {
           "sr": 44100,
           "modulated": true,
-          "cpu_percent": 5.12364,
-          "p99_block_us": 138.8,
-          "max_block_us": 1173.85,
+          "cpu_percent": 4.22749,
+          "p99_block_us": 170.047,
+          "max_block_us": 524.523,
           "energy": 53.943
         },
         {
           "sr": 48000,
           "modulated": false,
-          "cpu_percent": 3.46404,
-          "p99_block_us": 116.385,
-          "max_block_us": 315.727,
+          "cpu_percent": 4.13881,
+          "p99_block_us": 174.723,
+          "max_block_us": 2972.79,
           "energy": 61.6346
         },
         {
           "sr": 48000,
           "modulated": true,
-          "cpu_percent": 4.46847,
-          "p99_block_us": 152.21,
-          "max_block_us": 901.502,
+          "cpu_percent": 4.7202,
+          "p99_block_us": 219.992,
+          "max_block_us": 588.178,
           "energy": 59.9959
         },
         {
           "sr": 96000,
           "modulated": false,
-          "cpu_percent": 9.11667,
-          "p99_block_us": 132.931,
-          "max_block_us": 450.911,
+          "cpu_percent": 7.6079,
+          "p99_block_us": 209.396,
+          "max_block_us": 1319.31,
           "energy": 123.116
         },
         {
           "sr": 96000,
           "modulated": true,
-          "cpu_percent": 9.88308,
-          "p99_block_us": 172.41,
-          "max_block_us": 5230.29,
+          "cpu_percent": 9.72423,
+          "p99_block_us": 216.016,
+          "max_block_us": 1371.05,
           "energy": 120.503
         },
         {
           "sr": 192000,
           "modulated": false,
-          "cpu_percent": 15.3729,
-          "p99_block_us": 116.756,
-          "max_block_us": 2003.05,
+          "cpu_percent": 15.2401,
+          "p99_block_us": 164.96,
+          "max_block_us": 3587.17,
           "energy": 245.17
         },
         {
           "sr": 192000,
           "modulated": true,
-          "cpu_percent": 22.3377,
-          "p99_block_us": 137.868,
-          "max_block_us": 2842.73,
+          "cpu_percent": 19.7453,
+          "p99_block_us": 234.654,
+          "max_block_us": 6460.46,
           "energy": 240.112
         }
       ],
@@ -215,65 +215,65 @@
         {
           "sr": 44100,
           "modulated": false,
-          "cpu_percent": 3.66648,
-          "p99_block_us": 100.492,
-          "max_block_us": 658.244,
+          "cpu_percent": 3.71344,
+          "p99_block_us": 224.118,
+          "max_block_us": 1283.84,
           "energy": 39.7718
         },
         {
           "sr": 44100,
           "modulated": true,
-          "cpu_percent": 5.89581,
-          "p99_block_us": 144.849,
-          "max_block_us": 1839.48,
+          "cpu_percent": 4.72591,
+          "p99_block_us": 307.865,
+          "max_block_us": 2169.4,
           "energy": 53.943
         },
         {
           "sr": 48000,
           "modulated": false,
-          "cpu_percent": 4.64219,
-          "p99_block_us": 150.087,
-          "max_block_us": 1980.6,
+          "cpu_percent": 4.25868,
+          "p99_block_us": 259.511,
+          "max_block_us": 3063.79,
           "energy": 61.6346
         },
         {
           "sr": 48000,
           "modulated": true,
-          "cpu_percent": 6.45956,
-          "p99_block_us": 146.922,
-          "max_block_us": 460.766,
+          "cpu_percent": 5.38348,
+          "p99_block_us": 306.883,
+          "max_block_us": 4227.81,
           "energy": 59.9959
         },
         {
           "sr": 96000,
           "modulated": false,
-          "cpu_percent": 10.5163,
-          "p99_block_us": 124.218,
-          "max_block_us": 167.302,
+          "cpu_percent": 7.90752,
+          "p99_block_us": 191.8,
+          "max_block_us": 1616.91,
           "energy": 123.116
         },
         {
           "sr": 96000,
           "modulated": true,
-          "cpu_percent": 11.6657,
-          "p99_block_us": 141.944,
-          "max_block_us": 646.667,
+          "cpu_percent": 9.46084,
+          "p99_block_us": 211.95,
+          "max_block_us": 1179.22,
           "energy": 120.503
         },
         {
           "sr": 192000,
           "modulated": false,
-          "cpu_percent": 15.2667,
-          "p99_block_us": 117.627,
-          "max_block_us": 621.599,
+          "cpu_percent": 15.102,
+          "p99_block_us": 183.717,
+          "max_block_us": 2118.46,
           "energy": 245.17
         },
         {
           "sr": 192000,
           "modulated": true,
-          "cpu_percent": 21.569,
-          "p99_block_us": 161.103,
-          "max_block_us": 3119.57,
+          "cpu_percent": 18.79,
+          "p99_block_us": 207.784,
+          "max_block_us": 1713.94,
           "energy": 240.112
         }
       ]
@@ -283,65 +283,65 @@
         {
           "sr": 44100,
           "modulated": false,
-          "cpu_percent": 1.40596,
-          "p99_block_us": 75.374,
-          "max_block_us": 979.833,
+          "cpu_percent": 1.58348,
+          "p99_block_us": 127.813,
+          "max_block_us": 999.619,
           "energy": 39.7718
         },
         {
           "sr": 44100,
           "modulated": true,
-          "cpu_percent": 1.59532,
-          "p99_block_us": 87.272,
-          "max_block_us": 1643.28,
+          "cpu_percent": 1.61614,
+          "p99_block_us": 103.927,
+          "max_block_us": 651.945,
           "energy": 53.943
         },
         {
           "sr": 48000,
           "modulated": false,
-          "cpu_percent": 1.46361,
-          "p99_block_us": 74.213,
-          "max_block_us": 229.918,
+          "cpu_percent": 1.5892,
+          "p99_block_us": 108.664,
+          "max_block_us": 460.035,
           "energy": 61.6346
         },
         {
           "sr": 48000,
           "modulated": true,
-          "cpu_percent": 1.65909,
-          "p99_block_us": 75.804,
-          "max_block_us": 497.803,
+          "cpu_percent": 1.7639,
+          "p99_block_us": 103.766,
+          "max_block_us": 393.104,
           "energy": 59.9959
         },
         {
           "sr": 96000,
           "modulated": false,
-          "cpu_percent": 2.84144,
-          "p99_block_us": 70.447,
-          "max_block_us": 357.681,
+          "cpu_percent": 3.11312,
+          "p99_block_us": 104.919,
+          "max_block_us": 1151.2,
           "energy": 123.116
         },
         {
           "sr": 96000,
           "modulated": true,
-          "cpu_percent": 3.21689,
-          "p99_block_us": 67.532,
-          "max_block_us": 451.483,
+          "cpu_percent": 3.57775,
+          "p99_block_us": 101.503,
+          "max_block_us": 2206.53,
           "energy": 120.503
         },
         {
           "sr": 192000,
           "modulated": false,
-          "cpu_percent": 5.79062,
-          "p99_block_us": 70.787,
-          "max_block_us": 2485.4,
+          "cpu_percent": 6.17396,
+          "p99_block_us": 94.683,
+          "max_block_us": 873.6,
           "energy": 245.17
         },
         {
           "sr": 192000,
           "modulated": true,
-          "cpu_percent": 6.75243,
-          "p99_block_us": 79.621,
-          "max_block_us": 329.318,
+          "cpu_percent": 7.06712,
+          "p99_block_us": 95.194,
+          "max_block_us": 988.843,
           "energy": 240.112
         }
       ],
@@ -349,65 +349,65 @@
         {
           "sr": 44100,
           "modulated": false,
-          "cpu_percent": 1.30114,
-          "p99_block_us": 52.89,
-          "max_block_us": 258.562,
+          "cpu_percent": 1.47022,
+          "p99_block_us": 107.513,
+          "max_block_us": 625.624,
           "energy": 39.7718
         },
         {
           "sr": 44100,
           "modulated": true,
-          "cpu_percent": 1.45301,
-          "p99_block_us": 45.218,
-          "max_block_us": 237.089,
+          "cpu_percent": 1.79089,
+          "p99_block_us": 107.382,
+          "max_block_us": 5102.24,
           "energy": 53.943
         },
         {
           "sr": 48000,
           "modulated": false,
-          "cpu_percent": 1.3892,
-          "p99_block_us": 55.825,
-          "max_block_us": 139.922,
+          "cpu_percent": 1.59599,
+          "p99_block_us": 101.193,
+          "max_block_us": 651.564,
           "energy": 61.6346
         },
         {
           "sr": 48000,
           "modulated": true,
-          "cpu_percent": 1.59774,
-          "p99_block_us": 67.361,
-          "max_block_us": 266.133,
+          "cpu_percent": 1.87339,
+          "p99_block_us": 104.348,
+          "max_block_us": 3948.48,
           "energy": 59.9959
         },
         {
           "sr": 96000,
           "modulated": false,
-          "cpu_percent": 2.91813,
-          "p99_block_us": 40.131,
-          "max_block_us": 6766.71,
+          "cpu_percent": 3.01646,
+          "p99_block_us": 99.58,
+          "max_block_us": 590.972,
           "energy": 123.116
         },
         {
           "sr": 96000,
           "modulated": true,
-          "cpu_percent": 3.19508,
-          "p99_block_us": 54.732,
-          "max_block_us": 1620.72,
+          "cpu_percent": 3.56972,
+          "p99_block_us": 117.137,
+          "max_block_us": 400.114,
           "energy": 120.503
         },
         {
           "sr": 192000,
           "modulated": false,
-          "cpu_percent": 5.50737,
-          "p99_block_us": 40.151,
-          "max_block_us": 1550.82,
+          "cpu_percent": 6.00564,
+          "p99_block_us": 83.116,
+          "max_block_us": 629.591,
           "energy": 245.17
         },
         {
           "sr": 192000,
           "modulated": true,
-          "cpu_percent": 6.79174,
-          "p99_block_us": 82.445,
-          "max_block_us": 1231.07,
+          "cpu_percent": 7.4007,
+          "p99_block_us": 113.251,
+          "max_block_us": 1923.85,
           "energy": 240.112
         }
       ],
@@ -415,65 +415,65 @@
         {
           "sr": 44100,
           "modulated": false,
-          "cpu_percent": 1.30812,
-          "p99_block_us": 45.148,
-          "max_block_us": 220.834,
+          "cpu_percent": 1.46829,
+          "p99_block_us": 103.296,
+          "max_block_us": 557.112,
           "energy": 39.7718
         },
         {
           "sr": 44100,
           "modulated": true,
-          "cpu_percent": 1.5344,
-          "p99_block_us": 75.344,
-          "max_block_us": 633.407,
+          "cpu_percent": 1.75051,
+          "p99_block_us": 94.232,
+          "max_block_us": 4236.59,
           "energy": 53.943
         },
         {
           "sr": 48000,
           "modulated": false,
-          "cpu_percent": 1.50495,
-          "p99_block_us": 67.832,
-          "max_block_us": 1953.36,
+          "cpu_percent": 1.51351,
+          "p99_block_us": 90.016,
+          "max_block_us": 393.074,
           "energy": 61.6346
         },
         {
           "sr": 48000,
           "modulated": true,
-          "cpu_percent": 1.67139,
-          "p99_block_us": 45.098,
-          "max_block_us": 269.757,
+          "cpu_percent": 1.71991,
+          "p99_block_us": 96.836,
+          "max_block_us": 352.512,
           "energy": 59.9959
         },
         {
           "sr": 96000,
           "modulated": false,
-          "cpu_percent": 3.7113,
-          "p99_block_us": 66.47,
-          "max_block_us": 386.634,
+          "cpu_percent": 2.81669,
+          "p99_block_us": 68.103,
+          "max_block_us": 340.714,
           "energy": 123.116
         },
         {
           "sr": 96000,
           "modulated": true,
-          "cpu_percent": 3.98895,
-          "p99_block_us": 55.334,
-          "max_block_us": 115.365,
+          "cpu_percent": 3.39382,
+          "p99_block_us": 77.136,
+          "max_block_us": 3066.75,
           "energy": 120.503
         },
         {
           "sr": 192000,
           "modulated": false,
-          "cpu_percent": 7.61953,
-          "p99_block_us": 50.336,
-          "max_block_us": 474.567,
+          "cpu_percent": 6.03563,
+          "p99_block_us": 92.53,
+          "max_block_us": 807.489,
           "energy": 245.17
         },
         {
           "sr": 192000,
           "modulated": true,
-          "cpu_percent": 8.52907,
-          "p99_block_us": 100.252,
-          "max_block_us": 1041.99,
+          "cpu_percent": 6.98475,
+          "p99_block_us": 89.625,
+          "max_block_us": 842.913,
           "energy": 240.112
         }
       ]

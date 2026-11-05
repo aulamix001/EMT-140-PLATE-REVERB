@@ -2,7 +2,7 @@
 
 [Auditoria completa e provas antes/depois](CRACKLE_AUDIT.md). Linux Release
 13/13, integração dos 100 presets, pluginval 10 e validator 47/47 executados.
-ASan/UBSan da revisão e Windows 0.2.1 em andamento; o registro 0.2.0 abaixo é
+ASan/UBSan: 9/9, 159,59 s; testes explícitos em buffers 100/520; benchmark de CPU 59–66% menor em oito cenários e 100 presets sem clipping no probe −18,42 dBFS. Windows 0.2.1 em andamento; o registro 0.2.0 abaixo é
 histórico, não deve ser confundido com a validação do novo binário.
 Studio One 8, Reaper e escuta real continuam não executados.
 
